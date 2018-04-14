@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'backendApp.apps.BackendappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'djreact.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'djreact/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'backendApp/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +77,15 @@ WSGI_APPLICATION = 'djreact.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'ENFORCE_SCHEMA': True,
+        'NAME': 'd3m',
+        'HOST': 'ds121955.mlab.com',
+        'PORT': 21955,
+        'USER': 'D3M-Website',
+        'PASSWORD': 'D3M-Website',
+        'AUTH_SOURCE': 'd3m',
+        'AUTH_MECHANISM': 'SCRAM-SHA-1',
     }
 }
 
@@ -121,7 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'djreact/static'),
+    os.path.join(BASE_DIR, 'backendApp/static'),
 ]
 
 # webpack loader
