@@ -1,3 +1,4 @@
-Django==django@2.0.4
+Django==2.0.4
 django-webpack-loader==0.6.0
 djongo==1.2.24
+mongoengine==0.15.0
