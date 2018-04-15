@@ -26,4 +26,8 @@ config.module.loaders.push(
   { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] }
 )
 
+config.module.loaders.push(
+  { test: /\.css?$/, exclude: /node_modules/, loaders:  [ 'style-loader', 'css-loader' ] }
+)
+
 module.exports = config
