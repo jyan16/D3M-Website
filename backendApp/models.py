@@ -1,4 +1,3 @@
-from mongoengine import *
 from djongo import models
 from django import forms
 from django.utils import timezone
