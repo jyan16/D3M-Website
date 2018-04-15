@@ -27,6 +27,7 @@ Dataset Collection:
     name: ,
     most_recent_time: ,
     type: ,
+    metric: ,
     train_result: [
         {time: ,
          score_name1: ,
