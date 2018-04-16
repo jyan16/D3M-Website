@@ -4,8 +4,12 @@ export default class FilterItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            filters: props.data
+            filters: props.data,
+            removeFilter: props.removeFilter
         };
+
+
+        this.generateFilter = this.generateFilter.bind(this);
     }
 
     generateFilter(filter) {
@@ -37,11 +41,17 @@ export default class FilterItem extends React.Component {
         return (
             <li className="filter-item" key={key}>
                 {display}
-                <button type="button" className="close mt-1" aria-label="Close">
+                <button type="button" className="close mt-1" aria-label="Close" onClick={this.state.removeFilter} index={filter.id}>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </li>
         )
+    }
+
+    deleteSelf(event) {
+        event.preventDefault();
+
+
     }
 
     render() {
