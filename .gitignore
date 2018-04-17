@@ -5,3 +5,5 @@ __pycache__/
 
 
 webpack-stats-local\.json
+
+package-lock\.json
