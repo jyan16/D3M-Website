@@ -8,7 +8,7 @@ export default class FilterItem extends React.Component {
             removeFilter: props.removeFilter
         };
 
-
+        this.renderFilter = this.renderFilter.bind(this);
         this.generateFilter = this.generateFilter.bind(this);
     }
 
@@ -41,23 +41,25 @@ export default class FilterItem extends React.Component {
         return (
             <li className="filter-item" key={key}>
                 {display}
-                <button type="button" className="close mt-1" aria-label="Close" onClick={this.state.removeFilter} index={filter.id}>
+                <button type="button" className="close mt-1" aria-label="Close" onClick={this.state.removeFilter} id={key}>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </li>
         )
     }
 
-    deleteSelf(event) {
-        event.preventDefault();
-
-
+    renderFilter() {
+        let result = [];
+        this.state.filters.forEach(e=>{
+            result.push(e);
+        });
+        return result.map(this.generateFilter);
     }
 
     render() {
         return (
             <ul id="filter-filters" className="list-group">
-                {this.state.filters.map(this.generateFilter)}
+                {this.renderFilter()}
             </ul>
         )
     }

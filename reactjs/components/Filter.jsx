@@ -6,7 +6,7 @@ export default class Filter extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            filters: []
+            filters: new Map()
         };
 
         this.addfilter = this.addfilter.bind(this);
@@ -23,8 +23,9 @@ export default class Filter extends React.Component {
         let name = $("#filter-form-attribute");
         let relation = $("#filter-form-relation");
         let value = $("#filter-form-value");
+        let key = name.val()+relation.val()+value.val();
 
-        this.state.filters.push({id: this.state.filters.length, name: name.val(), relation: relation.val(), value: parseFloat(value.val())});
+        this.state.filters.set(key, {name: name.val(), relation: relation.val(), value: parseFloat(value.val())});
 
         name.val('');
         // relation.val('lt');
@@ -36,14 +37,14 @@ export default class Filter extends React.Component {
     applyfilters(event) {
         event.preventDefault();
 
-        alert("applyfilters not implemented");
+        console.log(this.state.filters);
+        console.log("applyfilters not implemented");
     }
 
     removeFilter(event) {
         // event.preventDefault();
 
-        console.log(event.currentTarget);
-
+        this.state.filters.delete(event.currentTarget.id);
         this.updateFilter();
     }
 
