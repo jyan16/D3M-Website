@@ -76,15 +76,26 @@ WSGI_APPLICATION = 'djreact.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'djongo',
+    #     'ENFORCE_SCHEMA': True,
+    #     'NAME': 'd3m',
+    #     'HOST': 'ds121955.mlab.com',
+    #     'PORT': 21955,
+    #     'USER': 'D3M-Website',
+    #     'PASSWORD': 'D3M-Website',
+    #     'AUTH_SOURCE': 'd3m',
+    #     'AUTH_MECHANISM': 'SCRAM-SHA-1',
+    # }
     'default': {
         'ENGINE': 'djongo',
         'ENFORCE_SCHEMA': True,
-        'NAME': 'd3m',
-        'HOST': 'ds121955.mlab.com',
-        'PORT': 21955,
+        'NAME': 'd3m2',
+        'HOST': 'ds149309.mlab.com',
+        'PORT': 49309,
         'USER': 'D3M-Website',
         'PASSWORD': 'D3M-Website',
-        'AUTH_SOURCE': 'd3m',
+        'AUTH_SOURCE': 'd3m2',
         'AUTH_MECHANISM': 'SCRAM-SHA-1',
     }
 }

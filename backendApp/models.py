@@ -17,9 +17,6 @@ class Result(models.Model):
     BO_Duration = models.IntegerField()
     AP_Duration = models.IntegerField()
 
-    class Meta:
-        abstract = True
-
 
 class ResultForm(forms.ModelForm):
     class Meta:
@@ -39,29 +36,13 @@ class ResultForm(forms.ModelForm):
 
 
 class DataSet(models.Model):
-    type_choices = (
-        ('R', 'Regression'),
-        ('C', 'Classification'),
-    )
-    metric_choices = (
-        ('R', 'Root_Mean_Squared_Error'),
-        ('F', 'F1_MACRO'),
-        ('M', 'MEAN_SQUARED_ERROR'),
-    )
     name = models.CharField(max_length=100, default='')
     most_recent_time = models.DateField(default=timezone.now())
-    type = models.CharField(
-        max_length=20,
-        choices=type_choices,
-        default='R')
-    metric = models.CharField(
-        max_length=30,
-        choices=metric_choices,
-        default='R')
-    train_results = models.ArrayModelField(
-        model_container=Result,
-        model_form_class=ResultForm,
-        default=list()
+    type = models.CharField(max_length=20)
+    metric = models.CharField(max_length=30)
+    train_results = models.ArrayReferenceField(
+        to=Result,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):

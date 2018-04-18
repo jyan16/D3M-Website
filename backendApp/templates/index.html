@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+</head>
+<body>
+    <form action="upload/" method="post">
+    {% csrf_token %}
+        <label for="file_dir">file directory</label>
+        <input type="text" name="file_dir" value="/Users/jinyan/Documents/COURSE/cs132/D3M-Website/benchmark/results.json" />
+        <input type="submit" value="upload" />
+    </form>
+</body>
+</html>
