@@ -11,5 +11,11 @@
         <input type="text" name="file_dir" value="/Users/jinyan/Documents/COURSE/cs132/D3M-Website/benchmark/results.json" />
         <input type="submit" value="upload" />
     </form>
+    <form action="dataset/" method="get">
+    {% csrf_token %}
+        <label for="data_name">dataset name:</label>
+        <input type="text" name="data_name" value="313_spectrometer" />
+        <input type="submit" value="get data" />
+    </form>
 </body>
 </html>

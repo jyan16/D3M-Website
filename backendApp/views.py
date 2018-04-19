@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from backendApp.models import *
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import json
 import pprint
 from django.utils import timezone
 from .utils import *
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.serializers import serialize
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -67,8 +68,20 @@ def upload(request):
     return HttpResponse('you are uploading file')
 
 
-def get_data(name):
-    return HttpResponse('get name: %s' % name)
+def get_data(request):
+    name = request.GET['data_name']
+    try:
+        dataset = DataSet.objects.filter(name=name)
+    except ObjectDoesNotExist:
+        return JsonResponse({'ok': False})
+
+    dataset = json.loads(serialize('json', dataset))[0]
+    response = dict()
+    response['ok'] = True
+    response['data'] = dataset['fields']
+
+    pp.pprint(response)
+    return JsonResponse(response)
 
 
 def get_all():

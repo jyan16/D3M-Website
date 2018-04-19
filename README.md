@@ -65,7 +65,9 @@ Statistic Collection:
 ## Control
 
 ### RESTful API
-1. URL `upload/` POST:
+Our system uses AJAX to communicate between frontend and backend.
+
+1. URL `upload/ POST['file_dir']`:
 This url is used for post json file to server
 
 1. URL `index`:
@@ -99,7 +101,8 @@ response = {
 }
 ~~~~
 
-1. URL `/dataset_name/`:
+1. URL `dataset/ GET['data_name']`:
+This API is used to get data of a specific dataset:
 
 ~~~~
 response = {
