@@ -1,6 +1,15 @@
 from djongo import models
-from django import forms
 from django.utils import timezone
+
+
+class DataSet(models.Model):
+    name = models.CharField(max_length=100, default='')
+    most_recent_time = models.DateField(default=timezone.now())
+    type = models.CharField(max_length=20)
+    metric = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
 
 
 class Result(models.Model):
@@ -17,35 +26,9 @@ class Result(models.Model):
     BO_Duration = models.IntegerField()
     AP_Duration = models.IntegerField()
 
-    class Meta:
-        ordering = ['-time']
+    dataset = models.ForeignKey(DataSet, on_delete=models.CASCADE)
 
 
-class ResultForm(forms.ModelForm):
-    class Meta:
-        model = Result
-        fields = (
-            'time',
-            'RS_Score',
-            'HB_Score',
-            'BO_Score',
-            'AP_Score',
-            'Baseline_Score',
-            'RS_Duration',
-            'HB_Duration',
-            'BO_Duration',
-            'AP_Duration',
-        )
 
-
-class DataSet(models.Model):
-    name = models.CharField(max_length=100, default='')
-    most_recent_time = models.DateField(default=timezone.now())
-    type = models.CharField(max_length=20)
-    metric = models.CharField(max_length=30)
-    train_results = models.ManyToManyField(to=Result)
-
-    def __str__(self):
-        return self.name
 
 

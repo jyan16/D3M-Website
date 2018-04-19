@@ -28,11 +28,6 @@ Dataset Collection:
     most_recent_time: ,
     type: ,
     metric: ,
-    train_result: [
-        Result1,
-        Result2,
-        ...
-    ]
 }
 ~~~~
 
@@ -106,13 +101,12 @@ This API is used to get data of a specific dataset:
 
 ~~~~
 response = {
-    dataset_name: ,
-    most_recent_time: ,
-    train_result: [
-        {score_name1: ,
-         score_name2: ,
-         train_time: ,
-        },
+    ok: ,
+    data: DataSet,
+    train: [
+        Result1,
+        Result2,
+        ...
     ]
 }
 ~~~~

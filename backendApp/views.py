@@ -62,8 +62,8 @@ def upload(request):
             AP_Duration=data['Duration(AP)'][index],
             Baseline_Score=data['Baseline Score'][index]
         )
-        dataset.train_results.add(result)
-        dataset.save()
+        result.dataset = dataset
+        result.save()
 
     return HttpResponse('you are uploading file')
 
@@ -73,15 +73,15 @@ def get_data(request):
     response = dict()
     try:
         dataset = DataSet.objects.filter(name=name)
-        tmp = json.loads(serialize('json', dataset))[0]
-        response['dataset'] = tmp['fields']
         response['ok'] = True
 
     except ObjectDoesNotExist:
         return JsonResponse({'ok': False})
 
-    dataset = dataset.get()
-    train_results = dataset.train_results.all()
+    dataset = json.loads(serialize('json', dataset))[0]
+    response['dataset'] = dataset['fields']
+
+    train_results = Result.objects.filter(dataset__name=name)
     train_results = json.loads(serialize('json', train_results))
 
     response['train'] = list()
