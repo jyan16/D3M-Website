@@ -70,15 +70,23 @@ def upload(request):
 
 def get_data(request):
     name = request.GET['data_name']
+    response = dict()
     try:
         dataset = DataSet.objects.filter(name=name)
+        tmp = json.loads(serialize('json', dataset))[0]
+        response['dataset'] = tmp['fields']
+        response['ok'] = True
+
     except ObjectDoesNotExist:
         return JsonResponse({'ok': False})
 
-    dataset = json.loads(serialize('json', dataset))[0]
-    response = dict()
-    response['ok'] = True
-    response['data'] = dataset['fields']
+    dataset = dataset.get()
+    train_results = dataset.train_results.all()
+    train_results = json.loads(serialize('json', train_results))
+
+    response['train'] = list()
+    for item in train_results:
+        response['train'].append(item['fields'])
 
     pp.pprint(response)
     return JsonResponse(response)

@@ -43,10 +43,7 @@ class DataSet(models.Model):
     most_recent_time = models.DateField(default=timezone.now())
     type = models.CharField(max_length=20)
     metric = models.CharField(max_length=30)
-    train_results = models.ArrayReferenceField(
-        to=Result,
-        on_delete=models.CASCADE,
-    )
+    train_results = models.ManyToManyField(to=Result)
 
     def __str__(self):
         return self.name
