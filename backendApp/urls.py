@@ -4,8 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('view1/', views.view1, name='view1'),
-    path('view2/', views.view2, name='view2'),
-    path('upload/', views.upload, name='upload')
-
+    path('upload/', views.upload, name='upload'),
+    path('dataset/<name>/', views.get_data, name='get_data'),
+    path('all/', views.get_all, name='get_all'),
 ]

@@ -17,6 +17,9 @@ class Result(models.Model):
     BO_Duration = models.IntegerField()
     AP_Duration = models.IntegerField()
 
+    class Meta:
+        ordering = ['-time']
+
 
 class ResultForm(forms.ModelForm):
     class Meta:

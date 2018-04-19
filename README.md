@@ -23,19 +23,35 @@ In this section we list MongoDB schema:
 Dataset Collection:
 ~~~~
 {
-    id: ObjectId(),
+    id: ,
     name: ,
     most_recent_time: ,
     type: ,
     metric: ,
     train_result: [
-        {time: ,
-         score_name1: ,
-         score_name2: ,},
+        Result1,
+        Result2,
+        ...
     ]
 }
 ~~~~
 
+Result Collection:
+~~~~
+{
+    id: ,
+    time: ,
+    RS_Score: ,
+    HB_Score: ,
+    BO_Score: ,
+    AP_Score: ,
+    Baseline_Score: ,
+    RS_Duration: ,
+    HB_Duration: ,
+    BO_Duration: ,
+    AP_Duration: ,
+}
+~~~~
 Statistic Collection:
 ~~~~
 {
@@ -49,6 +65,8 @@ Statistic Collection:
 ## Control
 
 ### RESTful API
+1. URL `upload/` POST:
+This url is used for post json file to server
 
 1. URL `index`:
 
