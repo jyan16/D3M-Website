@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from backendApp.models import *
 from django.http import HttpResponse, JsonResponse
-import json
+import csv
 import pprint
-from django.utils import timezone
 from .utils import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.serializers import serialize
@@ -29,44 +28,44 @@ def view2(request):
 def upload(request):
     file_dir = request.POST['file_dir']
     try:
-        with open(file_dir, 'r') as file:
-            data = json.load(file)
+        data = csv.DictReader(open(file_dir, 'r'))
+
     except:
         return HttpResponse('open file %s fail' % file_dir)
 
-    time = get_time(file_dir)
-    keys = data.keys()
-    # create object
-    for index, name in data['Dataset'].items():
-
-        # get dataset object
+    for row in data:
+        name = row['Dataset'].lower()
+        time = get_time(row['TimeStamp'])
         try:
-            dataset = DataSet.objects.get(name=name.lower())
+            dataset = DataSet.objects.get(name=name)
             dataset.most_recent_time = time
+
         except ObjectDoesNotExist:
             print('create new dataset: %s' % name)
             dataset = DataSet.objects.create(
-                name=name.lower(),
+                name=name,
                 most_recent_time=time,
-                type=data['TaskType'][index].lower(),
-                metric=data['Metric'][index].lower(),
+                type=row['TaskType'].lower(),
+                metric=row['ScoreMetric'].lower()
             )
             dataset.save()
 
-        result = Result.objects.create(
-            time=time,
-            dataset=dataset
+        dataset.most_recent_time = time
+
+        try:
+            result = Result.objects.get(dataset=dataset, time=time)
+        except ObjectDoesNotExist:
+            result = Result.objects.create(time=time, dataset=dataset)
+            result.save()
+        score = None if row['Score'] == '' else float(row['Score'])
+        duration = None if row['Duration'] == '' else int(float(row['Duration']))
+        record = Record.objects.create(
+            method=row['Method'],
+            score=score,
+            duration=duration,
+            result=result
         )
-        result.save()
-        for key in keys:
-            if key.lower() in DATASET_FIELD:
-                continue
-            record = Record.objects.create(
-                method=key.lower(),
-                score=data[key][index],
-                result=result
-            )
-            record.save()
+        record.save()
 
     return HttpResponse('you are uploading file')
 
@@ -81,16 +80,19 @@ def get_data(request):
     except ObjectDoesNotExist:
         return JsonResponse({'ok': False})
 
-    dataset = json.loads(serialize('json', dataset))[0]
-    response['dataset'] = dataset['fields']
+    response['dataset'] = json.loads(serialize('json', dataset))[0]['fields']
+    dataset = dataset.first()
+    results = dataset.result_set.all()
+    response['results'] = list()
 
-    train_results = Result.objects.filter(dataset__name=name)
-    train_results = json.loads(serialize('json', train_results))
-
-    response['train'] = list()
-    for item in train_results:
-        response['train'].append(item['fields'])
-
+    for result in results:
+        tmp = dict()
+        tmp['time'] = result.time
+        records = result.record_set.all()
+        for record in records:
+            tmp[record.method] = record.score
+            tmp[record.method + ' Duration'] = record.duration
+        response['results'].append(tmp)
     pp.pprint(response)
     return JsonResponse(response)
 
@@ -105,9 +107,13 @@ def get_all(request):
             response[dataset.type] = list()
         data = dict()
         data['name'] = dataset.name
-        result = Result.objects.filter(dataset=dataset)
-        for field in RESULT_FIELD:
-            data[field] = result.aggregate(Max(field))
+        data['most_recent_time'] = dataset.most_recent_time
+        data['metric'] = dataset.metric
+        data['most_recent_result'] = dict()
+        result = dataset.result_set.get(time=dataset.most_recent_time)
+        records = result.record_set.all()
+        for record in records:
+            data['most_recent_result'][record.method] = record.score
         response[dataset.type].append(data)
 
     pp.pprint(response)

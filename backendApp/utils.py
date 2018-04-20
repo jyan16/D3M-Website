@@ -2,10 +2,17 @@ from django.utils.dateparse import parse_datetime
 import json
 
 
-def get_time(file_dir):
-    tmp = file_dir.split('/')[-1]
-    tmp = tmp.split('.')[:3]
-    return parse_datetime(':'.join(tmp))
+def get_time(time_str):
+    tmp = time_str.split()
+    date = tmp[0].split('/')
+    date.reverse()
+    date = '-'.join(date)
+    time = tmp[1].split(':')
+    time = ':'.join(time)
+    date_time = date + 'T' + time
+    return parse_datetime(date_time)
+
+    # return parse_datetime(':'.join(tmp))
 
 
 def get_field(data, fields, index):

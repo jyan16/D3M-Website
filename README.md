@@ -21,41 +21,6 @@ https://github.com/nesdis/djongo.
 Jin Yan (jyan16)
 
 ## Model
-In this section we list MongoDB schema:
-
-Dataset Collection:
-~~~~
-{
-    id: ,
-    name: ,
-    most_recent_time: ,
-    type: ,
-    metric: ,
-}
-~~~~
-
-Result Collection:
-~~~~
-{
-    id: ,
-    time: ,
-    RS_Score: ,
-    HB_Score: ,
-    BO_Score: ,
-    AP_Score: ,
-    Baseline_Score: ,
-    RS_Duration: ,
-    HB_Duration: ,
-    BO_Duration: ,
-    AP_Duration: ,
-}
-~~~~
-Statistic Collection:
-~~~~
-{
-    
-}
-~~~~
 
 
 ## View
@@ -65,54 +30,46 @@ Statistic Collection:
 ### RESTful API
 Our system uses AJAX to communicate between frontend and backend.
 
-1. URL `upload/ POST['file_dir']`:
-This url is used for post json file to server
 
-1. URL `index`:
+1. `GET[] request, url: localhost:8000/all/`:
 
 ~~~~
 response = {
-    "TaskType": {
-        datasets: [
-            {name: ,
-             our_score: ,
-             base_score: ,
-             time: ,},
-        ],
-        metric_name1: {
-            score_name: {
-                mean: ,
-                high: ,
-                min: ,
-                average: ,
-            },            
-        },
-        metric_name2: {
-            score_name: {
-                mean: ,
-                max: ,
-                min: ,
-                avg: ,
-            },            
-        },
-    },
-}
-~~~~
-
-1. URL `dataset/ GET['data_name']`:
-This API is used to get data of a specific dataset:
-
-~~~~
-response = {
-    ok: ,
-    data: DataSet,
-    train: [
-        Result1,
-        Result2,
-        ...
+    "TaskType": [
+        {
+            name: string,
+            most_recent_time: DateTime,
+            most_recent_result: {
+                Baseline: float,
+                Our: float,
+            }
+        }, ...
     ]
 }
 ~~~~
+
+2. `GET['data_name'] request, url: localhost:8000/dataset/`:
+
+~~~~
+response = {
+    ok: bool,
+    dataset: {
+        metric: string,
+        most_recent_time: DateTime,
+        name: string,
+        type: string,
+    },
+    train: [
+        {
+            Baseline: float,
+            duration: int,
+            time: DateTime
+        }, ...
+    ]
+}
+~~~~
+
+3. `POST['file_dir] url: localhost:8000/upload`
 
 
 ### Maintenance

@@ -1,10 +1,9 @@
 from django.db import models
-from django.utils import timezone
 
 
 class DataSet(models.Model):
     name = models.CharField(max_length=100, default='')
-    most_recent_time = models.DateField()
+    most_recent_time = models.DateTimeField()
     type = models.CharField(max_length=20)
     metric = models.CharField(max_length=40)
 
@@ -23,6 +22,7 @@ class Result(models.Model):
 class Record(models.Model):
     method = models.CharField(max_length=50, null=False)
     score = models.FloatField(null=True)
+    duration = models.IntegerField(null=True)
     result = models.ForeignKey(Result, on_delete=models.CASCADE)
 
     def __str__(self):

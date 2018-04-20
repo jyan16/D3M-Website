@@ -11,5 +11,9 @@ def reformat_json():
         reformat(infile_dir, outfile_dir)
 
 
+def test_get_time():
+    print(get_time('3/10/2018  5:46:33 PM'))
+
+
 if __name__ == '__main__':
-    reformat_json()
+    test_get_time()
