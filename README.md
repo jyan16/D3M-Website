@@ -12,7 +12,7 @@ Jin Yan(jyan16), Tong Zhang(tzhang48), Zexuan Huang(zhuang31), Zhiwei Zhang(zzha
 ## How to Run React:
 Our project needs python3, pip3 and npm.
 
-1. `cd` to root directory
+1. `cd` to project root directory
 2. `npm install` to install all packages
 3. `pip3 install -r req.txt` to install all python package
 4. `node dev_server.js` to start webpack dev server. Note that this is import to make react run correctly
