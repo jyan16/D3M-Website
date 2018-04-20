@@ -77,15 +77,8 @@ WSGI_APPLICATION = 'djreact.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'ENFORCE_SCHEMA': False,
-        'NAME': 'd3m2',
-        'HOST': 'ds149309.mlab.com',
-        'PORT': 49309,
-        'USER': 'D3M-Website',
-        'PASSWORD': 'D3M-Website',
-        'AUTH_SOURCE': 'd3m2',
-        'AUTH_MECHANISM': 'SCRAM-SHA-1',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

@@ -124,7 +124,7 @@ response = {
 1. password: D3M-Website
 
 #### Add new field
-If the you add a new field to the data, what you need to do is add a corresponding line in the models.py.
+If a user want to 
 
 #### TODO
 

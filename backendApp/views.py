@@ -7,7 +7,7 @@ from django.utils import timezone
 from .utils import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.serializers import serialize
-from djongo.models import Max
+from django.db.models import Avg, Max
 from .config import *
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -35,35 +35,38 @@ def upload(request):
         return HttpResponse('open file %s fail' % file_dir)
 
     time = get_time(file_dir)
+    keys = data.keys()
     # create object
     for index, name in data['Dataset'].items():
 
         # get dataset object
         try:
-            dataset = DataSet.objects.get(name=name)
+            dataset = DataSet.objects.get(name=name.lower())
             dataset.most_recent_time = time
         except ObjectDoesNotExist:
             print('create new dataset: %s' % name)
-            dataset = DataSet.objects.create()
-
-            dataset.name = name
-            dataset.most_recent_time = time
-
-            dataset.type = data['TaskType'][index]
-            dataset.metric = data['Metric'][index]
+            dataset = DataSet.objects.create(
+                name=name.lower(),
+                most_recent_time=time,
+                type=data['TaskType'][index].lower(),
+                metric=data['Metric'][index].lower(),
+            )
             dataset.save()
 
         result = Result.objects.create(
             time=time,
-            Baseline_Score=get_field(data, ['Baseline Score', 'Normalized Baseline Score'], index),
-            Our_Score=get_field(data, ['Our Score'], index),
-            Our_Duration=get_field(data, ['Duration', 'Our Duration'], index),
-            AutoSklearn_Score=get_field(data, ['AutoSklearn Score', 'Normalized AutoSklearn Score'], index),
-            AutoSklearn_Duration=get_field(data, ['AutoSklearn Duration'], index),
+            dataset=dataset
         )
-
-        result.dataset = dataset
         result.save()
+        for key in keys:
+            if key.lower() in DATASET_FIELD:
+                continue
+            record = Record.objects.create(
+                method=key.lower(),
+                score=data[key][index],
+                result=result
+            )
+            record.save()
 
     return HttpResponse('you are uploading file')
 
@@ -103,10 +106,9 @@ def get_all(request):
         data = dict()
         data['name'] = dataset.name
         result = Result.objects.filter(dataset=dataset)
-        avg = result.aggregate(Max('Our_Score'))
-        data['Baseline_Score'] = result.Baseline_Score
-        data['Our_Score'] = result.Our_Score
-
+        for field in RESULT_FIELD:
+            data[field] = result.aggregate(Max(field))
         response[dataset.type].append(data)
 
+    pp.pprint(response)
     return JsonResponse(response)
