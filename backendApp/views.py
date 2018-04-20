@@ -7,7 +7,7 @@ from django.utils import timezone
 from .utils import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.serializers import serialize
-from django.db.models import Max
+from djongo.models import Max
 from .config import *
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -102,7 +102,8 @@ def get_all(request):
             response[dataset.type] = list()
         data = dict()
         data['name'] = dataset.name
-        result = Result.objects.filter(dataset=dataset)[0]
+        result = Result.objects.filter(dataset=dataset)
+        avg = result.aggregate(Max('Our_Score'))
         data['Baseline_Score'] = result.Baseline_Score
         data['Our_Score'] = result.Our_Score
 
