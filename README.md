@@ -18,6 +18,12 @@ Our project needs python3, pip3 and npm.
 4. `node dev_server.js` to start webpack dev server. Note that this is import to make react run correctly
 5. `python3 manage.py runserver` to start Django
 
+## Views
+There are three views in the system:
+
+1. 'localhost:8000/' index view. You can upload csv file and check datasets here.
+1. 'localhost:8000/view1' the home page of website.
+
 ## RESTful API
 Our system uses AJAX to communicate between frontend and backend.
 
