@@ -7,6 +7,8 @@ from django.utils import timezone
 from .utils import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.serializers import serialize
+from django.db.models import Max
+from .config import *
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -32,13 +34,14 @@ def upload(request):
     except:
         return HttpResponse('open file %s fail' % file_dir)
 
-    time = timezone.now()
+    time = get_time(file_dir)
     # create object
     for index, name in data['Dataset'].items():
 
         # get dataset object
         try:
             dataset = DataSet.objects.get(name=name)
+            dataset.most_recent_time = time
         except ObjectDoesNotExist:
             print('create new dataset: %s' % name)
             dataset = DataSet.objects.create()
@@ -46,22 +49,19 @@ def upload(request):
             dataset.name = name
             dataset.most_recent_time = time
 
-            dataset.type = check_type(data['TaskType'][index])
-            dataset.metric = check_metric(data['Metric'][index])
+            dataset.type = data['TaskType'][index]
+            dataset.metric = data['Metric'][index]
             dataset.save()
 
         result = Result.objects.create(
             time=time,
-            RS_Score=data['RS Score'][index],
-            HB_Score=data['HB Score'][index],
-            BO_Score=data['BO Score'][index],
-            AP_Score=data['AP Score'][index],
-            RS_Duration=data['Duration(RS)'][index],
-            HB_Duration=data['Duration(HB)'][index],
-            BO_Duration=data['Duration(BO)'][index],
-            AP_Duration=data['Duration(AP)'][index],
-            Baseline_Score=data['Baseline Score'][index]
+            Baseline_Score=get_field(data, ['Baseline Score', 'Normalized Baseline Score'], index),
+            Our_Score=get_field(data, ['Our Score'], index),
+            Our_Duration=get_field(data, ['Duration', 'Our Duration'], index),
+            AutoSklearn_Score=get_field(data, ['AutoSklearn Score', 'Normalized AutoSklearn Score'], index),
+            AutoSklearn_Duration=get_field(data, ['AutoSklearn Duration'], index),
         )
+
         result.dataset = dataset
         result.save()
 
@@ -92,5 +92,20 @@ def get_data(request):
     return JsonResponse(response)
 
 
-def get_all():
-    pass
+def get_all(request):
+    datasets = DataSet.objects.all()
+    response = dict()
+    response['ok'] = True
+
+    for dataset in datasets:
+        if dataset.type not in response.keys():
+            response[dataset.type] = list()
+        data = dict()
+        data['name'] = dataset.name
+        result = Result.objects.filter(dataset=dataset)[0]
+        data['Baseline_Score'] = result.Baseline_Score
+        data['Our_Score'] = result.Our_Score
+
+        response[dataset.type].append(data)
+
+    return JsonResponse(response)

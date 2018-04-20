@@ -1,13 +1,15 @@
-from .config import *
+from django.utils.dateparse import parse_datetime
 
 
-def check_type(task_type):
-    if task_type not in TYPE_SET:
-        raise ValueError('type %s not in list!' % task_type)
-    return task_type
+def get_time(file_dir):
+    tmp = file_dir.split('/')[-1]
+    tmp = tmp.split('.')[:3]
+    return parse_datetime(':'.join(tmp))
 
 
-def check_metric(metric):
-    if metric not in METRIC_SET:
-        raise ValueError('metric %s not in list' % metric)
-    return metric
+def get_field(data, fields, index):
+    for field in fields:
+        if field in data.keys():
+            return data[field][index]
+
+    return None

@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'djreact.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'ENFORCE_SCHEMA': True,
+        'ENFORCE_SCHEMA': False,
         'NAME': 'd3m2',
         'HOST': 'ds149309.mlab.com',
         'PORT': 49309,

@@ -1,9 +1,5 @@
-TYPE_SET = {
-    'CLASSIFICATION',
-    'REGRESSION'}
-
-METRIC_SET = {
-    'F1_MACRO',
-    'ROOT_MEAN_SQUARED_ERROR',
-    'MEAN_SQUARED_ERROR',
+RESULT_FIELD = {
+    'Our_Score',
+    'AutoSklearn_Score',
+    'Baseline_Score',
 }
