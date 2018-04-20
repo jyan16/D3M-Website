@@ -7,7 +7,7 @@ from .utils import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.serializers import serialize
 from django.db.models import Avg, Max
-from .config import *
+
 
 pp = pprint.PrettyPrinter(indent=4)
 

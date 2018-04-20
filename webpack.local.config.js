@@ -23,7 +23,20 @@ config.plugins = config.plugins.concat([
 ])
 
 config.module.loaders.push(
-  { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] }
+  { test: /\.jsx$/,
+    loaders: ['babel'],
+    exclude: /node_modules/,
+    options: {
+        cacheDirectory: true,
+        plugins: [
+            'react-hot-loader/babel'
+        ]
+    }
+  }
+)
+
+config.module.loaders.push(
+  { test: /\.css?$/, exclude: /node_modules/, loaders:  [ 'style-loader', 'css-loader' ] }
 )
 
 module.exports = config
