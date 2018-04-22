@@ -27,9 +27,6 @@ class App1 extends React.Component {
                     <div id="right-toolbar-container">
                         <Search/>
                     </div>
-                    <div id="summary-container">
-                        <Summary/>
-                    </div>
                 </div>
                 
             </div>
