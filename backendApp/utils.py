@@ -1,4 +1,5 @@
 from django.utils.dateparse import parse_datetime
+from django.utils.timezone import is_aware, make_aware
 import json
 
 
@@ -10,9 +11,10 @@ def get_time(time_str):
     time = tmp[1].split(':')
     time = ':'.join(time)
     date_time = date + 'T' + time
-    return parse_datetime(date_time)
-
-    # return parse_datetime(':'.join(tmp))
+    ret = parse_datetime(date_time)
+    if not is_aware(ret):
+        ret = make_aware(ret)
+    return ret
 
 
 def get_field(data, fields, index):
