@@ -1,2 +1,4 @@
 Django==2.0.4
 django-webpack-loader==0.6.0
+numpy==1.14.2
+pandas==0.22.0

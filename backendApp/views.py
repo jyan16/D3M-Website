@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from backendApp.models import *
 from django.http import HttpResponse, JsonResponse
-import csv
 import pprint
 from .utils import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.serializers import serialize
-from django.db.models import Avg, Max
-
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -27,44 +27,129 @@ def view2(request):
 
 def upload(request):
     file_dir = request.POST['file_dir']
-    try:
-        data = csv.DictReader(open(file_dir, 'r'))
 
+    # read data
+    try:
+        df = pd.read_csv(file_dir).dropna()
     except:
         return HttpResponse('open file %s fail' % file_dir)
 
-    for row in data:
-        name = row['Dataset'].lower()
-        time = get_time(row['TimeStamp'])
-        try:
-            dataset = DataSet.objects.get(name=name)
-            dataset.most_recent_time = time
+    # clean data
+    df['Dataset'] = df['Dataset'].str.lower()
+    df['Method'] = df['Method'].str.lower()
+    df['ScoreMetric'] = df['ScoreMetric'].str.lower()
+    df['TaskType'] = df['TaskType'].str.lower()
 
+    # calculate and store statistic results
+    grouped_df = df[['Method', 'Score', 'TaskType', 'TimeStamp']].groupby(['Method', 'TaskType', 'TimeStamp'])
+    avg_result = grouped_df.aggregate(np.average).dropna()
+    for _, row in avg_result.iterrows():
+        create_statistic(row)
+
+    #
+    for _, row in df.iterrows():
+        time = get_time(row.TimeStamp)
+
+        # get / create dataset object
+        try:
+            dataset = DataSet.objects.get(name=row.Dataset)
+            dataset.most_recent_time = time
         except ObjectDoesNotExist:
-            print('create new dataset: %s' % name)
+            print('create new dataset: %s' % row.Dataset)
             dataset = DataSet.objects.create(
-                name=name,
+                name=row.Dataset,
                 most_recent_time=time,
-                type=row['TaskType'].lower(),
-                metric=row['ScoreMetric'].lower()
+                type=row.TaskType,
+                metric=row.ScoreMetric,
             )
         dataset.save()
 
+        # get / create result object
         try:
             result = Result.objects.get(dataset=dataset, time=time)
         except ObjectDoesNotExist:
             result = Result.objects.create(time=time, dataset=dataset)
             result.save()
-        score = None if row['Score'] == '' else float(row['Score'])
-        duration = None if row['Duration'] == '' else int(float(row['Duration']))
+
+        # create record object
         record = Record.objects.create(
-            method=row['Method'],
-            score=score,
-            duration=duration,
+            method=row.Method,
+            score=row.Score,
+            duration=int(row.Duration),
             result=result
         )
         record.save()
 
+    #
+    #
+    # try:
+    #     data = csv.DictReader(open(file_dir, 'r'))
+    #
+    # except:
+    #     return HttpResponse('open file %s fail' % file_dir)
+    #
+    # cache = dict()
+    # time = None
+    # for row in data:
+    #     if row['Score'] == '':
+    #         continue
+    #
+    #     # process csv data
+    #     name = row['Dataset'].lower()
+    #     task_type = row['TaskType'].lower()
+    #     metric = row['ScoreMetric'].lower()
+    #     cur_time = get_time(row['TimeStamp'])
+    #     method = row['Method'].lower()
+    #     score = float(row['Score'])
+    #     duration = int(float(row['Duration']))
+    #
+    #     # record statistic data
+    #     if cur_time != time:
+    #         if time is not None:
+    #             add_statistic(cache, time)
+    #         cache = dict()
+    #         time = cur_time
+    #     else:
+    #         if task_type not in cache:
+    #             cache[task_type] = dict()
+    #         task_map = cache[task_type]
+    #
+    #         if method not in task_map:
+    #             task_map[method] = [0, 0]
+    #         method_list = task_map[method]
+    #         method_list[0] += score
+    #         method_list[1] += 1
+    #
+    #     # record dataset info
+    #     try:
+    #         dataset = DataSet.objects.get(name=name)
+    #         dataset.most_recent_time = time
+    #
+    #     except ObjectDoesNotExist:
+    #         print('create new dataset: %s' % name)
+    #         dataset = DataSet.objects.create(
+    #             name=name,
+    #             most_recent_time=time,
+    #             type=task_type,
+    #             metric=metric,
+    #         )
+    #     dataset.save()
+    #
+    #     try:
+    #         result = Result.objects.get(dataset=dataset, time=time)
+    #     except ObjectDoesNotExist:
+    #         result = Result.objects.create(time=time, dataset=dataset)
+    #         result.save()
+    #
+    #     record = Record.objects.create(
+    #         method=method,
+    #         score=score,
+    #         duration=duration,
+    #         result=result
+    #     )
+    #     record.save()
+    #
+    # add_statistic(cache, time)
     return HttpResponse('you are uploading file')
 
 
@@ -114,5 +199,12 @@ def get_all(request):
             data['most_recent_result'][record.method] = record.score
         response[dataset.type].append(data)
 
-    pp.pprint(response)
+    times = Statistic.objects.values('time').distinct()
+    response['statistic'] = dict()
+    threshold = make_aware(datetime.now() - timedelta(days=20))
+    for time in times:
+        if time['time'] < threshold:
+            continue
+        statistics = list(Statistic.objects.filter(time=time['time']).values('method', 'score_avg', 'type'))
+        response['statistic'][str(time['time'])] = statistics
     return JsonResponse(response)

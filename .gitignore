@@ -5,4 +5,7 @@ __pycache__/
 
 dataset/
 test.py
+
 webpack-stats-local.json
+package-lock.json
+.ipynb_checkpoints
