@@ -38,7 +38,6 @@ def upload(request):
         time = get_time(row['TimeStamp'])
         try:
             dataset = DataSet.objects.get(name=name)
-            dataset.most_recent_time = time
 
         except ObjectDoesNotExist:
             print('create new dataset: %s' % name)
@@ -50,7 +49,7 @@ def upload(request):
             )
             dataset.save()
 
-        dataset.most_recent_time = time
+        dataset.most_recent_time = max(time, dataset.most_recent_time)
 
         try:
             result = Result.objects.get(dataset=dataset, time=time)
