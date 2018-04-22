@@ -184,10 +184,10 @@ def get_all(request):
     datasets = DataSet.objects.all()
     response = dict()
     response['ok'] = True
-
+    response['data'] = dict()
     for dataset in datasets:
         if dataset.type not in response.keys():
-            response[dataset.type] = list()
+            response['data'][dataset.type] = list()
         data = dict()
         data['name'] = dataset.name
         data['most_recent_time'] = dataset.most_recent_time
@@ -197,7 +197,7 @@ def get_all(request):
         records = result.record_set.all()
         for record in records:
             data['most_recent_result'][record.method] = record.score
-        response[dataset.type].append(data)
+        response['data'][dataset.type].append(data)
 
     times = Statistic.objects.values('time').distinct()
     response['statistic'] = dict()
