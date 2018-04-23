@@ -13,10 +13,12 @@ Jin Yan(jyan16), Tong Zhang(tzhang48), Zexuan Huang(zhuang31), Zhiwei Zhang(zzha
 Our project needs python3, pip3 and npm.
 
 1. `cd` to project root directory
-2. `npm install` to install all packages
-3. `pip3 install -r req.txt` to install all python package
-4. `node dev_server.js` to start webpack dev server. Note that this is import to make react run correctly
-5. `python3 manage.py runserver` to start Django
+1. run `node_modules/.bin/webpack --config webpack.local.config.js` to generate react bundle files. They should now be
+stored in backendApp/static/bundles/local.
+1. `npm install` to install all packages
+1. `pip3 install -r req.txt` to install all python package
+1. `node dev_server.js` to start webpack dev server. Note that this is import to make react run correctly
+1. `python3 manage.py runserver` to start Django
 
 ## Views
 There are three views in the system:
