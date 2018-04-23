@@ -13,13 +13,15 @@ export default class MainContent extends React.Component {
             currentCatagory: null,
             catagoryList: [],
             data: null,
-            main_chart: null
+            main_chart: null,
+            detail_chart: null
         };
 
         this.render = this.render.bind(this);
         this.retrieveData = this.retrieveData.bind(this);
         this.formatDataForMainGraph = this.formatDataForMainGraph.bind(this);
         this.updateChart = this.updateChart.bind(this);
+        this.updateChartForDataset = this.updateChartForDataset.bind(this);
     }
 
     retrieveData() {
@@ -41,7 +43,6 @@ export default class MainContent extends React.Component {
                         main_chart: mychart
                     });
                     mychart.on('click', function (params) {
-                        console.log(params)
                         $.ajax({
                             url: location.origin + "/dataset/?data_name=" + params.data[2].name,
                             type: "GET",
@@ -70,57 +71,179 @@ export default class MainContent extends React.Component {
     }
 
     updateChartForDataset(raw) {
-        let mychart = this.state.main_chart;
-
+        let mychart = echarts.init(this.refs.main_graph);
+        mychart.clear();
+        $("#xySelectorWrapper").hide();
         let data = raw.results;
+        if (data.length == 0) {
+            alert('not enough data for '+raw.dataset.name);
+            return;
+        }
+
+        let dimensions = [];
+        let ys = [];
+        for (let i = 0; i < data.length; i++) {
+            for (let key in data[i]) {
+                if (dimensions.includes(key) == false) {
+                    dimensions.push(key);
+                    if (key != 'time') {
+                        ys.push(key);
+                    }
+                }
+            }
+        }
+
+        let series = [];
+        for (let i = 0; i < ys.length; i++) {
+            let s = {
+                type: ys[i].endsWith('Duration')?'bar':'line',
+                yAxisIndex: ys[i].endsWith('Duration')?1:0,
+                name: ys[i],
+                dimensions: ['time', ys[i]],
+                encode: {
+                    x: 'time',
+                    y: ys[i],
+                    tooltip: ys[i]
+                }
+            }
+            series.push(s);
+        }
 
         let option = {
+            dataset: {
+                source : data
+            },
             animation: true,
             legend: {
-                show: true
+                show: true,
+                // type: 'scroll',
+                width: '70%',
+                left: '15%',
+            },
+            grid: {
+                left: '15%',
+                right: '15%',
+                bottom: '15%'
             },
             tooltip: {
-
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
             },
             xAxis: {
                 type: 'time',
                 name: 'Time',
+                nameTextStyle: {
+                    fontStyle: 'bolder',
+                    fontSize: 16
+                },
                 nameLocation: 'middle',
                 nameGap: 30,
-                min: function(val) {
-                    return val.min - Math.abs(val.min*0.1);
-                },
-                max: function(val) {
-                    return val.max + Math.abs(val.max*0.1);
-                },
+                min: 'dataMin',
+                max: 'dataMax',
                 splitLine: {
                     show: true
                 }
             },
-            yAxis: {
+            yAxis: [{
                 type: 'value',
+                scale: true,
                 nameLocation: 'middle',
+                name: 'score',
+                nameTextStyle: {
+                    fontStyle: 'bolder',
+                    fontSize: 16
+                },
                 nameGap: 30,
                 min: function(val) {
-                    return val.min - Math.abs(val.min*0.1);
+                    return Math.round((val.min * 1.1)*1000)/1000;
                 },
                 max: function(val) {
-                    return val.max + Math.abs(val.max*0.1);
+                    return Math.round((val.max * 1.1)*1000)/1000;
                 },
                 splitLine: {
                     show: true
                 }
+            }, {
+                type: 'value',
+                scale: true,
+                nameLocation: 'middle',
+                position: 'right',
+                name: 'duration',
+                nameTextStyle: {
+                    fontStyle: 'bolder',
+                    fontSize: 16
+                },
+                nameGap: 30,
+                min: function(val) {
+                    return Math.round((val.min * 1.1)*1000)/1000;
+                },
+                max: function(val) {
+                    return Math.round((val.max * 1.1)*1000)/1000;
+                },
+                splitLine: {
+                    show: true
+                }
+            }],
+            dataZoom: [{
+                type: 'slider',
+                filterMode: 'filter',
+                show: true,
+                xAxisIndex: [0],
+                start: 0,
+                end: 100
             },
-            series: [
-                
-            ]
+            {
+                type: 'inside',
+                filterMode: 'filter',
+                xAxisIndex: [0],
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'slider',
+                filterMode: 'filter',
+                show: true,
+                yAxisIndex: [0],
+                left: '0%',
+                start: 0,
+                end: 100
+            },
+            // {
+            //     type: 'inside',
+            //     filterMode: 'filter',
+            //     yAxisIndex: [0],
+            //     start: 0,
+            //     end: 100
+            // },
+            {
+                type: 'slider',
+                filterMode: 'filter',
+                show: true,
+                yAxisIndex: [1],
+                right: '0%',
+                start: 0,
+                end: 100
+            },
+            // {
+            //     type: 'inside',
+            //     filterMode: 'filter',
+            //     yAxisIndex: [1],
+            //     start: 0,
+            //     end: 100
+            // }
+            ],
+            series: series
         }
 
-        //mychart.setOption(option);
+        mychart.setOption(option);
     }
 
     updateChart() {
         let mychart = this.state.main_chart;
+        mychart.clear();
+        $("#xySelectorWrapper").show();
         let data = this.state.data[this.state.currentCatagory].map(this.formatDataForMainGraph);
 
         let xs = data.map(d => d[0]);
@@ -152,13 +275,17 @@ export default class MainContent extends React.Component {
             xAxis: {
                 type: 'value',
                 name: mythis.state.xAxis,
+                nameTextStyle: {
+                    fontStyle: 'bolder',
+                    fontSize: 16
+                },
                 nameLocation: 'middle',
                 nameGap: 30,
                 min: function(val) {
-                    return val.min - Math.abs(val.min*0.1);
+                    return Math.round((val.min * 1.1)*1000)/1000;
                 },
                 max: function(val) {
-                    return val.max + Math.abs(val.max*0.1);
+                    return Math.round((val.max * 1.1)*1000)/1000;
                 },
                 splitLine: {
                     show: true
@@ -167,13 +294,17 @@ export default class MainContent extends React.Component {
             yAxis: {
                 type: 'value',
                 name: mythis.state.yAxis,
+                nameTextStyle: {
+                    fontStyle: 'bolder',
+                    fontSize: 16
+                },
                 nameLocation: 'middle',
                 nameGap: 30,
                 min: function(val) {
-                    return val.min - Math.abs(val.min*0.1);
+                    return Math.round((val.min * 1.1)*1000)/1000;
                 },
                 max: function(val) {
-                    return val.max + Math.abs(val.max*0.1);
+                    return Math.round((val.max * 1.1)*1000)/1000;
                 },
                 splitLine: {
                     show: true
