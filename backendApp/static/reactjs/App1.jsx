@@ -4,7 +4,6 @@ import { render } from "react-dom"
 import Header from "./components/Header"
 import Filter from "./components/Filter"
 import Search from "./components/Search"
-import Summary from "./components/Summary"
 import MainContent from "./components/MainContent"
 
 
