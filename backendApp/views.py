@@ -186,7 +186,7 @@ def get_all(request):
     response['ok'] = True
     response['data'] = dict()
     for dataset in datasets:
-        if dataset.type not in response.keys():
+        if dataset.type not in response['data'].keys():
             response['data'][dataset.type] = list()
         data = dict()
         data['name'] = dataset.name
@@ -199,12 +199,22 @@ def get_all(request):
             data['most_recent_result'][record.method] = record.score
         response['data'][dataset.type].append(data)
 
-    times = Statistic.objects.values('time').distinct()
+    # pp.pprint(response)
     response['statistic'] = dict()
-    threshold = make_aware(datetime.now() - timedelta(days=20))
-    for time in times:
-        if time['time'] < threshold:
-            continue
-        statistics = list(Statistic.objects.filter(time=time['time']).values('method', 'score_avg', 'type'))
-        response['statistic'][str(time['time'])] = statistics
+
+    threshold = make_aware(datetime.now() - timedelta(days=10))
+    print('get statistic after %s' % threshold)
+    statistics = Statistic.objects.filter(time__gte=threshold)
+
+    for statistic in statistics:
+        if statistic.type not in response['statistic']:
+            response['statistic'][statistic.type] = dict()
+        class_entry = response['statistic'][statistic.type]
+
+        tmp_key = str(statistic.time)
+        if tmp_key not in class_entry:
+            class_entry[tmp_key] = dict()
+        class_entry_time = class_entry[tmp_key]
+        class_entry_time[statistic.method] = statistic.score_avg
+
     return JsonResponse(response)

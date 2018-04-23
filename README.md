@@ -28,24 +28,40 @@ There are three views in the system:
 Our system uses AJAX to communicate between frontend and backend.
 
 
-1. `GET[] request, url: localhost:8000/all/`:
+1. `GET localhost:8000/all/?`:
 
 ~~~~
-response = {
-    "TaskType": [
-        {
-            name: string,
-            most_recent_time: DateTime,
-            most_recent_result: {
-                Baseline: float,
-                Our: float,
-            }
-        }, ...
-    ]
+response = 
+{
+    'ok': bool,
+    'data': {
+        task_type: [
+            {
+                'name': string,
+                'most_recent_time': string,
+                'metric': string,
+                'most_recent_result': 
+                {
+                    score_name: score_value,
+                    ...
+                }
+            }, 
+            ...
+        ]
+    },
+    'statistic': {
+        task_type: {
+            time: {
+                score_name: score_value,
+                ...
+            },
+            ...
+        }
+    }
 }
 ~~~~
 
-2. `GET['data_name'] request, url: localhost:8000/dataset/`:
+2. `GET localhost:8000/dataset?data_name=my_dataset`:
 
 ~~~~
 response = {
@@ -66,7 +82,7 @@ response = {
 }
 ~~~~
 
-3. `POST['file_dir] url: localhost:8000/upload`
+3. `POST localhost:8000/upload?file_dir=my_file_directory`:
 
 
 ## Maintenance
