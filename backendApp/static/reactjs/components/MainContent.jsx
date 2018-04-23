@@ -12,16 +12,17 @@ export default class MainContent extends React.Component {
             yAxis: 'our',
             currentCatagory: null,
             catagoryList: [],
-            data: null
+            data: null,
+            main_chart: null
         };
 
         this.render = this.render.bind(this);
         this.retrieveData = this.retrieveData.bind(this);
         this.formatDataForMainGraph = this.formatDataForMainGraph.bind(this);
-        this.initChart = this.initChart.bind(this);
+        this.updateChart = this.updateChart.bind(this);
     }
 
-    retrieveData(callback) {
+    retrieveData() {
         let mythis = this;
         $.ajax({
             url: location.origin + "/all",
@@ -30,32 +31,96 @@ export default class MainContent extends React.Component {
                 if (data.ok == true) {
                     let cl = Object.keys(data.data);
                     let axis = Object.keys(data.data[cl[0]][0].most_recent_result)
+                    let mychart = echarts.init(mythis.refs.main_graph);
                     mythis.setState({
                         data: data.data,
                         catagoryList: cl,
                         currentCatagory: cl[0],
                         xAxis: axis[0],
-                        yAxis: axis[1]
+                        yAxis: axis[1],
+                        main_chart: mychart
                     });
-                    callback();
+                    mychart.on('click', function (params) {
+                        console.log(params)
+                        $.ajax({
+                            url: location.origin + "/dataset/?data_name=" + params.data[2].name,
+                            type: "GET",
+                            success: function(data) {
+                                mythis.updateChartForDataset(data);
+                            },
+                            error: function() {
+                                alert('error retrieving data');
+                            }
+                        });
+                    });
                 } else {
                     alert('Invalid data returned!');
                 }
             },
-            error: function() {
-                alert('Cannot retrieve data!');
-            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('error retrieving data');
+            }
         });
     }
 
     formatDataForMainGraph(entry) {
         let x = entry.most_recent_result[this.state.xAxis];
         let y = entry.most_recent_result[this.state.yAxis];
-        return [x,y];
+        return [x,y, entry];
     }
 
-    initChart() {
-        let mychart = echarts.init(this.refs.main_graph);
+    updateChartForDataset(raw) {
+        let mychart = this.state.main_chart;
+
+        let data = raw.results;
+
+        let option = {
+            animation: true,
+            legend: {
+                show: true
+            },
+            tooltip: {
+
+            },
+            xAxis: {
+                type: 'time',
+                name: 'Time',
+                nameLocation: 'middle',
+                nameGap: 30,
+                min: function(val) {
+                    return val.min - Math.abs(val.min*0.1);
+                },
+                max: function(val) {
+                    return val.max + Math.abs(val.max*0.1);
+                },
+                splitLine: {
+                    show: true
+                }
+            },
+            yAxis: {
+                type: 'value',
+                nameLocation: 'middle',
+                nameGap: 30,
+                min: function(val) {
+                    return val.min - Math.abs(val.min*0.1);
+                },
+                max: function(val) {
+                    return val.max + Math.abs(val.max*0.1);
+                },
+                splitLine: {
+                    show: true
+                }
+            },
+            series: [
+                
+            ]
+        }
+
+        //mychart.setOption(option);
+    }
+
+    updateChart() {
+        let mychart = this.state.main_chart;
         let data = this.state.data[this.state.currentCatagory].map(this.formatDataForMainGraph);
 
         let xs = data.map(d => d[0]);
@@ -70,13 +135,14 @@ export default class MainContent extends React.Component {
         let mythis = this;
         let now = new Date();
         let option = {
-            animation: false,
+            animation: true,
             legend: {
                 show: false
             },
             tooltip: {
                 formatter: function(params) {
-                    return mythis.state.xAxis + ':' + params.data[0] + ", " + mythis.state.yAxis + ':' + params.data[1];
+                    let info = JSON.stringify(params.data[2], null, 4);
+                    return '<pre>' + info + '</pre>';
                 }
             },
             grid: {
@@ -146,13 +212,13 @@ export default class MainContent extends React.Component {
                 }
             ],
             series: [{
-                    name: 'data',
+                    name: mythis.state.currentCatagory,
                     type: 'scatter',
                     itemStyle: {
                         normal: {
                             opacity: 0.8,
                             color: function(params) {
-                                let date = new Date(mythis.state.data[mythis.state.currentCatagory][params.dataIndex].most_recent_time);
+                                let date = new Date(data[params.dataIndex][2].most_recent_time);
                                 let alpha = date / now;
                                 let start = [194,53,49].map(x=>x*alpha);
                                 let end = [245,191,198].map(x=>x*(1-alpha));
@@ -179,11 +245,11 @@ export default class MainContent extends React.Component {
     }
 
     componentDidMount() {
-        this.retrieveData(this.initChart);
+        this.retrieveData();
     }
 
     componentDidUpdate() {
-        this.initChart();
+        this.updateChart();
     }
 
     render() {

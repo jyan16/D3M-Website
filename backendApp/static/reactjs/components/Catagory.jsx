@@ -4,7 +4,12 @@ export default class Catagory extends React.Component {
     constructor(props) {
         super(props);
         this.render = this.render.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
+        this.renderItems = this.renderItems.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event) {
+        this.props.rootThis.updateChart();
     }
 
     renderIndicators(cat, index) {
@@ -24,7 +29,7 @@ export default class Catagory extends React.Component {
         }
         return (
             <div className={c} key={'item-'+index}>
-                <button className="d-block btn btn-secondary">{cat}</button>
+                <button className="d-block btn btn-secondary" onClick={this.handleClick}>{cat}</button>
             </div>
         )
     }

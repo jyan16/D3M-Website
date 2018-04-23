@@ -189,3 +189,8 @@ ul {
 }
 
 /* main content */
+
+pre {
+    margin: auto;
+    color: white;
+}
