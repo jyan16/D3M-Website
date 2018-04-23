@@ -14,7 +14,8 @@ export default class MainContent extends React.Component {
             catagoryList: [],
             data: null,
             main_chart: null,
-            detail_chart: null
+            summary_chart: null,
+            statistics: null
         };
 
         this.render = this.render.bind(this);
@@ -22,6 +23,7 @@ export default class MainContent extends React.Component {
         this.formatDataForMainGraph = this.formatDataForMainGraph.bind(this);
         this.updateChart = this.updateChart.bind(this);
         this.updateChartForDataset = this.updateChartForDataset.bind(this);
+        this.updateSummaryChart = this.updateSummaryChart.bind(this);
     }
 
     retrieveData() {
@@ -34,13 +36,16 @@ export default class MainContent extends React.Component {
                     let cl = Object.keys(data.data);
                     let axis = Object.keys(data.data[cl[0]][0].most_recent_result)
                     let mychart = echarts.init(mythis.refs.main_graph);
+                    let summarychart = echarts.init(mythis.refs.summary_graph);
                     mythis.setState({
                         data: data.data,
                         catagoryList: cl,
                         currentCatagory: cl[0],
                         xAxis: axis[0],
                         yAxis: axis[1],
-                        main_chart: mychart
+                        main_chart: mychart,
+                        summary_chart: summarychart,
+                        statistics: data.statistics,
                     });
                     mychart.on('click', function (params) {
                         $.ajax({
@@ -48,6 +53,7 @@ export default class MainContent extends React.Component {
                             type: "GET",
                             success: function(data) {
                                 mythis.updateChartForDataset(data);
+                                mythis.updateSummaryChartForDataset(data);
                             },
                             error: function() {
                                 alert('error retrieving data');
@@ -67,7 +73,23 @@ export default class MainContent extends React.Component {
     formatDataForMainGraph(entry) {
         let x = entry.most_recent_result[this.state.xAxis];
         let y = entry.most_recent_result[this.state.yAxis];
-        return [x,y, entry];
+
+        let now = new Date();
+        let t = Math.round((now-new Date(entry.most_recent_time))/(1000*60*60*24));
+        return [x,y, entry, t];
+    }
+
+    updateSummaryChartForDataset(raw) {
+        let summarychart = this.state.summary_chart;
+        summarychart.clear();
+    }
+
+    updateSummaryChart() {
+        let summarychart = this.state.summary_chart;
+        summarychart.clear();
+        let statistics = this.state.statistics;
+
+
     }
 
     updateChartForDataset(raw) {
@@ -345,22 +367,22 @@ export default class MainContent extends React.Component {
             series: [{
                     name: mythis.state.currentCatagory,
                     type: 'scatter',
-                    itemStyle: {
-                        normal: {
-                            opacity: 0.8,
-                            color: function(params) {
-                                let date = new Date(data[params.dataIndex][2].most_recent_time);
-                                let alpha = date / now;
-                                let start = [194,53,49].map(x=>x*alpha);
-                                let end = [245,191,198].map(x=>x*(1-alpha));
-                                let combine = [];
-                                for (let i = 0; i < 3; i++) {
-                                    combine.push(start[i]+end[i]);
-                                }
-                                return 'rgb('+combine[0]+','+combine[1]+','+combine[2]+')';
-                            }
-                        }
-                    },
+                    // itemStyle: {
+                    //     normal: {
+                    //         opacity: 0.8,
+                    //         color: function(params) {
+                    //             let date = new Date(data[params.dataIndex][2].most_recent_time);
+                    //             let alpha = date / now;
+                    //             let start = [194,53,49].map(x=>x*alpha);
+                    //             let end = [245,191,198].map(x=>x*(1-alpha));
+                    //             let combine = [];
+                    //             for (let i = 0; i < 3; i++) {
+                    //                 combine.push(start[i]+end[i]);
+                    //             }
+                    //             return 'rgb('+combine[0]+','+combine[1]+','+combine[2]+')';
+                    //         }
+                    //     }
+                    // },
                     symbolSize: function (val, params) {
                         let a = 50;
                         if (xmax == xmin || ymax == ymin) {
@@ -370,9 +392,42 @@ export default class MainContent extends React.Component {
                     },
                     data: data
                 }
-            ]
+            ],
+            visualMap: {
+                type: 'piecewise',
+                pieces: [
+                    {
+                        lte: 3,
+                        color: 'rgb(194,53,49)'
+                    }, {
+                        gt: 3, lte: 7,
+                        color: 'rgb(240,80,57)'
+                    }, {
+                        gt: 7, lte: 15,
+                        color: 'rgb(255,255,50)'
+                    }, {
+                        gt: 15, lte: 30,
+                        color: 'rgb(76,255,76)'
+                    }, {
+                        gt: 30, lte: 60,
+                        color: 'rgb(50,50,255)'
+                    }, {
+                        gt: 60, lte: 120,
+                        color: 'rgb(110,50,155)'
+                    } , {
+                        gt: 120, lte: 180,
+                        color: 'rgb(201,127,233)'
+                    }
+                ],
+                top: 0,
+                left: '10%',
+                orient: 'horizontal',
+                text: ['Far', 'Near'],
+                
+            }
         }
         mychart.setOption(option)
+        this.updateSummaryChart();
     }
 
     componentDidMount() {
