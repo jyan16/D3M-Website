@@ -2,6 +2,7 @@ from django.utils.dateparse import parse_datetime
 from django.utils.timezone import is_aware, make_aware
 import json
 from .models import *
+import numpy as np
 
 
 def get_time(time_str):
@@ -46,3 +47,18 @@ def create_statistic(row):
     )
     statistic.save()
     return statistic
+
+
+def get_statistic(key, value_list):
+
+    tmp = np.array(value_list)
+    hist, bins = np.histogram(tmp, bins=10, density=True)
+    ret = {
+        'mean': np.mean(tmp),
+        'median': np.median(tmp),
+        'standard_deviation': np.std(tmp),
+        'bin': list(bins),
+        'hist': list(hist),
+    }
+    return ret
+

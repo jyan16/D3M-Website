@@ -66,6 +66,9 @@ response =
 
 2. `GET localhost:8000/dataset?data_name=my_dataset`:
 
+This request will response the individual data and its corresponding statistic result. The statistic result
+contains mean, median, standard deviation, as well as two lists to draw distribution histogram --- bin is x-axis and 
+hist is y-axis. Note that the integral of hist would be 1.
 ~~~~
 response = {
     ok: bool,
@@ -75,13 +78,22 @@ response = {
         name: string,
         type: string,
     },
-    train: [
+    results: [
         {
             Baseline: float,
             duration: int,
             time: DateTime
         }, ...
-    ]
+    ],
+    statistic: {
+        score_name: {
+            'bin': list(float),
+            'hist': list(float),
+            'mean': float,
+            'median': float,
+            'standard_deviation': float,
+        }
+    }
 }
 ~~~~
 
