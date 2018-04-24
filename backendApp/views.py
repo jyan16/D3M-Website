@@ -98,26 +98,21 @@ def get_data(request):
     results = dataset.result_set.all()
     response['results'] = list()
 
-    statistic = dict()
+    statistic = list()
     for result in results:
         tmp = dict()
         tmp['time'] = result.time
         records = result.record_set.all()
         for record in records:
-            if record.method not in statistic:
-                statistic[record.method] = list()
-            statistic[record.method].append(record.score)
+            if record.method == 'our':
+                statistic.append(record.score)
             tmp[record.method] = record.score
             tmp[record.method + ' Duration'] = record.duration
         response['results'].append(tmp)
 
-    response['statistic'] = dict()
+    # get statistic
+    response['statistic'] = get_statistic(statistic)
 
-    # process statistic data
-    for key, value_list in statistic.items():
-        response['statistic'][key] = get_statistic(value_list)
-
-    # pp.pprint(response)
     return JsonResponse(response)
 
 

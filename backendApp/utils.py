@@ -55,7 +55,7 @@ def get_statistic(value_list):
     hist, bins = np.histogram(tmp, bins=10, density=True)
     data = list()
     for i in range(0, 10):
-        data.append((hist[i], np.average(bins[i: i + 2])))
+        data.append((np.average(bins[i: i + 2]), hist[i]))
 
     ret = {
         'mean': np.mean(tmp),

@@ -67,8 +67,8 @@ response =
 2. `GET localhost:8000/dataset?data_name=my_dataset`:
 
 This request will response the individual data and its corresponding statistic result. The statistic result
-contains mean, median, standard deviation, as well as two lists to draw distribution histogram --- bin is x-axis and 
-hist is y-axis. Note that the integral of hist would be 1.
+contains mean, median, standard deviation. Client could use data field in statistic to draw frequency density histogram 
+for our score.
 ~~~~
 response = {
     ok: bool,
@@ -86,12 +86,10 @@ response = {
         }, ...
     ],
     statistic: {
-        score_name: {
-            'data': [(float, float), ...],
-            'mean': float,
-            'median': float,
-            'standard_deviation': float,
-        }
+        'data': [(float, float), ...],
+        'mean': float,
+        'median': float,
+        'standard_deviation': float,
     }
 }
 ~~~~
