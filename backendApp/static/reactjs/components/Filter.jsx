@@ -37,8 +37,7 @@ export default class Filter extends React.Component {
     applyfilters(event) {
         event.preventDefault();
 
-        console.log(this.state.filters);
-        console.log("applyfilters not implemented");
+        this.props.rootThis.setState({filters: this.state.filters});
     }
 
     removeFilter(event) {

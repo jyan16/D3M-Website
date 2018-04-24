@@ -10,6 +10,13 @@ import MainContent from "./components/MainContent"
 import "../css/main.css"
 
 class App1 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            filters: new Map()
+        }
+    }
+
     render() {
         return (
             <div id="app-container">
@@ -18,10 +25,10 @@ class App1 extends React.Component {
                 </div>
                 <div id="page-wrapper">
                     <div id="left-toolbar-container">
-                        <Filter/>
+                        <Filter rootThis={this}/>
                     </div>
                     <div id="main-content-container">
-                        <MainContent/>
+                        <MainContent filters={this.state.filters}/>
                     </div>
                     <div id="right-toolbar-container">
                         <Search/>

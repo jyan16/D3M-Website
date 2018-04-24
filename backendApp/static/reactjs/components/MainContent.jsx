@@ -13,6 +13,7 @@ export default class MainContent extends React.Component {
             currentCatagory: null,
             catagoryList: [],
             data: null,
+            filteredData: null,
             main_chart: null,
             summary_chart: null,
             statistics: null
@@ -72,12 +73,94 @@ export default class MainContent extends React.Component {
     updateSummaryChartForDataset(raw) {
         let summarychart = this.state.summary_chart;
         summarychart.clear();
+
+        let types = Object.keys(raw.statistic);
+        let series = [];
+        for (let i = 0; i < types.length; i++) {
+            let s = {
+                type: 'bar',
+                barGap: 0,
+                name: types[i],
+                data: raw.statistic[types[i]].data,
+            }
+            series.push(s);
+        }
+        
+        let option = {
+            title: {
+                text: raw.dataset.name
+            },
+            legend: {
+                show: true
+            },
+            animation: true,
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            grid: {
+                bottom: '15%'
+            },
+            xAxis: {
+                type: 'value',
+                name: 'X Axis',
+                nameTextStyle: {
+                    fontStyle: 'bolder',
+                    fontSize: 16
+                },
+                nameLocation: 'middle',
+                nameGap: 30,
+                min: function(val) {
+                    return Math.round((val.min - val.max*0.1)*1000)/1000;
+                },
+                max: function(val) {
+                    return Math.round((val.max * 1.1)*1000)/1000;
+                },
+                splitLine: {
+                    show: true
+                },
+                scale: true,
+            },
+            yAxis: {
+                type: 'value',
+                nameLocation: 'middle',
+                name: 'Y Axis',
+                nameTextStyle: {
+                    fontStyle: 'bolder',
+                    fontSize: 16
+                },
+                nameGap: 30,
+                splitLine: {
+                    show: true
+                }
+            },
+            dataZoom: [{
+                type: 'slider',
+                filterMode: 'filter',
+                show: true,
+                xAxisIndex: [0],
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'inside',
+                filterMode: 'filter',
+                xAxisIndex: [0],
+                start: 0,
+                end: 100
+            }],
+            series: series
+
+        }
+        summarychart.setOption(option);
     }
 
     updateSummaryChart() {
         let summarychart = this.state.summary_chart;
         let oldOption = summarychart.getOption();
-        if (oldOption && oldOption.title[0].text == this.state.currentCatagory) {
+        if (oldOption && oldOption.title && oldOption.title[0].text == this.state.currentCatagory) {
             return;
         }
         summarychart.clear();
@@ -105,7 +188,9 @@ export default class MainContent extends React.Component {
                 encode: {
                     x: 'time',
                     y: ys[i]
-                }
+                },
+                barGap: 0,
+                barCategoryGap: '70%',
             }
             series.push(s);
         }
@@ -125,7 +210,7 @@ export default class MainContent extends React.Component {
                 bottom: '28%',
             },
             tooltip: {
-                trigger: 'item',
+                trigger: 'axis',
                 axisPointer: {
                     type: 'cross'
                 }
@@ -352,7 +437,7 @@ export default class MainContent extends React.Component {
         }
 
         mychart.setOption(option);
-        // this.updateSummaryChartForDataset(data);
+        this.updateSummaryChartForDataset(raw);
     }
 
     formatDataForMainGraph(entry) {
@@ -368,7 +453,7 @@ export default class MainContent extends React.Component {
         let mychart = this.state.main_chart;
         mychart.clear();
         $("#xySelectorWrapper").show();
-        let data = this.state.data[this.state.currentCatagory].map(this.formatDataForMainGraph);
+        let data = this.state.filteredData.map(this.formatDataForMainGraph);
 
         let xs = data.map(d => d[0]);
         let ys = data.map(d => d[1]);
@@ -536,6 +621,52 @@ export default class MainContent extends React.Component {
     }
 
     componentDidUpdate() {
+        let helper = function(value, index, array) {
+            for (let e of this.props.filters) {
+                let name = e[1].name;
+                let relation = e[1].relation;
+                let target = parseFloat(e[1].value);
+                if (name in value.most_recent_result) {
+                    let v = value.most_recent_result[name];
+                    switch(relation) {
+                        case 'lt':
+                            if ((v < target) == false) {
+                                return false;
+                            }
+                            break;
+                        case 'le':
+                            if ((v <= target) == false) {
+                                return false;
+                            }
+                            break;
+                        case 'eq':
+                            if ((v == target) == false) {
+                                return false;
+                            }
+                            break;
+                        case 'ne':
+                            if ((v != target) == false) {
+                                return false;
+                            }
+                            break;
+                        case 'ge':
+                            if ((v >= target) == false) {
+                                return false;
+                            }
+                            break;
+                        case 'gt':
+                            if ((v > target) == false) {
+                                return false;
+                            }
+                            break;
+                    }
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
+        this.state.filteredData = this.state.data[this.state.currentCatagory].filter(helper, this);
         this.updateChart();
     }
 
@@ -544,6 +675,9 @@ export default class MainContent extends React.Component {
             <div id="MainContent-wrapper">
                 <Catagory catagoryList={this.state.catagoryList} rootThis={this}/>
                 <div ref="main_graph" id="main-graph"></div>
+                <div id="summary-info">
+                    hahaha
+                </div>
                 <div ref="summary_graph" id="summary-graph"></div>
                 
                 <XYSelector data={this.state.data} currentCatagory={this.state.currentCatagory} rootThis={this}/>
