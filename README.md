@@ -87,8 +87,7 @@ response = {
     ],
     statistic: {
         score_name: {
-            'bin': list(float),
-            'hist': list(float),
+            'data': [(float, float), ...],
             'mean': float,
             'median': float,
             'standard_deviation': float,

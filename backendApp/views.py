@@ -115,9 +115,9 @@ def get_data(request):
 
     # process statistic data
     for key, value_list in statistic.items():
-        response['statistic'][key] = get_statistic(key, value_list)
+        response['statistic'][key] = get_statistic(value_list)
 
-    pp.pprint(response)
+    # pp.pprint(response)
     return JsonResponse(response)
 
 

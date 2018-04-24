@@ -49,16 +49,19 @@ def create_statistic(row):
     return statistic
 
 
-def get_statistic(key, value_list):
+def get_statistic(value_list):
 
     tmp = np.array(value_list)
     hist, bins = np.histogram(tmp, bins=10, density=True)
+    data = list()
+    for i in range(0, 10):
+        data.append((hist[i], np.average(bins[i: i + 2])))
+
     ret = {
         'mean': np.mean(tmp),
         'median': np.median(tmp),
         'standard_deviation': np.std(tmp),
-        'bin': list(bins),
-        'hist': list(hist),
+        'data': data
     }
     return ret
 
