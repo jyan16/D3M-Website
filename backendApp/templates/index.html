@@ -1,21 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Example</title>
+	<title></title>
+	<style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Cairo');
+        html{
+            background-image: url("http://harrisburgu.edu/wp-content/uploads/2015/08/large_hero_image2.png");
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+		h1{
+            text-align: center;
+            position: relative;
+            top:20px;
+            font-family:"Cairo";
+            color: black;
+            font-size: 30px;
+            opacity: 0.4;
+            letter-spacing: 2px;
+
+		}
+
+        #demo{
+            color: black;
+            opacity: 0.6;
+            font-family: "Times New Roman";
+            font-size: 30px;
+            position: absolute;
+            left:480px;
+            top:450px;
+        }
+
+        .dropbtn {
+            background:transparent;
+            border:none;
+            width:30%;
+            height: 30%;
+            position: relative;
+            left:100px;
+            top:50px;
+        }
+
+        img{
+            width: 60%;
+            height:60%;
+            opacity: 0.6;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            left:100px;
+
+        }
+
+        .dropdown-content {
+            font-family: "Times New Roman";
+            display: none;
+            position: relative;
+            left:220px;
+            bottom:35px;
+            min-width: 200px;
+
+        }
+
+        .dropdown-content a {
+            color: white;
+            font-weight: bold;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            color:darkblue;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+	</style>
 </head>
 <body>
-    <form action="upload/" method="post">
-    {% csrf_token %}
-        <label for="file_dir">file directory</label>
-        <input type="text" name="file_dir" style="width: 700px;" value="your file dir here" />
-        <input type="submit" value="upload" />
-    </form>
-    <form action="dataset/" method="get">
-    {% csrf_token %}
-        <label for="data_name">dataset name:</label>
-        <input type="text" name="data_name" value="313_spectrometer" style="width: 200px;"/>
-        <input type="submit" value="get data" />
-    </form>
+
+<div id="main">
+	<div id = "content">
+		<h1>DMhub</h1>
+	</div>
+
+    <div class="dropdown">
+        <button class="dropbtn"><img src="menu.png"></button>
+        <div class="dropdown-content">
+            <a href="#">DMhub</a>
+            <a href="#">Contact Lab</a>
+        </div>
+    </div>
+
+    <p id = "demo"></p>
+</div>
 </body>
+<script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+</script>
+<script>
+    var i = 0;
+    var txt = 'DMhub change the way you look at data ...';
+    var speed = 80; /* The speed/duration of the effect in milliseconds */
+
+    $(document).ready(function a(){
+        if (i < txt.length) {
+            document.getElementById("demo").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(a,speed);
+        }
+    })
+</script>
 </html>

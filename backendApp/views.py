@@ -17,12 +17,16 @@ def index(request):
     return render(request, 'index.html')
 
 
-def view1(request):
-    return render(request, 'view1.html')
+def test(request):
+    return render(request, 'test.html')
 
 
-def view2(request):
-    return render(request, 'view2.html')
+def lab(request):
+    return render(request, 'lab.html')
+
+
+def data(request):
+    return render(request, 'data.html')
 
 
 def upload(request):
