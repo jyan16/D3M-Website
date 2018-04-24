@@ -41,7 +41,7 @@ export default class Catagory extends React.Component {
         $('#carouselIndicators').on('slide.bs.carousel', function (event) {
             let currentIndex = event.to;
             let newcat = mythis.props.catagoryList[currentIndex];
-            rootThis.setState({currentCatagory: newcat})
+            rootThis.setState({currentCatagory: newcat});
         })
     }
 

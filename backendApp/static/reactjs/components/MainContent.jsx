@@ -45,7 +45,7 @@ export default class MainContent extends React.Component {
                         yAxis: axis[1],
                         main_chart: mychart,
                         summary_chart: summarychart,
-                        statistics: data.statistics,
+                        statistics: data.statistic,
                     });
                     mychart.on('click', function (params) {
                         $.ajax({
@@ -53,7 +53,6 @@ export default class MainContent extends React.Component {
                             type: "GET",
                             success: function(data) {
                                 mythis.updateChartForDataset(data);
-                                mythis.updateSummaryChartForDataset(data);
                             },
                             error: function() {
                                 alert('error retrieving data');
@@ -70,15 +69,6 @@ export default class MainContent extends React.Component {
         });
     }
 
-    formatDataForMainGraph(entry) {
-        let x = entry.most_recent_result[this.state.xAxis];
-        let y = entry.most_recent_result[this.state.yAxis];
-
-        let now = new Date();
-        let t = Math.round((now-new Date(entry.most_recent_time))/(1000*60*60*24));
-        return [x,y, entry, t];
-    }
-
     updateSummaryChartForDataset(raw) {
         let summarychart = this.state.summary_chart;
         summarychart.clear();
@@ -86,10 +76,112 @@ export default class MainContent extends React.Component {
 
     updateSummaryChart() {
         let summarychart = this.state.summary_chart;
+        let oldOption = summarychart.getOption();
+        if (oldOption && oldOption.title[0].text == this.state.currentCatagory) {
+            return;
+        }
         summarychart.clear();
-        let statistics = this.state.statistics;
+        let statistics = this.state.statistics[this.state.currentCatagory];
 
+        let dimensions = [];
+        let ys = [];
+        for (let i = 0; i < statistics.length; i++) {
+            for (let key in statistics[i]) {
+                if (dimensions.includes(key) == false) {
+                    dimensions.push(key);
+                    if (key != 'time') {
+                        ys.push(key);
+                    }
+                }
+            }
+        }
 
+        let series = [];
+        for (let i = 0; i < ys.length; i++) {
+            let s = {
+                type: 'bar',
+                name: ys[i],
+                dimensions: ['time', ys[i]],
+                encode: {
+                    x: 'time',
+                    y: ys[i]
+                }
+            }
+            series.push(s);
+        }
+
+        let option = {
+            title: {
+                text: this.state.currentCatagory
+            },
+            animation: true,
+            dataset: {
+                source: statistics
+            },
+            legend: {
+                show: true
+            },
+            grid: {
+                bottom: '28%',
+            },
+            tooltip: {
+                trigger: 'item',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            xAxis: {
+                type: 'time',
+                name: 'Time',
+                nameTextStyle: {
+                    fontStyle: 'bolder',
+                    fontSize: 16
+                },
+                nameLocation: 'middle',
+                nameGap: 30,
+                min: 'dataMin',
+                max: 'dataMax',
+                splitLine: {
+                    show: true
+                }
+            },
+            yAxis: {
+                type: 'value',
+                nameLocation: 'middle',
+                name: 'score',
+                nameTextStyle: {
+                    fontStyle: 'bolder',
+                    fontSize: 16
+                },
+                nameGap: 30,
+                // min: function(val) {
+                //     return Math.round((val.min * 1.1)*1000)/1000;
+                // },
+                max: function(val) {
+                    return Math.round((val.max * 1.1)*1000)/1000;
+                },
+                splitLine: {
+                    show: true
+                }
+            },
+            dataZoom: [{
+                type: 'slider',
+                filterMode: 'filter',
+                show: true,
+                xAxisIndex: [0],
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'inside',
+                filterMode: 'filter',
+                xAxisIndex: [0],
+                start: 0,
+                end: 100
+            }],
+            series: series
+        }
+        summarychart.setOption(option);
     }
 
     updateChartForDataset(raw) {
@@ -260,6 +352,16 @@ export default class MainContent extends React.Component {
         }
 
         mychart.setOption(option);
+        // this.updateSummaryChartForDataset(data);
+    }
+
+    formatDataForMainGraph(entry) {
+        let x = entry.most_recent_result[this.state.xAxis];
+        let y = entry.most_recent_result[this.state.yAxis];
+
+        let now = new Date();
+        let t = Math.round((now-new Date(entry.most_recent_time))/(1000*60*60*24));
+        return [x,y, entry, t];
     }
 
     updateChart() {
@@ -278,7 +380,6 @@ export default class MainContent extends React.Component {
         let ymax = Math.max.apply(null, ys);
 
         let mythis = this;
-        let now = new Date();
         let option = {
             animation: true,
             legend: {
@@ -426,7 +527,7 @@ export default class MainContent extends React.Component {
                 
             }
         }
-        mychart.setOption(option)
+        mychart.setOption(option);
         this.updateSummaryChart();
     }
 

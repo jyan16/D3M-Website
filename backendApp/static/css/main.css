@@ -194,3 +194,8 @@ pre {
     margin: auto;
     color: white;
 }
+
+#summary-graph {
+    width: 600px;
+    height: 300px;
+}
