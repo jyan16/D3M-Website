@@ -53,7 +53,8 @@ response =
     },
     'statistic': {
         task_type: {
-            time: {
+            {
+                time: string,
                 score_name: score_value,
                 ...
             },
