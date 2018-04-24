@@ -74,13 +74,15 @@ export default class Filter extends React.Component {
                     <input type="text" className="form-control" id="filter-form-value" placeholder="value" pattern="^[+-]?([0-9]*[.])?[0-9]+$" required/>                    
                     
                 </div>
+            </form>
+
                 <button className="btn btn-primary" id="filter-form-add" type="submit">
                     Add
                 </button>
-            </form>
-            <button className="btn btn-primary" id="filter-form-apply" onClick={this.applyfilters}>
+
+                <button className="btn btn-primary" id="filter-form-apply" onClick={this.applyfilters}>
                     Apply Filter
-            </button>
+                </button>
         </div>
         
 

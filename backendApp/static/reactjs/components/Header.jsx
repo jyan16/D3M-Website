@@ -7,7 +7,7 @@ export default class Header extends React.Component {
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
                             <a href="#" className="nav-link">
-                                <i className="fas fa-home" color="black"></i>
+                                <i className="fas fa-home" color="black" style={{marginRight:'20px'}}></i>
                                 Home
                             </a>
                         </li>
@@ -15,6 +15,12 @@ export default class Header extends React.Component {
                         <li className="nav-item">
                             <a href="#" className="nav-link">
                                 Data
+                            </a>
+                        </li>
+
+                        <li className="nav-item">
+                            <a href="#" className="nav-link">
+                                Contact Lab
                             </a>
                         </li>
 

@@ -676,7 +676,6 @@ export default class MainContent extends React.Component {
                 <Catagory catagoryList={this.state.catagoryList} rootThis={this}/>
                 <div ref="main_graph" id="main-graph"></div>
                 <div id="summary-info">
-                    hahaha
                 </div>
                 <div ref="summary_graph" id="summary-graph"></div>
                 
