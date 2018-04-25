@@ -54,7 +54,7 @@ html, body, #App1, #app-container {
     border-radius: 4px; border-radius: 0.25rem;
     margin-top: 10%;
     margin-right:40%;
-    height: 50%;
+    height: 505px;
     color: white;
 }
 
@@ -137,8 +137,8 @@ ul {
     padding: 10px; padding: 0.625rem;
     border-radius: 4px; border-radius: 0.25rem;
     margin-top: 5%;
-    margin-left: 35%;
-    height:80%;
+    margin-left: 25%;
+    height: 750px;
 }
 
 #search-wrapper * {
