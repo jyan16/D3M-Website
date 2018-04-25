@@ -76,7 +76,7 @@ export default class MainContent extends React.Component {
         
         let option = {
             title: {
-                text: raw.dataset.name
+                text: 'dataset: ' + raw.dataset.name
             },
             legend: {
                 show: true
@@ -117,7 +117,7 @@ export default class MainContent extends React.Component {
             yAxis: {
                 type: 'value',
                 nameLocation: 'end',
-                name: 'frequency',
+                name: 'frequency density',
                 nameTextStyle: {
                     fontStyle: 'bolder',
                     fontSize: 16
@@ -357,7 +357,7 @@ export default class MainContent extends React.Component {
                 }
             },
             xAxis: {
-                type: 'time',
+                type: 'category',
                 name: 'Time',
                 nameTextStyle: {
                     fontStyle: 'bolder',
