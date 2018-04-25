@@ -86,26 +86,29 @@ export default class MainContent extends React.Component {
                 trigger: 'axis',
                 axisPointer: {
                     type: 'cross'
+                },
+                formatter: function(params) {
+                    return '<pre>' + 'score range: ' + params[0].data[0] + '\nfrequency: ' + params[0].data[1] + '</pre>'
                 }
             },
             grid: {
                 bottom: 60
             },
             xAxis: {
-                type: 'value',
-                name: 'distribution',
+                type: 'category',
+                name: 'score',
                 nameTextStyle: {
                     fontStyle: 'bolder',
                     fontSize: 16
                 },
                 nameLocation: 'middle',
                 nameGap: 40,
-                min: function(val) {
-                    return Math.round((val.min - val.max*0.1)*1000)/1000;
-                },
-                max: function(val) {
-                    return Math.round((val.max * 1.1)*1000)/1000;
-                },
+                // min: function(val) {
+                //     return Math.round((val.min - val.max*0.1)*1000)/1000;
+                // },
+                // max: function(val) {
+                //     return Math.round((val.max * 1.1)*1000)/1000;
+                // },
                 splitLine: {
                     show: true
                 },
@@ -114,7 +117,7 @@ export default class MainContent extends React.Component {
             yAxis: {
                 type: 'value',
                 nameLocation: 'end',
-                name: 'score',
+                name: 'frequency',
                 nameTextStyle: {
                     fontStyle: 'bolder',
                     fontSize: 16
@@ -142,7 +145,7 @@ export default class MainContent extends React.Component {
             }],
             series: {
                 type: 'bar',
-                name: 'our',
+                name: 'frequency',
                 data: raw.statistic.data,
             }
 
@@ -519,7 +522,7 @@ export default class MainContent extends React.Component {
             },
             grid: {
                 left: 110,
-                // right: '12%',
+                top: 20,
                 bottom: '12%'
             },
             xAxis: {
