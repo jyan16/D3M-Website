@@ -1,12 +1,12 @@
 html, body, #App1, #app-container {
     font-size: 16px;
-    height: 100%;
+    height:100%;
 }
 
 #app-container {
     display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 55px auto; grid-template-rows: 3.4375rem auto;
+    /*grid-template-columns: auto;*/
+    grid-template-rows: 6% auto;
     grid-template-areas: "header"
                          "page-wrapper";
     background-color: #1b6597;
@@ -16,22 +16,18 @@ html, body, #App1, #app-container {
     grid-area: header;
 }
 
-
 .nav-item {
     margin-left: 10px;
-
 }
 
 #page-wrapper {
     grid-area: page-wrapper;
-
     min-width: 768px; min-width: 48rem;
     max-width: 1080px; max-width: 67.5rem;
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: 260px auto 260px;
-    /*grid-template-columns: 10rem auto 10rem;*/
+    grid-template-columns:25% auto 25%;
     grid-template-rows: auto; grid-template-rows: auto;
     grid-template-areas: "left-toolbar main-content right-toolbar"
                          "summary summary summary";
@@ -39,17 +35,12 @@ html, body, #App1, #app-container {
 
 #left-toolbar-container {
     grid-area: left-toolbar;
-
-    margin: 10px; margin: 0.625rem;
-    margin-bottom: 0;
 }
-
 
 #main-content-container {
     grid-area: main-content;
     min-width: 600px;
     margin-bottom: 0;
-    
 }
 
 #right-toolbar-container {
@@ -67,7 +58,6 @@ html, body, #App1, #app-container {
     color: white;
 }
 
-
 /* filter section */
 #filter-form * {
     font-size: 10px; font-size: 0.625rem;
@@ -80,7 +70,7 @@ html, body, #App1, #app-container {
     font-size: 1rem;
     opacity: 0.7;
     position: relative;
-    left: 35px;
+    left:30%;
     bottom: 10px;
 }
 
@@ -108,25 +98,23 @@ html, body, #App1, #app-container {
 #filter-form-relation {
     width: auto;
     padding: 2px 8px; padding: 0.125rem 0.5rem;
-    font-size: 14.4px; font-size: 0.9rem;
+    font-size: 14px;
     margin-right: 7px;
 }
 #filter-form-add{
     opacity: 0.7;
-    margin-top:30px;
+    margin-top:15%;
     background-color: #2D5A84;
     border-color:white;
-    border-radius: 4px; border-radius: 0.25rem;
+    border-radius: 4px;
 }
 
 #filter-form-apply{
     opacity: 0.7;
     background-color: #2D5A84;
     border-color:white;
-    border-radius: 4px; border-radius: 0.25rem;
+    border-radius: 4px;
 }
-
-
 
 ul {
     list-style-type: none;
@@ -137,9 +125,9 @@ ul {
 #filter-filters {
     margin-top: 20%;
 }
+
 #filter-filters * {
     font-size: 0.875rem;
-    margin-top: 0.375rem;
 }
 
 /* end of filter section */
@@ -147,11 +135,10 @@ ul {
 /* search */
 #search-wrapper {
     padding: 10px; padding: 0.625rem;
-    padding-top: 0;
     border-radius: 4px; border-radius: 0.25rem;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-left: 35%;
-    height: 80%;
+    height:80%;
 }
 
 #search-wrapper * {
@@ -177,18 +164,16 @@ ul {
 #search-result .label {
     font-size: 1rem;
     position: relative;
-    top: 10px;
-    left:20px;
+    top: 7%;
+    left:15%;
     opacity: 0.7;
 }
-
 
 
 /* end search */
 
 /* main content */
 #MainContent-wrapper {
-    /*margin-top: 2%;*/
     display: flex;
     flex-direction: column;
 }
@@ -196,22 +181,19 @@ ul {
     margin: 0 auto;
 }
 #main-graph {
-    width: 420px;
-    height: 420px;
+    width: 350px;
+    height: 350px;
 }
 
 
 #carouselIndicators {
     width: 300px;
-    /*width: 18.75rem;*/
     height: 90px;
-    /*height: 5.625rem;*/
 }
 
 .carousel-item > button {
     margin: auto;
-    width: 220px;
-    height: 34px;
+    width: 70%;
     background-color: steelblue;
     border-color:steelblue ;
 }
@@ -221,15 +203,14 @@ ul {
 }
 
 .carousel-inner {
-    margin-top: 28px;
+    margin-top: 7%;
 }
-
 
 #xySelectorWrapper {
     position:relative;
-    width: 150px;
-    left:475px;
-    bottom:200px;
+    width: 25%;
+    left:80%;
+    bottom:180px;
     display: flex;
     flex-direction: column;
     background-color: #2D5A84;
@@ -260,7 +241,7 @@ pre {
 
 #summary-graph {
     width: 750px;
-    height: 250px;
+    height: 230px;
     position: relative;
-    right:50px;
+    right:10%;
 }
