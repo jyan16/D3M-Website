@@ -181,8 +181,9 @@ ul {
     margin: 0 auto;
 }
 #main-graph {
-    width: 500px;
+    width: 700px;
     height: 500px;
+    margin-left: -70px;
 }
 
 

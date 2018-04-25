@@ -99,7 +99,7 @@ export default class MainContent extends React.Component {
                     fontSize: 16
                 },
                 nameLocation: 'middle',
-                nameGap: 10,
+                nameGap: 40,
                 min: function(val) {
                     return Math.round((val.min - val.max*0.1)*1000)/1000;
                 },
@@ -216,7 +216,7 @@ export default class MainContent extends React.Component {
             },
             xAxis: {
                 type: 'category',
-                name: 'Time',
+                name: 'time',
                 nameTextStyle: {
                     fontStyle: 'bolder',
                     fontSize: 16
@@ -425,6 +425,10 @@ export default class MainContent extends React.Component {
                 start: 0,
                 end: 100,
                 width: 12,
+                labelPrecision: 1,
+                textStyle: {
+                    fontSize: 10,
+                }
             },
             // {
             //     type: 'inside',
@@ -442,6 +446,10 @@ export default class MainContent extends React.Component {
                 start: 0,
                 end: 100,
                 width: 12,
+                labelPrecision: 1,
+                textStyle: {
+                    fontSize: 10,
+                }
             },
             // {
             //     type: 'inside',
@@ -495,7 +503,8 @@ export default class MainContent extends React.Component {
                 }
             },
             grid: {
-                right: '12%',
+                left: 110,
+                // right: '12%',
                 bottom: '12%'
             },
             xAxis: {
@@ -625,11 +634,18 @@ export default class MainContent extends React.Component {
                         color: 'rgb(201,127,233)'
                     }
                 ],
-                top: 0,
-                left: '10%',
-                orient: 'horizontal',
-                text: ['Far', 'Near'],
-                
+                bottom: 50,
+                left: 0,
+                orient: 'vertical',
+                text: ['', 'Days'],
+                align: 'right',
+                inverse: true,
+                showLabel: true,
+                textGap: 5,
+                itemGap: 5,
+                textStyle: {
+                    fontSize: 10,
+                }
             }
         }
         mychart.setOption(option);
