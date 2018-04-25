@@ -5,26 +5,13 @@
     <title>Example</title>
 </head>
 <body>
-        <form action="{% url "push" %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>{{ form.non_field_errors }}</p>
-
-            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-
-            <p>
-                {{ form.docfile.errors }}
-                {{ form.docfile }}
-            </p>
-
-            <p><input type="submit" value="Upload"/></p>
-        </form>
     <form action="upload/" method="post">
     {% csrf_token %}
         <label for="file_dir">file directory</label>
         <input type="text" name="file_dir" style="width: 700px;" value="your file dir here" />
         <input type="submit" value="upload" />
     </form>
-    <form action="dataset/" method="get">
+    <form action="/dataset/" method="get">
     {% csrf_token %}
         <label for="data_name">dataset name:</label>
         <input type="text" name="data_name" value="313_spectrometer" style="width: 200px;"/>
