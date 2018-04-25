@@ -192,7 +192,7 @@ ul {
 }
 
 .carousel-item > button {
-    margin: auto;
+    margin: 2px auto;
     width: 70%;
     background-color: steelblue;
     border-color:steelblue ;

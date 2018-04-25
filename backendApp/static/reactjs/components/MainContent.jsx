@@ -197,9 +197,15 @@ export default class MainContent extends React.Component {
                 source: statistics
             },
             legend: {
-                show: true
+                show: true,
+                right: 640,
+                top: 50,
+                orient: 'vertical',
+                align: 'right',
             },
             grid: {
+                left: 150,
+                right: 150,
                 bottom: '25%',
             },
             tooltip: {
@@ -223,6 +229,7 @@ export default class MainContent extends React.Component {
                     show: true
                 },
                 axisLabel: {
+                    margin: 4,
                     formatter: function(value, index) {
                         let date = new Date(value);
                         let texts = [(date.getMonth() + 1), date.getDate()];
@@ -321,8 +328,8 @@ export default class MainContent extends React.Component {
                 left: '15%',
             },
             grid: {
-                left: 50,
-                right: 50,
+                left: 60,
+                right: 60,
                 bottom: 60
             },
             tooltip: {
