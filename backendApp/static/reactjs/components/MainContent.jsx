@@ -147,6 +147,10 @@ export default class MainContent extends React.Component {
                 type: 'bar',
                 name: 'frequency density',
                 barCategoryGap: 0,
+                itemStyle: {
+                    borderColor: 'black',
+                    borderWidth: 0.5,
+                },
                 data: raw.statistic.data,
             }
 
