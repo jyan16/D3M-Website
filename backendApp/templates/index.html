@@ -5,22 +5,23 @@
 	<style type="text/css">
         @import url('https://fonts.googleapis.com/css?family=Cairo');
         html{
+            width: auto;
+            height: auto;
+            margin: 0;
+            padding: 0;
             background-image: url("http://harrisburgu.edu/wp-content/uploads/2015/08/large_hero_image2.png");
-            height: 100%;
-            background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
 		h1{
-            text-align: center;
-            position: relative;
-            top:100px;
             font-family:"Cairo";
-            color: black;
+            color: white;
             font-size: 100px;
-            opacity: 0.7;
-            color:white;
+            opacity: 0.8;
             letter-spacing: 2px;
+            position:absolute;
+            left:4%;
+
 
 		}
 
@@ -34,55 +35,85 @@
             top:350px;
         }
 
+
+
+        .dropdown {
+            display: inline-block;
+            position: absolute;
+            top: 35%;
+        }
+
         .dropbtn {
             background:transparent;
             border:none;
             width:30%;
             height: 30%;
             position: relative;
-            left:100px;
-            top:50px;
+
         }
 
         img{
-            width: 60%;
-            height:60%;
+            width: 50%;
+            height:50%;
             opacity: 0.6;
         }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            left:400px;
-            top:200px;
-
-        }
-
         .dropdown-content {
-            font-family: "Cairo";
             display: none;
-            position: relative;
-            left:220px;
-            bottom:35px;
             min-width: 200px;
+            position: relative;
+            left:7%;
 
         }
 
         .dropdown-content a {
             color: white;
+            font-family: "Cairo";
+            font-size: 18px;
             font-weight: bold;
-            padding: 12px 16px;
+            padding: 20px 16px;
             text-decoration: none;
             display: block;
         }
 
         .dropdown-content a:hover {
-            color:blue;
+            color:bisque;
         }
         .dropdown:hover .dropdown-content {
             display: block;
         }
 
+        form{
+            position: absolute;
+            left:70%;
+            top:10%;
+
+        }
+
+
+        input[type=text]{
+            font-family: "Cairo";
+            color:white;
+            width: 250px;
+            height: 25px;
+            font-size:18px;
+            border-radius: 4px;
+            background: rgba(0, 0, 0,0.1);
+            border-color:#1b6597;
+
+
+        }
+
+        input[type=submit]{
+            color: white;
+            font-size:18px;
+            border-radius: 4px;
+            background: rgba(0, 0, 0,0.1);
+            border-color: #1b6597;
+            position: relative;
+            left: 5%;
+
+        }
 	</style>
 </head>
 <body>
@@ -93,14 +124,20 @@
 	</div>
 
     <div class="dropdown">
-        <button class="dropbtn"><img src="menu.png"></button>
+        <button class="dropbtn"><img src="https://www.decaloguesociety.org/wp-content/plugins/donorperfect-conduit//assets/images/menu-toggle.png"></button>
         <div class="dropdown-content">
-            <a href="#">DMhub</a>
-            <a href="#">Contact Lab</a>
+            <a href="http://127.0.0.1:8000/view1/">DMhub</a>
+            <a href="http://127.0.0.1:8000/lab/">Contact Lab</a>
         </div>
     </div>
-
     <p id = "demo"></p>
+
+    <form action="upload/" method="post">
+        <input type="text" name="file_dir" onfocus="this.value=''" value="  Your File Directory..." />
+        <input type="submit" value="Upload" />
+    </form>
+
+
 </div>
 </body>
 <script
@@ -110,8 +147,8 @@
 </script>
 <script>
     var i = 0;
-    var txt = 'DMhub change the way you look at data ...';
-    var speed = 50; /* The speed/duration of the effect in milliseconds */
+    var txt = 'DMhub changes the way you look at data ...';
+    var speed = 70; /* The speed/duration of the effect in milliseconds */
 
     $(document).ready(function a(){
         if (i < txt.length) {
