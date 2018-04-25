@@ -73,18 +73,6 @@ export default class MainContent extends React.Component {
     updateSummaryChartForDataset(raw) {
         let summarychart = this.state.summary_chart;
         summarychart.clear();
-
-        let types = Object.keys(raw.statistic);
-        let series = [];
-        for (let i = 0; i < types.length; i++) {
-            let s = {
-                type: 'bar',
-                barGap: 0,
-                name: types[i],
-                data: raw.statistic[types[i]].data,
-            }
-            series.push(s);
-        }
         
         let option = {
             title: {
@@ -101,17 +89,17 @@ export default class MainContent extends React.Component {
                 }
             },
             grid: {
-                bottom: '15%'
+                bottom: 60
             },
             xAxis: {
                 type: 'value',
-                name: 'X Axis',
+                name: 'distribution',
                 nameTextStyle: {
                     fontStyle: 'bolder',
                     fontSize: 16
                 },
                 nameLocation: 'middle',
-                nameGap: 30,
+                nameGap: 10,
                 min: function(val) {
                     return Math.round((val.min - val.max*0.1)*1000)/1000;
                 },
@@ -125,13 +113,13 @@ export default class MainContent extends React.Component {
             },
             yAxis: {
                 type: 'value',
-                nameLocation: 'middle',
-                name: 'Y Axis',
+                nameLocation: 'end',
+                name: 'score',
                 nameTextStyle: {
                     fontStyle: 'bolder',
                     fontSize: 16
                 },
-                nameGap: 30,
+                nameGap: 10,
                 splitLine: {
                     show: true
                 }
@@ -142,7 +130,8 @@ export default class MainContent extends React.Component {
                 show: true,
                 xAxisIndex: [0],
                 start: 0,
-                end: 100
+                end: 100,
+                height: 12,
             },
             {
                 type: 'inside',
@@ -151,7 +140,11 @@ export default class MainContent extends React.Component {
                 start: 0,
                 end: 100
             }],
-            series: series
+            series: {
+                type: 'bar',
+                name: 'our',
+                data: raw.statistic.data,
+            }
 
         }
         summarychart.setOption(option);
@@ -190,7 +183,7 @@ export default class MainContent extends React.Component {
                     y: ys[i]
                 },
                 barGap: 0,
-                barCategoryGap: '70%',
+                // barCategoryGap: '70%',
             }
             series.push(s);
         }
@@ -207,7 +200,7 @@ export default class MainContent extends React.Component {
                 show: true
             },
             grid: {
-                bottom: '28%',
+                bottom: '25%',
             },
             tooltip: {
                 trigger: 'axis',
@@ -216,29 +209,36 @@ export default class MainContent extends React.Component {
                 }
             },
             xAxis: {
-                type: 'time',
+                type: 'category',
                 name: 'Time',
                 nameTextStyle: {
                     fontStyle: 'bolder',
                     fontSize: 16
                 },
                 nameLocation: 'middle',
-                nameGap: 30,
+                nameGap: 35,
                 min: 'dataMin',
                 max: 'dataMax',
                 splitLine: {
                     show: true
+                },
+                axisLabel: {
+                    formatter: function(value, index) {
+                        let date = new Date(value);
+                        let texts = [(date.getMonth() + 1), date.getDate()];
+                        return texts.join('/');
+                    }
                 }
             },
             yAxis: {
                 type: 'value',
-                nameLocation: 'middle',
+                nameLocation: 'end',
                 name: 'score',
                 nameTextStyle: {
                     fontStyle: 'bolder',
                     fontSize: 16
                 },
-                nameGap: 30,
+                nameGap: 10,
                 // min: function(val) {
                 //     return Math.round((val.min * 1.1)*1000)/1000;
                 // },
@@ -255,14 +255,15 @@ export default class MainContent extends React.Component {
                 show: true,
                 xAxisIndex: [0],
                 start: 0,
-                end: 100
+                end: 100,
+                height: 12,
             },
             {
                 type: 'inside',
                 filterMode: 'filter',
                 xAxisIndex: [0],
                 start: 0,
-                end: 100
+                end: 100,              
             }],
             series: series
         }
@@ -315,14 +316,14 @@ export default class MainContent extends React.Component {
             animation: true,
             legend: {
                 show: true,
-                // type: 'scroll',
-                width: '70%',
+                type: 'scroll',
+                width: '80%',
                 left: '15%',
             },
             grid: {
-                left: '15%',
-                right: '15%',
-                bottom: '15%'
+                left: 50,
+                right: 50,
+                bottom: 60
             },
             tooltip: {
                 trigger: 'axis',
@@ -338,23 +339,30 @@ export default class MainContent extends React.Component {
                     fontSize: 16
                 },
                 nameLocation: 'middle',
-                nameGap: 30,
+                nameGap: 40,
                 min: 'dataMin',
                 max: 'dataMax',
                 splitLine: {
-                    show: true
+                    show: false
+                },
+                axisLabel: {
+                    formatter: function(value, index) {
+                        let date = new Date(value);
+                        let texts = [(date.getMonth() + 1), date.getDate()];
+                        return texts.join('/');
+                    }
                 }
             },
             yAxis: [{
                 type: 'value',
                 scale: true,
-                nameLocation: 'middle',
+                nameLocation: 'end',
                 name: 'score',
                 nameTextStyle: {
                     fontStyle: 'bolder',
                     fontSize: 16
                 },
-                nameGap: 30,
+                nameGap: 10,
                 min: function(val) {
                     return Math.round((val.min * 1.1)*1000)/1000;
                 },
@@ -362,19 +370,19 @@ export default class MainContent extends React.Component {
                     return Math.round((val.max * 1.1)*1000)/1000;
                 },
                 splitLine: {
-                    show: true
+                    show: false
                 }
             }, {
                 type: 'value',
                 scale: true,
-                nameLocation: 'middle',
+                nameLocation: 'end',
                 position: 'right',
                 name: 'duration',
                 nameTextStyle: {
                     fontStyle: 'bolder',
                     fontSize: 16
                 },
-                nameGap: 30,
+                nameGap: 10,
                 min: function(val) {
                     return Math.round((val.min * 1.1)*1000)/1000;
                 },
@@ -382,7 +390,7 @@ export default class MainContent extends React.Component {
                     return Math.round((val.max * 1.1)*1000)/1000;
                 },
                 splitLine: {
-                    show: true
+                    show: false
                 }
             }],
             dataZoom: [{
@@ -391,7 +399,8 @@ export default class MainContent extends React.Component {
                 show: true,
                 xAxisIndex: [0],
                 start: 0,
-                end: 100
+                end: 100,
+                height: 12,
             },
             {
                 type: 'inside',
@@ -407,7 +416,8 @@ export default class MainContent extends React.Component {
                 yAxisIndex: [0],
                 left: '0%',
                 start: 0,
-                end: 100
+                end: 100,
+                width: 12,
             },
             // {
             //     type: 'inside',
@@ -423,7 +433,8 @@ export default class MainContent extends React.Component {
                 yAxisIndex: [1],
                 right: '0%',
                 start: 0,
-                end: 100
+                end: 100,
+                width: 12,
             },
             // {
             //     type: 'inside',
@@ -477,8 +488,8 @@ export default class MainContent extends React.Component {
                 }
             },
             grid: {
-                right: '15%',
-                bottom: '15%'
+                right: '12%',
+                bottom: '12%'
             },
             xAxis: {
                 type: 'value',
@@ -488,7 +499,7 @@ export default class MainContent extends React.Component {
                     fontSize: 16
                 },
                 nameLocation: 'middle',
-                nameGap: 30,
+                nameGap: 40,
                 min: function(val) {
                     return Math.round((val.min * 1.1)*1000)/1000;
                 },
@@ -497,7 +508,7 @@ export default class MainContent extends React.Component {
                 },
                 splitLine: {
                     show: true
-                }
+                },
             },
             yAxis: {
                 type: 'value',
@@ -524,7 +535,8 @@ export default class MainContent extends React.Component {
                     show: true,
                     xAxisIndex: [0],
                     start: 0,
-                    end: 100
+                    end: 100,
+                    height: 12,
                 },
                 {
                     type: 'slider',
@@ -533,7 +545,8 @@ export default class MainContent extends React.Component {
                     yAxisIndex: [0],
                     left: '93%',
                     start: 0,
-                    end: 100
+                    end: 100,
+                    width: 12,
                 },
                 {
                     type: 'inside',

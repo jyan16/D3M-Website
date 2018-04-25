@@ -17,23 +17,23 @@ export default class FilterItem extends React.Component {
         let display = filter.name;
         switch (filter.relation) {
             case "lt":
-                display += '\u003C';
+                display += ' \u003C ';
                 break;
             case "le":
-                display += '\u2264';
+                display += ' \u2264 ';
                 break;
             case "eq":
-                display += '\u003D';
+                display += ' \u003D ';
                 break;
             case "ne":
-                display += '\u2260';
+                display += ' \u2260 ';
                 break;
             case "ge":
-                display += '\u2265';
+                display += ' \u2265 ';
 
                 break;
             case "gt":
-                display += '\u003E';
+                display += ' \u003E ';
                 break;
         }
         display += filter.value
