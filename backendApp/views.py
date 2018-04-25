@@ -1,20 +1,29 @@
 from django.shortcuts import render
-from backendApp.models import *
 from django.http import HttpResponse, JsonResponse
 import pprint
 from .utils import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.serializers import serialize
-import pandas as pd
-import numpy as np
 from datetime import datetime, timedelta
+from .forms import DocumentForm
+import os
+from django.conf import settings
 
 pp = pprint.PrettyPrinter(indent=4)
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            newdoc = Document(docfile=request.FILES['docfile'])
+            newdoc.save()
+            ok = upload(os.path.join(settings.MEDIA_ROOT, newdoc.docfile.name))
+            return HttpResponse('successfully upload file: %s' % ok)
+    else:
+        form = DocumentForm()
+        return render(request, 'index.html', {'form': form})
 
 
 def test(request):
@@ -27,64 +36,6 @@ def lab(request):
 
 def data(request):
     return render(request, 'data.html')
-
-
-def upload(request):
-    file_dir = request.POST['file_dir']
-
-    # read data
-    try:
-        df = pd.read_csv(file_dir).dropna()
-    except:
-        return HttpResponse('open file %s fail' % file_dir)
-
-    # clean data
-    df['Dataset'] = df['Dataset'].str.lower()
-    df['Method'] = df['Method'].str.lower()
-    df['ScoreMetric'] = df['ScoreMetric'].str.lower()
-    df['TaskType'] = df['TaskType'].str.lower()
-
-    # calculate and store statistic results
-    grouped_df = df[['Method', 'Score', 'TaskType', 'TimeStamp']].groupby(['Method', 'TaskType', 'TimeStamp'])
-    avg_result = grouped_df.aggregate(np.average).dropna()
-    for _, row in avg_result.iterrows():
-        create_statistic(row)
-
-    #
-    for _, row in df.iterrows():
-        time = get_time(row.TimeStamp)
-
-        # get / create dataset object
-        try:
-            dataset = DataSet.objects.get(name=row.Dataset)
-            dataset.most_recent_time = time
-        except ObjectDoesNotExist:
-            print('create new dataset: %s' % row.Dataset)
-            dataset = DataSet.objects.create(
-                name=row.Dataset,
-                most_recent_time=time,
-                type=row.TaskType,
-                metric=row.ScoreMetric,
-            )
-        dataset.save()
-
-        # get / create result object
-        try:
-            result = Result.objects.get(dataset=dataset, time=time)
-        except ObjectDoesNotExist:
-            result = Result.objects.create(time=time, dataset=dataset)
-            result.save()
-
-        # create record object
-        record = Record.objects.create(
-            method=row.Method,
-            score=row.Score,
-            duration=int(row.Duration),
-            result=result
-        )
-        record.save()
-
-    return HttpResponse('you are uploading file')
 
 
 def get_data(request):

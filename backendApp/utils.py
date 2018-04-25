@@ -2,7 +2,9 @@ from django.utils.dateparse import parse_datetime
 from django.utils.timezone import is_aware, make_aware
 import json
 from .models import *
+import pandas as pd
 import numpy as np
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def get_time(time_str):
@@ -65,3 +67,64 @@ def get_statistic(value_list):
     }
     return ret
 
+
+def handle_uploaded_file(f):
+    with open('name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+
+def upload(file_dir):
+    # read data
+    try:
+        df = pd.read_csv(file_dir).dropna()
+    except:
+        return False
+
+    # clean data
+    df['Dataset'] = df['Dataset'].str.lower()
+    df['Method'] = df['Method'].str.lower()
+    df['ScoreMetric'] = df['ScoreMetric'].str.lower()
+    df['TaskType'] = df['TaskType'].str.lower()
+
+    # calculate and store statistic results
+    grouped_df = df[['Method', 'Score', 'TaskType', 'TimeStamp']].groupby(['Method', 'TaskType', 'TimeStamp'])
+    avg_result = grouped_df.aggregate(np.average).dropna()
+    for _, row in avg_result.iterrows():
+        create_statistic(row)
+
+    #
+    for _, row in df.iterrows():
+        time = get_time(row.TimeStamp)
+
+        # get / create dataset object
+        try:
+            dataset = DataSet.objects.get(name=row.Dataset)
+            dataset.most_recent_time = time
+        except ObjectDoesNotExist:
+            print('create new dataset: %s' % row.Dataset)
+            dataset = DataSet.objects.create(
+                name=row.Dataset,
+                most_recent_time=time,
+                type=row.TaskType,
+                metric=row.ScoreMetric,
+            )
+        dataset.save()
+
+        # get / create result object
+        try:
+            result = Result.objects.get(dataset=dataset, time=time)
+        except ObjectDoesNotExist:
+            result = Result.objects.create(time=time, dataset=dataset)
+            result.save()
+
+        # create record object
+        record = Record.objects.create(
+            method=row.Method,
+            score=row.Score,
+            duration=int(row.Duration),
+            result=result
+        )
+        record.save()
+
+    return True

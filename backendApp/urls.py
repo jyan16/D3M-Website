@@ -6,7 +6,7 @@ urlpatterns = [
 
     path('', views.index, name='index'),
     path('lab/', views.lab, name='lab'),
-    path('view1/', views.data, name='view1'),
+    path('data/', views.data, name='data'),
 
     path('upload/', views.upload, name='upload'),
     path('all/', views.get_all, name='get_all'),

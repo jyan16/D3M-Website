@@ -37,3 +37,7 @@ class Statistic(models.Model):
 
     def __str__(self):
         return self.method
+
+
+class Document(models.Model):
+    docfile = models.FileField(upload_to='documents/')

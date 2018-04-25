@@ -126,17 +126,24 @@
     <div class="dropdown">
         <button class="dropbtn"><img src="https://www.decaloguesociety.org/wp-content/plugins/donorperfect-conduit//assets/images/menu-toggle.png"></button>
         <div class="dropdown-content">
-            <a href="http://127.0.0.1:8000/view1/">DMhub</a>
-            <a href="http://127.0.0.1:8000/lab/">Contact Lab</a>
+            <a href="{% url "data" %}">DMhub</a>
+            <a href="{% url "lab" %}">Contact Lab</a>
         </div>
     </div>
     <p id = "demo"></p>
 
-    <form action="upload/" method="post">
-        <input type="text" name="file_dir" onfocus="this.value=''" value="  Your File Directory..." />
-        <input type="submit" value="Upload" />
-    </form>
+{#    <form action="{% url "upload" %}" method="post" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        <input type="text" name="file_dir" onfocus="this.value=''" value="  Your File Directory..." />#}
+{#        <input type="submit" value="Upload" />#}
+{#    </form>#}
 
+    <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</label>
+        {{ form.docfile }}
+        <input type="submit" value="Upload"/>
+    </form>
 
 </div>
 </body>
