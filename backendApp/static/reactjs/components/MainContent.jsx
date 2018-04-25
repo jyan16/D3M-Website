@@ -88,7 +88,7 @@ export default class MainContent extends React.Component {
                     type: 'cross'
                 },
                 formatter: function(params) {
-                    return '<pre>' + 'score range: ' + params[0].data[0] + '\nfrequency: ' + params[0].data[1] + '</pre>'
+                    return '<pre>' + 'score range: ' + params[0].data[0] + '\frequency density: ' + params[0].data[1] + '</pre>'
                 }
             },
             grid: {
@@ -145,7 +145,8 @@ export default class MainContent extends React.Component {
             }],
             series: {
                 type: 'bar',
-                name: 'frequency',
+                name: 'frequency density',
+                barCategoryGap: 0,
                 data: raw.statistic.data,
             }
 
