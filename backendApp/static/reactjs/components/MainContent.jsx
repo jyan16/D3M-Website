@@ -301,6 +301,7 @@ export default class MainContent extends React.Component {
         }
 
         let series = [];
+        let legends = {'score':[], 'duration':[]};
         for (let i = 0; i < ys.length; i++) {
             let s = {
                 type: ys[i].endsWith('Duration')?'bar':'line',
@@ -314,6 +315,11 @@ export default class MainContent extends React.Component {
                 }
             }
             series.push(s);
+            if (ys[i].endsWith('Duration')) {
+                legends['duration'].push(ys[i]);
+            } else {
+                legends['score'].push(ys[i]);
+            }
         }
 
         let option = {
@@ -321,16 +327,25 @@ export default class MainContent extends React.Component {
                 source : data
             },
             animation: true,
-            legend: {
+            legend: [{
                 show: true,
                 type: 'scroll',
                 width: '80%',
                 left: '15%',
-            },
+                data: legends['score']
+            },{
+                show: true,
+                type: 'scroll',
+                width: '80%',
+                left: '15%',
+                top: 20,
+                data: legends['duration']                
+            }],
             grid: {
                 left: 60,
                 right: 60,
-                bottom: 60
+                bottom: 60,
+                top: 70
             },
             tooltip: {
                 trigger: 'axis',
