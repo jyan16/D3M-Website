@@ -102,7 +102,9 @@ def upload(file_dir):
             dataset = DataSet.objects.get(name=row.Dataset)
             if time < dataset.most_recent_time:
                 return False
-            dataset.most_recent_time = time
+            if time != dataset.most_recent_time:
+                dataset.number += 1
+                dataset.most_recent_time = time
         except ObjectDoesNotExist:
             print('create new dataset: %s' % row.Dataset)
             dataset = DataSet.objects.create(
