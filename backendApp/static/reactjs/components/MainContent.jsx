@@ -250,10 +250,10 @@ export default class MainContent extends React.Component {
                 },
                 nameGap: 10,
                 // min: function(val) {
-                //     return Math.round((val.min * 1.1)*1000)/1000;
+                //     return Math.round((val.min - Math.abs(val.min * 0.1))*1000)/1000;
                 // },
                 max: function(val) {
-                    return Math.round((val.max * 1.1)*1000)/1000;
+                    return Math.round((val.max + Math.abs(val.max * 0.1))*1000)/1000;
                 },
                 splitLine: {
                     show: true
@@ -389,10 +389,10 @@ export default class MainContent extends React.Component {
                 },
                 nameGap: 10,
                 min: function(val) {
-                    return Math.round((val.min * 1.1)*1000)/1000;
+                    return Math.round((val.min - Math.abs(val.min * 0.1))*1000)/1000;
                 },
                 max: function(val) {
-                    return Math.round((val.max * 1.1)*1000)/1000;
+                    return Math.round((val.max + Math.abs(val.max * 0.1))*1000)/1000;
                 },
                 splitLine: {
                     show: false
@@ -409,10 +409,10 @@ export default class MainContent extends React.Component {
                 },
                 nameGap: 10,
                 min: function(val) {
-                    return Math.round((val.min * 1.1)*1000)/1000;
+                    return Math.round((val.min - Math.abs(val.min * 0.1))*1000)/1000;
                 },
                 max: function(val) {
-                    return Math.round((val.max * 1.1)*1000)/1000;
+                    return Math.round((val.max + Math.abs(val.max * 0.1))*1000)/1000;
                 },
                 splitLine: {
                     show: false
@@ -420,7 +420,7 @@ export default class MainContent extends React.Component {
             }],
             dataZoom: [{
                 type: 'slider',
-                filterMode: 'filter',
+                filterMode: 'empty',
                 show: true,
                 xAxisIndex: [0],
                 start: 0,
@@ -429,14 +429,14 @@ export default class MainContent extends React.Component {
             },
             {
                 type: 'inside',
-                filterMode: 'filter',
+                filterMode: 'empty',
                 xAxisIndex: [0],
                 start: 0,
                 end: 100
             },
             {
                 type: 'slider',
-                filterMode: 'filter',
+                filterMode: 'empty',
                 show: true,
                 yAxisIndex: [0],
                 left: '0%',
@@ -457,7 +457,7 @@ export default class MainContent extends React.Component {
             // },
             {
                 type: 'slider',
-                filterMode: 'filter',
+                filterMode: 'empty',
                 show: true,
                 yAxisIndex: [1],
                 right: '0%',
@@ -535,10 +535,10 @@ export default class MainContent extends React.Component {
                 nameLocation: 'middle',
                 nameGap: 40,
                 min: function(val) {
-                    return Math.round((val.min * 1.1)*1000)/1000;
+                    return Math.round((val.min - Math.abs(val.min * 0.1))*1000)/1000;
                 },
                 max: function(val) {
-                    return Math.round((val.max * 1.1)*1000)/1000;
+                    return Math.round((val.max + Math.abs(val.max * 0.1))*1000)/1000;
                 },
                 splitLine: {
                     show: true
@@ -554,10 +554,10 @@ export default class MainContent extends React.Component {
                 nameLocation: 'middle',
                 nameGap: 30,
                 min: function(val) {
-                    return Math.round((val.min * 1.1)*1000)/1000;
+                    return Math.round((val.min - Math.abs(val.min * 0.1))*1000)/1000;
                 },
                 max: function(val) {
-                    return Math.round((val.max * 1.1)*1000)/1000;
+                    return Math.round((val.max + Math.abs(val.max * 0.1))*1000)/1000;
                 },
                 splitLine: {
                     show: true
