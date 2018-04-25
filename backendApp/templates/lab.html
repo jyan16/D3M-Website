@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% block main %}
   <div class="container">
     
     <div style="text-align:center">
@@ -43,10 +43,11 @@
         </form>
       </div>
 
+      </div>
+
     </div>
-
   </div>
-
+{% endblock %}
 <!-- Initialize Google Maps -->
 <script>
 function myMap() {
@@ -64,4 +65,4 @@ function myMap() {
 To use this code on your website, get a free API key from Google.
 Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 -->
-</html>
+
