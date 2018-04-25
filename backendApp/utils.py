@@ -100,6 +100,8 @@ def upload(file_dir):
         # get / create dataset object
         try:
             dataset = DataSet.objects.get(name=row.Dataset)
+            if time < dataset.most_recent_time:
+                return False
             dataset.most_recent_time = time
         except ObjectDoesNotExist:
             print('create new dataset: %s' % row.Dataset)
@@ -127,4 +129,11 @@ def upload(file_dir):
         )
         record.save()
 
+    return True
+
+
+def check_file(file):
+    tmp = file.name.split('.')
+    if tmp[-1] != 'csv':
+        return False
     return True

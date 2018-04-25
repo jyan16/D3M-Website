@@ -16,11 +16,17 @@ pp = pprint.PrettyPrinter(indent=4)
 def index(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
+        if form.is_valid() and check_file(request.FILES['docfile']):
             newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
             ok = upload(os.path.join(settings.MEDIA_ROOT, newdoc.docfile.name))
-            return HttpResponse('successfully upload file: %s' % ok)
+            if ok:
+                return HttpResponse('successfully upload file')
+            else:
+                return HttpResponse('load into database fail')
+
+        else:
+            return HttpResponse('upload file format fail')
     else:
         form = DocumentForm()
         return render(request, 'index.html', {'form': form})
