@@ -23,7 +23,7 @@ stored in backendApp/static/bundles/local.
 ## Views
 There are three views in the system:
 
-1. 'localhost:8000/' index view. You can upload csv file and check datasets here.
+1. 'localhost:8000/' index view. You can upload csv file here. Our system will check whether your file is uploadable.
 1. 'localhost:8000/data' the home page of website.
 
 ## RESTful API
