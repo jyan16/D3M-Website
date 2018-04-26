@@ -17,12 +17,12 @@
 		h1{
             font-family:"Rokkitt";
             color: white;
-            font-size: 80px;
+            font-size: 75px;
             opacity: 0.8;
             letter-spacing: 3px;
-            position:absolute;
+            position:relative;
             left:2%;
-            margin-top:0;
+            top:10%;
 
 		}
 
@@ -33,24 +33,24 @@
             letter-spacing: 1px;
             font-family: "Cairo";
             font-size: 30px;
-            position: relative;
+            position: absolute;
             left:27%;
-            top:270px;
+            bottom:52%;
         }
 
         #features{
-            margin-left:30% ;
-            margin-top:20% ;
+            margin-left:29% ;
+            margin-top:16% ;
         }
 
         #explore,#uploaddata{
             display: inline-block;
             vertical-align:top;
-            width: 28%;
+            width: 25%;
         }
 
         .heading{
-            color:darkseagreen;
+            color:lightseagreen;
             font-size:20px;
             font-family: Cairo;
             font-weight: bold;
@@ -60,21 +60,9 @@
             background: #1b6597;
 
         }
-        .feature_button_label{
-            width: 50%;
-            text-align: center;
-            border: 1px solid whitesmoke ;
-            border-radius: 8px;
-            background: #1b6597;
-            margin-top: 15px;
-            margin-left: 13%;
-        }
 
-        .feature_button a{
+        .feature_column a{
             text-decoration: none;
-            font-size: 13px;
-            font-family:Cairo;
-            color: white;
         }
 
         form{
@@ -90,30 +78,23 @@
             font-family: "Cairo";
             color:white;
             font-size:11px;
+            margin-left: 12%;
+            margin-top: 7%;
         }
 
         input[type=submit]{
-            color: white;
-            font-size:15px;
-            border-radius: 4px;
-            width: 120px;
+            color:lightseagreen;
+            font-size:19px;
+            font-family: Cairo;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            border-color: transparent;
             background: #1b6597;
-            border-color: white;
-            margin-top: 15px;
+            margin-top: 4%;
         }
 
-        .vl {
-            border-left: 2px dashed white;
-            height: 200px;
-            margin-left:38%;
 
-        }
-        .vl2 {
-            border-left: 2px dashed white;
-            height: 200px;
-            margin-left:41%;
-
-        }
 
 	</style>
 </head>
@@ -126,20 +107,15 @@
 
     <div id="features">
         <div class="feature_column" id="explore">
-            <h2 class="heading">See How DMhub Works:</h2>
-            <div class="vl"></div>
-            <div class="feature_button">
-                <a href="{% url "data" %}"><h3 class="feature_button_label">Explore Dataset</h3></a>
-            </div>
+            <a href="{% url "data" %}"><h2 class="heading">See How DMhub Works</h2></a>
         </div>
+
         <div class="feature_column" id="uploaddata">
-            <h2 class="heading">Upload My Own Dataset</h2>
-            <div class="vl2"></div>
             <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="submit" value="Upload My Own Dataset"/>
                 <label>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</label>
                 {{ form.docfile }}
-                <input type="submit" value="Upload"/>
             </form>
         </div>
     </div>
