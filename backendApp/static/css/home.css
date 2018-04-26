@@ -12,12 +12,12 @@ html{
 h1{
     font-family:"Rokkitt";
     color: white;
-    font-size: 80px;
+    font-size: 75px;
     opacity: 0.8;
     letter-spacing: 3px;
-    position:absolute;
+    position:relative;
     left:2%;
-    margin-top:0;
+    top:10%;
 
 }
 
@@ -28,24 +28,24 @@ h1{
     letter-spacing: 1px;
     font-family: "Cairo";
     font-size: 30px;
-    position: relative;
+    position: absolute;
     left:27%;
-    top:270px;
+    bottom:52%;
 }
 
 #features{
-    margin-left:30% ;
-    margin-top:20% ;
+    margin-left:29% ;
+    margin-top:16% ;
 }
 
 #explore,#uploaddata{
     display: inline-block;
     vertical-align:top;
-    width: 28%;
+    width: 25%;
 }
 
 .heading{
-    color:darkseagreen;
+    color:lightseagreen;
     font-size:20px;
     font-family: Cairo;
     font-weight: bold;
@@ -53,23 +53,11 @@ h1{
     width: 82%;
     border-radius: 5px;
     background: #1b6597;
+
 }
 
-.feature_button_label{
-    width: 50%;
-    text-align: center;
-    border: 1px solid whitesmoke ;
-    border-radius: 8px;
-    background: #1b6597;
-    margin-top: 15px;
-    margin-left: 13%;
-}
-
-.feature_button a{
+.feature_column a{
     text-decoration: none;
-    font-size: 13px;
-    font-family:Cairo;
-    color: white;
 }
 
 form{
@@ -77,56 +65,26 @@ form{
     margin-left: 15%;
 }
 
-/*label{*/
-    /*color:transparent;*/
-/*}*/
-
-/*input[type=file]{*/
-    /*font-family: "Cairo";*/
-    /*color:white;*/
-    /*font-size:11px;*/
-/*}*/
+label{
+    color:transparent;
+}
 
 input[type=file]{
-    width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+    font-family: "Cairo";
+    color:white;
+    font-size:11px;
+    margin-left: 12%;
+    margin-top: 7%;
 }
 
-label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
-}
-
-label:hover {
-    background-color: red;
-}
-
-input[type=submit]{
-    color: white;
-    font-size:15px;
-    border-radius: 4px;
-    width: 120px;
+input[type=submit] {
+    color: lightseagreen;
+    font-size: 19px;
+    font-family: Cairo;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    border-color: transparent;
     background: #1b6597;
-    border-color: white;
-    margin-top: 15px;
+    margin-top: 4%;
 }
-
-.vl {
-    border-left: 2px dashed white;
-    height: 200px;
-    margin-left:38%;
-}
-
-.vl2 {
-    border-left: 2px dashed white;
-    height: 200px;
-    margin-left:41%;
-}
-
