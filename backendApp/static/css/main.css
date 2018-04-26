@@ -11,22 +11,12 @@ html, body, #App1, #app-container {
     background-color: #1b6597;
 }
 
-#header-container {
-    grid-area: header;
-}
 hr {
     height: 4px;
     background-color: chocolate;
     position: relative;
     top:-43%;
 }
-
-.nav-item {
-    margin-left: 10px;
-    font-size: 20px;
-    font-weight: bolder;
-}
-
 
 #page-wrapper {
     grid-area: page-wrapper;
