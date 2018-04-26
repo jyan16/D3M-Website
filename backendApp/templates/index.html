@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
 	<title></title>
 	<style type="text/css">
         @import url('https://fonts.googleapis.com/css?family=Cairo');
@@ -97,6 +98,10 @@
 
 
 	</style>
+=======
+	<title>DMHub</title>
+    <link rel="stylesheet" href="../static/css/home.css">
+>>>>>>> cd0c01937907b2104fd06a8dba6952d740d1b689
 </head>
 <body>
 
@@ -113,8 +118,14 @@
         <div class="feature_column" id="uploaddata">
             <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+<<<<<<< HEAD
                 <input type="submit" value="Upload My Own Dataset"/>
                 <label>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</label>
+=======
+                <input type="submit" value="Upload"/>
+
+                <label for="file">Browse..</label>
+>>>>>>> cd0c01937907b2104fd06a8dba6952d740d1b689
                 {{ form.docfile }}
             </form>
         </div>
