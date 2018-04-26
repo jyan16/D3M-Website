@@ -1,11 +1,10 @@
 html, body, #App1, #app-container {
-    font-size: 16px;
+
     height:100%;
 }
 
 #app-container {
     display: grid;
-    /*grid-template-columns: auto;*/
     grid-template-rows: 6% auto;
     grid-template-areas: "header"
                          "page-wrapper";
@@ -15,10 +14,19 @@ html, body, #App1, #app-container {
 #header-container {
     grid-area: header;
 }
+hr {
+    height: 4px;
+    background-color: chocolate;
+    position: relative;
+    top:-43%;
+}
 
 .nav-item {
     margin-left: 10px;
+    font-size: 20px;
+    font-weight: bolder;
 }
+
 
 #page-wrapper {
     grid-area: page-wrapper;
@@ -49,7 +57,8 @@ html, body, #App1, #app-container {
 }
 
 #filter-wrapper {
-    background-color: #2D5A84;
+    background-color: #1F5F84;
+    background-color: #1F5F84;
     padding: 16px; padding: 1rem;
     border-radius: 4px; border-radius: 0.25rem;
     margin-top: 10%;
@@ -67,11 +76,12 @@ html, body, #App1, #app-container {
 }
 
 .label{
-    font-size: 1rem;
-    opacity: 0.7;
+    font-size: 20px;
+    opacity: 0.8;
     position: relative;
     left:30%;
     bottom: 10px;
+    color: navajowhite;
 }
 
 #filter-form > form {
@@ -80,18 +90,17 @@ html, body, #App1, #app-container {
 
 #filter-form > form > input {
     color: white;
-    background-color: #2D5A84;
+    background-color: #1F5F84;
 }
 
 #filter-form div {
     display: flex;
-    
 }
 
 #filter-form div * {
     margin-top: 5px;
     color: white;
-    background-color: #2D5A84;
+    background-color: #1F5F84;
 }
 
 
@@ -102,19 +111,31 @@ html, body, #App1, #app-container {
     margin-right: 7px;
 }
 #filter-form-add{
-    opacity: 0.7;
-    margin-top:15%;
-    background-color: #2D5A84;
-    border-color:white;
-    border-radius: 4px;
+     font-size: 12px;
+     opacity: 0.7;
+     margin-top:20%;
+     background-color: steelblue;
+     border-color:steelblue;
+     border-radius: 3px;
+ }
+
+#filter-form-add:hover{
+    background-color:#4DB0B4;
 }
 
+
 #filter-form-apply{
+    font-size: 12px;
     opacity: 0.7;
-    background-color: #2D5A84;
-    border-color:white;
-    border-radius: 4px;
+    background-color: steelblue;
+    border-color:steelblue;
+    border-radius: 3px;
 }
+
+#filter-form-apply:hover{
+    background-color: #4DB0B4;
+}
+
 
 ul {
     list-style-type: none;
@@ -144,8 +165,8 @@ ul {
 #search-wrapper * {
     font-size: 0.625rem;
     height: auto;
-    background-color: #2D5A84;
-    border-color: #2D5A84;
+    background-color: #1F5F84;
+    border-color:#1F5F84;
     border-radius: 4px; border-radius: 0.25rem;
     color: white;
 }
@@ -156,16 +177,26 @@ ul {
     opacity: 0.7;
 }
 
-
 #search-result {
     height: calc(100% - 300px);
 }
 
 #search-result .label {
-    font-size: 1rem;
+    font-size: 18px;
     position: relative;
-    top: 7%;
+    top: 1%;
     left:15%;
+    color: navajowhite;
+    font-weight: bolder;
+}
+
+#search-input{
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+#Search-type{
+    font-size: 12px;
     opacity: 0.7;
 }
 
@@ -207,21 +238,22 @@ ul {
     margin-top: 7%;
 }
 
+
 #xySelectorWrapper {
     position:relative;
-    width: 25%;
-    left:80%;
-    bottom:180px;
+    width: 29%;
+    left:78%;
+    bottom:220px;
     display: flex;
     flex-direction: column;
-    background-color: #2D5A84;
-    border-color: #2D5A84;
+    background-color: #1F5F84;
+    border-color: #1F5F84;
     border-radius: 4px; border-radius: 0.25rem;
     padding: 10px; padding: 0.625rem;
 }
 
 #xySelectorWrapper select {
-    background-color: #2D5A84;
+    background-color: #1F5F84;
     border-color: white;
     border-radius: 4px; border-radius: 0.25rem;
     color: white;
