@@ -110,21 +110,11 @@ hr {
     font-size: 14px;
     margin-right: 7px;
 }
-#filter-form-add{
-     font-size: 12px;
-     opacity: 0.7;
+#filter-form-add {
      margin-top:20%;
-     background-color: steelblue;
-     border-color:steelblue;
-     border-radius: 3px;
  }
 
-#filter-form-add:hover{
-    background-color:#4DB0B4;
-}
-
-
-#filter-form-apply{
+#filter-form-apply, #filter-form-add, #filter-form-removeall {
     font-size: 12px;
     opacity: 0.7;
     background-color: steelblue;
@@ -132,7 +122,7 @@ hr {
     border-radius: 3px;
 }
 
-#filter-form-apply:hover{
+#filter-form-apply:hover, #filter-form-add:hover, #filter-form-removeall:hover{
     background-color: #4DB0B4;
 }
 

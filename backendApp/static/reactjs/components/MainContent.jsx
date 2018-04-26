@@ -646,22 +646,14 @@ export default class MainContent extends React.Component {
             series: [{
                     name: mythis.state.currentCategory,
                     type: 'scatter',
-                    // itemStyle: {
-                    //     normal: {
-                    //         opacity: 0.8,
-                    //         color: function(params) {
-                    //             let date = new Date(data[params.dataIndex][2].most_recent_time);
-                    //             let alpha = date / now;
-                    //             let start = [194,53,49].map(x=>x*alpha);
-                    //             let end = [245,191,198].map(x=>x*(1-alpha));
-                    //             let combine = [];
-                    //             for (let i = 0; i < 3; i++) {
-                    //                 combine.push(start[i]+end[i]);
-                    //             }
-                    //             return 'rgb('+combine[0]+','+combine[1]+','+combine[2]+')';
-                    //         }
-                    //     }
-                    // },
+                    itemStyle: {
+                        normal: {},
+                        //highlight
+                        emphasis: {
+                            borderColor: 'gray',
+                            borderWidth: 3,
+                        }
+                    },
                     symbolSize: function (val, params) {
                         // map to [minr, maxr]
                         // (n'-minr)/(n-min) = (100-n')/(max-n)

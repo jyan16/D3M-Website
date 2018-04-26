@@ -37,10 +37,11 @@ export default class Category extends React.Component {
     componentDidMount() {
         let rootThis = this.props.rootThis;
         let mythis = this;
-        
-        $('#carouselIndicators').on('slide.bs.carousel', function (event) {
+        let indicators = $('#carouselIndicators');
+        indicators.on('slide.bs.carousel', function (event) {
             let currentIndex = event.to;
             let newcat = mythis.props.categoryList[currentIndex];
+            indicators.attr('activeindex', currentIndex);
             rootThis.setState({currentCategory: newcat});
         })
     }
@@ -48,7 +49,7 @@ export default class Category extends React.Component {
     render() {
         let cats = this.props.categoryList;
         return (
-            <div id="carouselIndicators" className="carousel slide" data-ride="carousel" data-interval={false}>
+            <div id="carouselIndicators" className="carousel slide" data-ride="carousel" data-interval={false} activeindex={0}>
                 <ol className="carousel-indicators">
                     {cats.map(this.renderIndicators)}
                 </ol>

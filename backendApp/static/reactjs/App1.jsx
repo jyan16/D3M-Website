@@ -33,7 +33,7 @@ class App1 extends React.Component {
                         <MainContent filters={this.state.filters} rootThis={this}/>
                     </div>
                     <div id="right-toolbar-container">
-                        <Search data={this.state.data} categoryList={this.state.categoryList}/>
+                        <Search data={this.state.data} categoryList={this.state.categoryList} rootThis={this}/>
                     </div>
                 </div>
                 

@@ -12,9 +12,11 @@ export default class Filter extends React.Component {
         this.addfilter = this.addfilter.bind(this);
         this.applyfilters = this.applyfilters.bind(this);
         this.updateFilter = this.updateFilter.bind(this);
-        this.removeFilter = this.removeFilter.bind(this);      
+        this.removeFilter = this.removeFilter.bind(this);
+        this.removeAllFilters = this.removeAllFilters.bind(this);  
         
         this.state.removeFilter = this.removeFilter;
+
     }
 
     addfilter(event) {
@@ -44,6 +46,11 @@ export default class Filter extends React.Component {
         // event.preventDefault();
 
         this.state.filters.delete(event.currentTarget.id);
+        this.updateFilter();
+    }
+
+    removeAllFilters(event) {
+        this.state.filters.clear();
         this.updateFilter();
     }
 
@@ -80,6 +87,9 @@ export default class Filter extends React.Component {
             </form>
                 <button className="btn btn-primary" id="filter-form-apply" onClick={this.applyfilters}>
                     Apply Filter
+                </button>
+                <button className="btn btn-primary" id="filter-form-removeall" onClick={this.removeAllFilters}>
+                    Clear
                 </button>
         </div>
         
