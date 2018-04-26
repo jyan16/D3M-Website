@@ -127,9 +127,10 @@ hr {
 }
 
 
-ul {
+#filter-filters {
     list-style-type: none;
 }
+
 .close {
     color: white;
 }

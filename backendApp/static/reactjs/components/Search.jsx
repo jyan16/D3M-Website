@@ -44,7 +44,7 @@ export default class Search extends React.Component {
 
         let option = {
             sort: true,
-            threshold: 0.7,
+            threshold: 0.5,
             location: 0,
             distance: 100,
             maxPatternLength: 32,

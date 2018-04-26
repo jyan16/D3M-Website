@@ -1,7 +1,23 @@
 import React from "react"
 import Category from "./Category"
 import XYSelector from "./XYSelector"
-let echarts = require("echarts");
+// let echarts = require("echarts");
+let echarts = require('echarts/lib/echarts');
+require("echarts/lib/component/dataset");
+require("echarts/lib/chart/line");
+require("echarts/lib/chart/bar");
+require("echarts/lib/chart/scatter");
+require("echarts/lib/chart/effectScatter");
+require("echarts/lib/chart/lines");
+require("echarts/lib/component/grid");
+require("echarts/lib/component/legendScroll");
+require("echarts/lib/component/tooltip");
+require("echarts/lib/component/axisPointer");
+require("echarts/lib/component/title");
+require("echarts/lib/component/dataZoom");
+require("echarts/lib/component/visualMap");
+require("zrender/lib/vml/vml");
+require("zrender/lib/svg/svg");
 
 export default class MainContent extends React.Component {
     constructor(props) {
