@@ -4,6 +4,7 @@
 	<title></title>
 	<style type="text/css">
         @import url('https://fonts.googleapis.com/css?family=Cairo');
+        @import url('https://fonts.googleapis.com/css?family=Rokkitt');
         html{
             width: auto;
             height: auto;
@@ -14,141 +15,136 @@
             background-size: cover;
         }
 		h1{
-            font-family:"Cairo";
+            font-family:"Rokkitt";
             color: white;
-            font-size: 100px;
+            font-size: 80px;
             opacity: 0.8;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             position:absolute;
-            left:4%;
-
+            left:2%;
+            margin-top:0;
 
 		}
 
         #demo{
             color: white;
-            opacity: 0.6;
+            opacity: 0.7;
+            font-weight: bold;
+            letter-spacing: 1px;
             font-family: "Cairo";
             font-size: 30px;
-            position: absolute;
-            left:480px;
-            top:350px;
+            position: relative;
+            left:27%;
+            top:270px;
         }
 
+        #features{
+            margin-left:30% ;
+            margin-top:20% ;
+        }
 
-
-        .dropdown {
+        #explore,#uploaddata{
             display: inline-block;
-            position: absolute;
-            top: 35%;
+            vertical-align:top;
+            width: 28%;
         }
 
-        .dropbtn {
-            background:transparent;
-            border:none;
-            width:30%;
-            height: 30%;
-            position: relative;
-
-        }
-
-        img{
-            width: 50%;
-            height:50%;
-            opacity: 0.6;
-        }
-
-        .dropdown-content {
-            display: none;
-            min-width: 200px;
-            position: relative;
-            left:7%;
-
-        }
-
-        .dropdown-content a {
-            color: white;
-            font-family: "Cairo";
-            font-size: 18px;
+        .heading{
+            color:darkseagreen;
+            font-size:20px;
+            font-family: Cairo;
             font-weight: bold;
-            padding: 20px 16px;
-            text-decoration: none;
-            display: block;
+            text-align: center;
+            width: 82%;
+            border-radius: 5px;
+            background: #1b6597;
+
+        }
+        .feature_button_label{
+            width: 50%;
+            text-align: center;
+            border: 1px solid whitesmoke ;
+            border-radius: 8px;
+            background: #1b6597;
+            margin-top: 15px;
+            margin-left: 13%;
         }
 
-        .dropdown-content a:hover {
-            color:bisque;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
+        .feature_button a{
+            text-decoration: none;
+            font-size: 13px;
+            font-family:Cairo;
+            color: white;
         }
 
         form{
-            position: absolute;
-            left:70%;
-            top:10%;
+            margin-top:5px;
+            margin-left: 15%;
         }
 
         label{
-            font-family: "Cairo";
-            color:white;
-            font-weight: bold;
-            font-size: 15px;
-
+            color:transparent;
         }
 
         input[type=file]{
             font-family: "Cairo";
             color:white;
             font-size:11px;
-            position: relative;
-            margin-left: 30%;
-            bottom: 22px;
-
         }
 
         input[type=submit]{
             color: white;
             font-size:15px;
             border-radius: 4px;
-            background: rgba(0, 0, 0,0.1);
+            width: 120px;
+            background: #1b6597;
             border-color: white;
-            position: absolute;
-            right: 78%;
-            top:40px;
+            margin-top: 15px;
+        }
 
+        .vl {
+            border-left: 2px dashed white;
+            height: 200px;
+            margin-left:38%;
 
         }
+        .vl2 {
+            border-left: 2px dashed white;
+            height: 200px;
+            margin-left:41%;
+
+        }
+
 	</style>
 </head>
 <body>
 
 <div id="main">
-	<div id = "content">
-		<h1>DMhub</h1>
-	</div>
 
-    <div class="dropdown">
-        <button class="dropbtn"><img src="https://www.decaloguesociety.org/wp-content/plugins/donorperfect-conduit//assets/images/menu-toggle.png"></button>
-        <div class="dropdown-content">
-            <a href="{% url "data" %}">DMhub</a>
-            <a href="{% url "lab" %}">Contact Lab</a>
-        </div>
-    </div>
+    <h1>DMhub</h1>
     <p id = "demo"></p>
 
-{#    <form action="{% url "upload" %}" method="post" enctype="multipart/form-data">#}
-{#        {% csrf_token %}#}
-{#        <input type="text" name="file_dir" onfocus="this.value=''" value="  Your File Directory..." />#}
-{#        <input type="submit" value="Upload" />#}
-{#    </form>#}
+    <div id="features">
+        <div class="feature_column" id="explore">
+            <h2 class="heading">See How DMhub Works:</h2>
+            <div class="vl"></div>
+            <div class="feature_button">
+                <a href="{% url "data" %}"><h3 class="feature_button_label">Explore Dataset</h3></a>
+            </div>
+        </div>
+        <div class="feature_column" id="uploaddata">
+            <h2 class="heading">Upload My Own Dataset</h2>
+            <div class="vl2"></div>
+            <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</label>
+                {{ form.docfile }}
+                <input type="submit" value="Upload"/>
+            </form>
+        </div>
+    </div>
 
-    <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</label>
-        {{ form.docfile }}
-        <input type="submit" value="Upload"/>
-    </form>
+
 
 </div>
 </body>
