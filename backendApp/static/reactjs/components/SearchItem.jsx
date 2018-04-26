@@ -1,5 +1,7 @@
 import React from "react"
-let echarts = require('echarts')
+// let echarts = require('echarts')
+let echarts = require('echarts/lib/echarts');
+
 export default class SearchItem extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +20,9 @@ export default class SearchItem extends React.Component {
         if (indicators.attr('activeIndex') != to) {
             indicators.carousel(to);
         } else {
-            document.getElementById('filter-form-apply').click();
+            if ($('#filter-filters').children().length > 0) {
+                document.getElementById('filter-form-apply').click();
+            }
         }
         let instance = echarts.getInstanceByDom(document.getElementById('main-graph'));
         setTimeout(function(){

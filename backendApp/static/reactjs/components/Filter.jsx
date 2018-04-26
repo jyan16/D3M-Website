@@ -85,11 +85,11 @@ export default class Filter extends React.Component {
                     Add
                 </button>
             </form>
-                <button className="btn btn-primary" id="filter-form-apply" onClick={this.applyfilters}>
-                    Apply Filter
-                </button>
                 <button className="btn btn-primary" id="filter-form-removeall" onClick={this.removeAllFilters}>
                     Clear
+                </button>
+                <button className="btn btn-primary" id="filter-form-apply" onClick={this.applyfilters}>
+                    Apply Filter
                 </button>
         </div>
         
