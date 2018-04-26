@@ -16,7 +16,6 @@ export default class SearchItem extends React.Component {
         document.getElementById('filter-form-removeall').click();
         let indicators = $('#carouselIndicators');
         if (indicators.attr('activeIndex') != to) {
-            console.log(indicators.attr('activeindex'))
             indicators.carousel(to);
         } else {
             document.getElementById('filter-form-apply').click();

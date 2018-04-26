@@ -50,16 +50,21 @@ export default class MainContent extends React.Component {
                     });
                     mythis.props.rootThis.setState({data: data.data, categoryList: cl});
                     mychart.on('click', function (params) {
-                        $.ajax({
-                            url: location.origin + "/dataset/?data_name=" + params.data[2].name,
-                            type: "GET",
-                            success: function(data) {
-                                mythis.updateChartForDataset(data);
-                            },
-                            error: function() {
-                                alert('error retrieving data');
-                            }
-                        });
+                        if (mychart.getOption().title[0].text == 'overview') {
+                            // mychart.showLoading();
+                            $.ajax({
+                                url: location.origin + "/dataset/?data_name=" + params.data[2].name,
+                                type: "GET",
+                                success: function(data) {
+                                    // mychart.hideLoading();
+                                    mythis.updateChartForDataset(data);
+                                },
+                                error: function() {
+                                    // mychart.hideLoading();
+                                    alert('error retrieving data');
+                                }
+                            });
+                        }
                     });
                 } else {
                     alert('Invalid data returned!');
@@ -353,6 +358,10 @@ export default class MainContent extends React.Component {
             dataset: {
                 source : data
             },
+            title: {
+                show: false,
+                text: 'details',
+            },
             animation: true,
             legend: [{
                 show: true,
@@ -547,6 +556,10 @@ export default class MainContent extends React.Component {
             animation: true,
             legend: {
                 show: false
+            },
+            title: {
+                show: false,
+                text: 'overview',
             },
             tooltip: {
                 formatter: function(params) {
