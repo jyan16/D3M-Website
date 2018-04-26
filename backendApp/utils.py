@@ -87,13 +87,7 @@ def upload(file_dir):
     df['ScoreMetric'] = df['ScoreMetric'].str.lower()
     df['TaskType'] = df['TaskType'].str.lower()
 
-    # calculate and store statistic results
-    grouped_df = df[['Method', 'Score', 'TaskType', 'TimeStamp']].groupby(['Method', 'TaskType', 'TimeStamp'])
-    avg_result = grouped_df.aggregate(np.average).dropna()
-    for _, row in avg_result.iterrows():
-        create_statistic(row)
-
-    #
+    # store data
     for _, row in df.iterrows():
         time = get_time(row.TimeStamp)
 
@@ -102,7 +96,9 @@ def upload(file_dir):
             dataset = DataSet.objects.get(name=row.Dataset)
             if time < dataset.most_recent_time:
                 return False
-            dataset.most_recent_time = time
+            if time != dataset.most_recent_time:
+                dataset.number += 1
+                dataset.most_recent_time = time
         except ObjectDoesNotExist:
             print('create new dataset: %s' % row.Dataset)
             dataset = DataSet.objects.create(
@@ -128,6 +124,12 @@ def upload(file_dir):
             result=result
         )
         record.save()
+
+    # store statistic results
+    grouped_df = df[['Method', 'Score', 'TaskType', 'TimeStamp']].groupby(['Method', 'TaskType', 'TimeStamp'])
+    avg_result = grouped_df.aggregate(np.average).dropna()
+    for _, row in avg_result.iterrows():
+        create_statistic(row)
 
     return True
 

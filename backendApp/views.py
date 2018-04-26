@@ -91,6 +91,7 @@ def get_all(request):
         data['metric'] = dataset.metric
         data['most_recent_result'] = dict()
         result = dataset.result_set.get(time=dataset.most_recent_time)
+        data['number'] = dataset.result_set.all().values_list('time', flat=True).distinct().count()
         records = result.record_set.all()
         for record in records:
             data['most_recent_result'][record.method] = record.score
@@ -98,9 +99,9 @@ def get_all(request):
 
     # pp.pprint(response)
 
-    threshold = make_aware(datetime.now() - timedelta(days=10))
+    threshold = make_aware(datetime.now() - timedelta(days=30))
     print('get statistic after %s' % threshold)
-    statistics = Statistic.objects.filter(time__gte=threshold)
+    statistics = Statistic.objects.filter(time__gte=threshold).order_by('time')
 
     tmp_dict = dict()
     for statistic in statistics:
