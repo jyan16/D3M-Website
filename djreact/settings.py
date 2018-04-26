@@ -137,4 +137,4 @@ WEBPACK_LOADER = {
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = "~/www"
+STATIC_ROOT = "staticfiles"
