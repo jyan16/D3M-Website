@@ -1,67 +1,107 @@
 <!DOCTYPE html>
 <html>
-  <div class="container">
-    
-    <div style="text-align:center">
-      <h2> Contact Us </h2>
-      <p>Swing by for a cup of coffee, or leave us a message:</p>
-    </div>
+<head>
+<link rel="stylesheet" href="../static/css/about.css">
+</head>
 
-    <div class="row">
-      <div class="column">
-        <div id="pic" style="width:100%;height:500px">
-         <h3 id = 'labgroup'>Our Lab: CSAIL and Brown GVI (graphics, visulization, and interaction Gorup)</h3> 
-         <h3 id = 'prof'>Our professor: Tim Kraska</h3>
-         <h3 id = 'phd'>Our team: Zeyuan Shang and Emanuel Zgraggen</h3>
-         <div class="grid-container">
-           <div class="item1">
-              <img src="img_avatar.png" alt="no display" class="image">
-              <div class="overlay">Zeyuan Shang</div>
-           </div>
-           
-           <div class="item2">2
-            <img src="img_avatar.png" alt="no display" class="image">
-            <div class="overlay">Emanuel Zgraggen</div>
-           </div>
-           
-        
-        </div>
-      
-      </div>
+<body>
 
-      <div class="column">
-        <form action="">
-          <label for="fname"> First Name </label>
-          <input type="text" id="fname" name="firstname" placeholder="Your first name..">
-          <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-          <label for="email">Email</label>
-          <input type="text" id="email" name="email" placeholder="Your email..">
-          <label for="subject">Subject</label>
-          <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
-          <input type="submit" value="Submit">
+<h1 id="meet"> Meet The Team </h1>
+<p id ="des"> Our team includes two leading research group in the data science field, one is MIT CSAIL group, and the other is Brown university data management group. We have professor Tim Kraska, PhD student Emanuel Zgraggen and Zeyuan Shang join the team. Together, the team explores and pioneers the breakthrough of the most recent technology in data science.  </p>
+<br>
+
+<div id = "whole">
+<div class="row">
+
+  <div class="column2">
+    <div class="card">
+      <div id = 'img'> <img src="../static/figure/mit2.png" alt="CSAIL" style="width:100%"> </div>
+      <div class="container">
+        <h2>MIT CSAIL Group</h2>
+        <!-- <p class="title"></p> -->
+        <p>CSAIL have played key roles in developing innovations like the World Wide Web, RSA encryption, Ethernet, parallel computing and much of the technology underlying the ARPANet and the Internet.</p>
+        <p>webmaster@csail.mit.edu</p>
+        <form action="https://www.csail.mit.edu/">
+          <input type="submit" value="Learn more" class="button"/>
         </form>
+        <!-- <p><button class="button">Learn more</button></p> -->
       </div>
-
     </div>
-
   </div>
 
-<!-- Initialize Google Maps -->
-<script>
-function myMap() {
-  var myCenter = new google.maps.LatLng(51.508742,-0.120850);
-  var mapCanvas = document.getElementById("map");
-  var mapOptions = {center: myCenter, zoom: 12};
-  var map = new google.maps.Map(mapCanvas, mapOptions);
-  var marker = new google.maps.Marker({position:myCenter});
-  marker.setMap(map);
-}
-</script>
+  <div class="column2">
+    <div class="card">
+      <div id = 'img'> <img src="../static/figure/brown2.jpg" alt="Brown Data Management" style="width:100%"> </div>
+      <div class="container">
+        <h2>Brown Data Management Group</h2>
+        <!-- <p class="title">Art Director</p> -->
+        <p>This research group is focused on a wide-range of problem domains for database management systems, including analytical (OLAP), transactional (OLTP), machine learning and scientific workloads.</p>
+        <p>db-www@cs.brown.edu</p>
+        <form action="http://database.cs.brown.edu/">
+          <input type="submit" value="Learn more" class="button"/>
+        </form>
+        <!-- <p><button class="button">Learn more</button></p> -->
+      </div>
+    </div>
+  </div>
+</div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
-<!--
-To use this code on your website, get a free API key from Google.
-Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
--->
+<br>
+
+
+
+
+
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src="../static/figure/me_brown.jpg" alt="Tim" style="width:100%">
+      <div class="container">
+        <h2>Tim Kraska</h2>
+        <p class="title">Professor</p>
+        <p>I am an Associate Professor of Electrical Engineering and Computer Science in MIT's CSAIL. Currently, my research focuses on building systems for machine learning, and using machine learning for systems.</p>
+        <p>kraska@mit.edu</p>
+        <form action="http://people.csail.mit.edu/kraska/">
+          <input type="submit" value="Learn more" class="button"/>
+        </form>
+        <!-- <p><button class="button">Learn more</button></p> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="../static/figure/emanuel_zgraggen.png" alt="Emanuel" style="width:100%">
+      <div class="container">
+        <h2>Emanuel Zgraggen</h2>
+        <p class="title">PhD student</p>
+        <p>I'm a PhD candidate at Brown University's Computer Science department. My research interests include HCI, InfoVis and Data Science. I'm currently working on pen & touch-based tools for visual data exploration and analysis.</p>
+        <p>ez@cs.brown.edu</p>
+        <form action="http://emanuelzgraggen.com/">
+          <input type="submit" value="Learn more" class="button"/>
+        </form>
+        <!-- <p><button class="button">Contact</button></p> -->
+      </div>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      <img src="../static/figure/zeyuan.jpg" alt="John" style="width:100%">
+      <div class="container">
+        <h2>Zeyuan Shang</h2>
+        <p class="title">PhD student</p>
+        <p>I am currencly a first year Ph.D. student in Computer Science at Brown University. My research interests include systems for machine learning, machine learning for systems, and large-scale interactive data analytics.</p>
+        <p>zeyuanxy@gmail.com</p>
+        <form action="http://www.shangzeyuan.com/">
+          <input type="submit" value="Learn more" class="button"/>
+        </form>
+        <!-- <p><button class="button">Contact</button></p> -->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</body>
 </html>
