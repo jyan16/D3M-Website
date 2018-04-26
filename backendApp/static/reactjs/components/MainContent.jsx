@@ -79,7 +79,7 @@ export default class MainContent extends React.Component {
                 text: 'dataset: ' + raw.dataset.name
             },
             legend: {
-                show: true
+                show: false
             },
             animation: true,
             tooltip: {
@@ -88,12 +88,25 @@ export default class MainContent extends React.Component {
                     type: 'cross'
                 },
                 formatter: function(params) {
-                    return '<pre>' + 'score range: ' + params[0].data[0] + '\frequency density: ' + params[0].data[1] + '</pre>'
+                    return '<pre>' + 'score: ' + params[0].data[0] + '\nfrequency density: ' + params[0].data[1] + '</pre>'
                 }
             },
             grid: {
                 bottom: 60
             },
+            // label: {
+            //     show: true,
+            //     position: 'top',
+            //     formatter: function(params) {
+            //         if (typeof params.value == 'number' ) {
+            //             return params.value;
+            //             // return parseFloat(Math.round(params.value * 100) / 100);
+            //         }
+            //         let v =  parseFloat(Math.round(params.value[1] * 100) / 100);
+
+            //         return v > 0 ? v : ''
+            //     },
+            // },
             xAxis: {
                 type: 'category',
                 name: 'score',
@@ -104,15 +117,20 @@ export default class MainContent extends React.Component {
                 nameLocation: 'middle',
                 nameGap: 40,
                 // min: function(val) {
-                //     return Math.round((val.min - val.max*0.1)*1000)/1000;
+                //     return Math.round((val.min - (val.max-val.min) * 0.1)*100)/100;
                 // },
                 // max: function(val) {
-                //     return Math.round((val.max * 1.1)*1000)/1000;
+                //     return Math.round((val.max + (val.max-val.min) * 0.1)*100)/100;
                 // },
                 splitLine: {
                     show: true
                 },
                 scale: true,
+                axisLabel: {
+                    formatter: function(value, index) {
+                        return parseFloat(Math.round(value * 100) / 100);
+                    }
+                }
             },
             yAxis: {
                 type: 'value',
@@ -147,6 +165,10 @@ export default class MainContent extends React.Component {
                 type: 'bar',
                 name: 'frequency density',
                 barCategoryGap: 0,
+                itemStyle: {
+                    borderColor: 'black',
+                    borderWidth: 0.5,
+                },
                 data: raw.statistic.data,
             }
 
@@ -251,11 +273,11 @@ export default class MainContent extends React.Component {
                 },
                 nameGap: 10,
                 // min: function(val) {
-                //     return Math.round((val.min - Math.abs(val.min * 0.1))*1000)/1000;
+                //     return Math.round((val.min - (val.max-val.min) * 0.1)*100)/100;
                 // },
-                max: function(val) {
-                    return Math.round((val.max + Math.abs(val.max * 0.1))*1000)/1000;
-                },
+                // max: function(val) {
+                //     return Math.round((val.max + (val.max-val.min) * 0.1)*100)/100;
+                // },
                 splitLine: {
                     show: true
                 }
@@ -389,12 +411,12 @@ export default class MainContent extends React.Component {
                     fontSize: 16
                 },
                 nameGap: 10,
-                min: function(val) {
-                    return Math.round((val.min - Math.abs(val.min * 0.1))*1000)/1000;
-                },
-                max: function(val) {
-                    return Math.round((val.max + Math.abs(val.max * 0.1))*1000)/1000;
-                },
+                // min: function(val) {
+                //     return Math.round((val.min - (val.max-val.min) * 0.1)*100)/100;
+                // },
+                // max: function(val) {
+                //     return Math.round((val.max + (val.max-val.min) * 0.1)*100)/100;
+                // },
                 splitLine: {
                     show: false
                 }
@@ -410,11 +432,12 @@ export default class MainContent extends React.Component {
                 },
                 nameGap: 10,
                 min: function(val) {
-                    return Math.round((val.min - Math.abs(val.min * 0.1))*1000)/1000;
+                    return 0;
+                    // return Math.round((val.min - (val.max-val.min) * 0.1)*100)/100;
                 },
-                max: function(val) {
-                    return Math.round((val.max + Math.abs(val.max * 0.1))*1000)/1000;
-                },
+                // max: function(val) {
+                //     return Math.round((val.max + (val.max-val.min) * 0.1)*100)/100;
+                // },
                 splitLine: {
                     show: false
                 }
@@ -498,16 +521,25 @@ export default class MainContent extends React.Component {
         let mychart = this.state.main_chart;
         mychart.clear();
         $("#xySelectorWrapper").show();
-        let data = this.state.filteredData.map(this.formatDataForMainGraph);
-
-        let xs = data.map(d => d[0]);
-        let ys = data.map(d => d[1]);
-
-        let xmin = Math.min.apply(null, xs);
-        let xmax = Math.max.apply(null, xs);
-
-        let ymin = Math.min.apply(null, ys);
-        let ymax = Math.max.apply(null, ys);
+        // let data = this.state.filteredData.map(this.formatDataForMainGraph);
+        let data = [];
+        let minn = Number.MAX_VALUE;
+        let maxn = Number.MIN_VALUE;
+        let minr = 10;
+        let maxr = 50;
+        let now = new Date();
+        for (let i = 0; i < this.state.filteredData.length; i++) {
+            let entry = this.state.filteredData[i];
+            data.push([
+                entry.most_recent_result[this.state.xAxis],
+                entry.most_recent_result[this.state.yAxis],
+                entry,
+                Math.round((now-new Date(entry.most_recent_time))/(1000*60*60*24))
+            ]);
+            let n = parseInt(entry.number);
+            minn = Math.min(minn, n);
+            maxn = Math.max(maxn, n);
+        }
 
         let mythis = this;
         let option = {
@@ -536,10 +568,10 @@ export default class MainContent extends React.Component {
                 nameLocation: 'middle',
                 nameGap: 40,
                 min: function(val) {
-                    return Math.round((val.min - Math.abs(val.min * 0.1))*1000)/1000;
+                    return Math.round((val.min - (val.max-val.min) * 0.2)*100)/100;
                 },
                 max: function(val) {
-                    return Math.round((val.max + Math.abs(val.max * 0.1))*1000)/1000;
+                    return Math.round((val.max + (val.max-val.min) * 0.2)*100)/100;
                 },
                 splitLine: {
                     show: true
@@ -555,10 +587,10 @@ export default class MainContent extends React.Component {
                 nameLocation: 'middle',
                 nameGap: 30,
                 min: function(val) {
-                    return Math.round((val.min - Math.abs(val.min * 0.1))*1000)/1000;
+                    return Math.round((val.min - (val.max-val.min) * 0.2)*100)/100;
                 },
                 max: function(val) {
-                    return Math.round((val.max + Math.abs(val.max * 0.1))*1000)/1000;
+                    return Math.round((val.max + (val.max-val.min) * 0.2)*100)/100;
                 },
                 splitLine: {
                     show: true
@@ -618,11 +650,14 @@ export default class MainContent extends React.Component {
                     //     }
                     // },
                     symbolSize: function (val, params) {
-                        let a = 50;
-                        if (xmax == xmin || ymax == ymin) {
-                            return [val[0]/val[1] * a, 1 * a];
+                        // map to [minr, maxr]
+                        // (n'-minr)/(n-min) = (100-n')/(max-n)
+                        if (minn == maxn) {
+                            return (minr+maxr)/2;
                         }
-                        return [(val[0]-xmin)/(xmax-xmin) * a, (val[1]-ymin)/(ymax-ymin) * a];
+                        let n = val[2].number;
+                        let radius = (minr*(maxn-n) + maxr*(n-minn)) / (maxn-minn);
+                        return radius;
                     },
                     data: data
                 }
