@@ -1,6 +1,6 @@
 import React from "react"
 
-export default class Catagory extends React.Component {
+export default class Category extends React.Component {
     constructor(props) {
         super(props);
         this.render = this.render.bind(this);
@@ -40,13 +40,13 @@ export default class Catagory extends React.Component {
         
         $('#carouselIndicators').on('slide.bs.carousel', function (event) {
             let currentIndex = event.to;
-            let newcat = mythis.props.catagoryList[currentIndex];
-            rootThis.setState({currentCatagory: newcat});
+            let newcat = mythis.props.categoryList[currentIndex];
+            rootThis.setState({currentCategory: newcat});
         })
     }
 
     render() {
-        let cats = this.props.catagoryList;
+        let cats = this.props.categoryList;
         return (
             <div id="carouselIndicators" className="carousel slide" data-ride="carousel" data-interval={false}>
                 <ol className="carousel-indicators">

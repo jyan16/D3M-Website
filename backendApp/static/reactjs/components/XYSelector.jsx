@@ -17,7 +17,7 @@ export default class XYSelector extends React.Component {
             return ''
         }
 
-        let results = this.props.data[this.props.currentCatagory]
+        let results = this.props.data[this.props.currentCategory]
         if (results.length == 0) {
             return ''
         }

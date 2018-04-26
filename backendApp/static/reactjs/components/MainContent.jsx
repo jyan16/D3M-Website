@@ -1,5 +1,5 @@
 import React from "react"
-import Catagory from "./Catagory"
+import Category from "./Category"
 import XYSelector from "./XYSelector"
 let echarts = require("echarts");
 
@@ -10,8 +10,8 @@ export default class MainContent extends React.Component {
         this.state = {
             xAxis: 'baseline',
             yAxis: 'our',
-            currentCatagory: null,
-            catagoryList: [],
+            currentCategory: null,
+            categoryList: [],
             data: null,
             filteredData: null,
             main_chart: null,
@@ -40,14 +40,15 @@ export default class MainContent extends React.Component {
                     let summarychart = echarts.init(mythis.refs.summary_graph);
                     mythis.setState({
                         data: data.data,
-                        catagoryList: cl,
-                        currentCatagory: cl[0],
+                        categoryList: cl,
+                        currentCategory: cl[0],
                         xAxis: axis[0],
                         yAxis: axis[1],
                         main_chart: mychart,
                         summary_chart: summarychart,
                         statistics: data.statistic,
                     });
+                    mythis.props.rootThis.setState({data: data.data, categoryList: cl});
                     mychart.on('click', function (params) {
                         $.ajax({
                             url: location.origin + "/dataset/?data_name=" + params.data[2].name,
@@ -179,11 +180,11 @@ export default class MainContent extends React.Component {
     updateSummaryChart() {
         let summarychart = this.state.summary_chart;
         let oldOption = summarychart.getOption();
-        if (oldOption && oldOption.title && oldOption.title[0].text == this.state.currentCatagory) {
+        if (oldOption && oldOption.title && oldOption.title[0].text == this.state.currentCategory) {
             return;
         }
         summarychart.clear();
-        let statistics = this.state.statistics[this.state.currentCatagory];
+        let statistics = this.state.statistics[this.state.currentCategory];
 
         let dimensions = [];
         let ys = [];
@@ -216,7 +217,7 @@ export default class MainContent extends React.Component {
 
         let option = {
             title: {
-                text: this.state.currentCatagory
+                text: this.state.currentCategory
             },
             animation: true,
             dataset: {
@@ -576,6 +577,12 @@ export default class MainContent extends React.Component {
                 splitLine: {
                     show: true
                 },
+                axisLine: {
+                    show: data.length > 0 ? false : true,
+                },
+                axisTick: {
+                    show: data.length > 0 ? false : true,
+                }
             },
             yAxis: {
                 type: 'value',
@@ -594,6 +601,12 @@ export default class MainContent extends React.Component {
                 },
                 splitLine: {
                     show: true
+                },
+                axisLine: {
+                    show: data.length > 0 ? false : true,
+                },
+                axisTick: {
+                    show: data.length > 0 ? false : true,
                 }
             },
             dataZoom: [{
@@ -631,7 +644,7 @@ export default class MainContent extends React.Component {
                 }
             ],
             series: [{
-                    name: mythis.state.currentCatagory,
+                    name: mythis.state.currentCategory,
                     type: 'scatter',
                     // itemStyle: {
                     //     normal: {
@@ -756,20 +769,20 @@ export default class MainContent extends React.Component {
             }
             return true;
         }
-        this.state.filteredData = this.state.data[this.state.currentCatagory].filter(helper, this);
+        this.state.filteredData = this.state.data[this.state.currentCategory].filter(helper, this);
         this.updateChart();
     }
 
     render() {
         return (
             <div id="MainContent-wrapper">
-                <Catagory catagoryList={this.state.catagoryList} rootThis={this}/>
+                <Category categoryList={this.state.categoryList} rootThis={this}/>
                 <div ref="main_graph" id="main-graph"></div>
                 <div id="summary-info">
                 </div>
                 <div ref="summary_graph" id="summary-graph"></div>
                 
-                <XYSelector data={this.state.data} currentCatagory={this.state.currentCatagory} rootThis={this}/>
+                <XYSelector data={this.state.data} currentCategory={this.state.currentCategory} rootThis={this}/>
                 
             </div>
         )

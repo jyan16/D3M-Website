@@ -13,7 +13,9 @@ class App1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            filters: new Map()
+            filters: new Map(),
+            data: [],
+            categoryList: [],
         }
     }
 
@@ -28,10 +30,10 @@ class App1 extends React.Component {
                         <Filter rootThis={this}/>
                     </div>
                     <div id="main-content-container">
-                        <MainContent filters={this.state.filters}/>
+                        <MainContent filters={this.state.filters} rootThis={this}/>
                     </div>
                     <div id="right-toolbar-container">
-                        <Search/>
+                        <Search data={this.state.data} categoryList={this.state.categoryList}/>
                     </div>
                 </div>
                 

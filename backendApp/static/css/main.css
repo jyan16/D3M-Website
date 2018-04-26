@@ -151,6 +151,10 @@ ul {
     font-size: 0.875rem;
 }
 
+.filter-item button {
+    margin-right: 10px;
+}
+
 /* end of filter section */
 
 /* search */
@@ -177,15 +181,15 @@ ul {
     opacity: 0.7;
 }
 
-#search-result {
+#search-result-wrapper {
     height: calc(100% - 300px);
 }
 
-#search-result .label {
+#search-result-wrapper .label {
     font-size: 18px;
     position: relative;
-    top: 1%;
-    left:15%;
+    top: 10px;
+    left: 33px;
     color: navajowhite;
     font-weight: bolder;
 }
@@ -200,7 +204,19 @@ ul {
     opacity: 0.7;
 }
 
+#search-result {
+    margin: 20px 10px;
+}
 
+.search-item {
+    cursor: pointer;
+    margin-top: 5px;
+    width: 100%;
+    word-wrap: break-word;
+}
+.search-item-category {
+    padding-left: 5px;
+}
 /* end search */
 
 /* main content */
@@ -277,4 +293,14 @@ pre {
     height: 230px;
     position: relative;
     right:10%;
+}
+
+#search-result {
+    height: 360px;
+    overflow: auto;
+}
+
+#filter-filters {
+    height: 250px;
+    overflow: auto;
 }

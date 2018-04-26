@@ -23,6 +23,7 @@
     "echarts": "^4.0.4",
     "es6-promise": "^3.1.2",
     "eslint-plugin-react": "^7.7.0",
+    "fuse.js": "^3.2.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.5.1",
     "radium": "^0.16.6",
