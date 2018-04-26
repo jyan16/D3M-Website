@@ -125,6 +125,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'backendApp/static'),
 ]
 
+STATIC_ROOT = "staticfiles"
 # webpack loader
 
 WEBPACK_LOADER = {
@@ -134,7 +135,9 @@ WEBPACK_LOADER = {
     }
 }
 
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = "staticfiles"
+ALLOWED_HOSTS = ['peaceful-inlet-74129.herokuapp.com']
+
