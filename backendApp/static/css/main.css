@@ -1,16 +1,8 @@
-html, body, #App1, #app-container {
-
+html, body {
     height:100%;
-}
-
-#app-container {
-    display: grid;
-    grid-template-rows: 6% auto;
-    grid-template-areas: "header"
-                         "page-wrapper";
     background-color: #1b6597;
+    min-width: 1200px;
 }
-
 #header-container {
     grid-area: header;
 }
@@ -26,7 +18,6 @@ hr {
     font-size: 20px;
     font-weight: bolder;
 }
-
 
 #page-wrapper {
     grid-area: page-wrapper;
