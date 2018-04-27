@@ -106,6 +106,8 @@ response = {
 1. password: abcd12345678
 
 
+### remember to set RDS security group
+
 
 
 

@@ -4,3 +4,4 @@ numpy==1.14.2
 pandas==0.22.0
 gunicorn
 django-heroku
+mysqlclient==1.3.12
