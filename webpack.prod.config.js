@@ -5,6 +5,8 @@ var config = require('./webpack.base.config.js')
 
 config.devtool = "#eval-source-map"
 
+config.output.publicPath = './static/bundles'
+
 config.plugins = config.plugins.concat([
   new BundleTracker({filename: './webpack-stats-local.json'}),
 ])
