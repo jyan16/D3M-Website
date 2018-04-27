@@ -71,11 +71,6 @@ export default class Search extends React.Component {
                     </div>
                 </form>
 
-                <select id="Search-type" className="form-control mb-2" style={{height:'25px'}}>
-                    <option value="data">Data List</option>
-                    <option value="attribute">Attribute List</option>
-                </select>
-
                 <div id="search-result-wrapper">
                     <span className="label mb-2">
                         Search Result

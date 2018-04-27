@@ -164,7 +164,7 @@ hr {
 }
 
 #search-result-wrapper {
-    height: calc(100% - 300px);
+    height: calc(100% - 265px);
 }
 
 #search-result-wrapper .label {
@@ -188,6 +188,8 @@ hr {
 
 #search-result {
     margin: 20px 10px;
+    height: 400px;
+    overflow: auto;
 }
 
 .search-item {
@@ -196,8 +198,13 @@ hr {
     width: 100%;
     word-wrap: break-word;
 }
+
 .search-item-category {
     padding-left: 5px;
+}
+
+.search-item-noresult {
+    text-align: center;
 }
 /* end search */
 
@@ -275,11 +282,6 @@ pre {
     height: 230px;
     position: relative;
     right:10%;
-}
-
-#search-result {
-    height: 360px;
-    overflow: auto;
 }
 
 #filter-filters {

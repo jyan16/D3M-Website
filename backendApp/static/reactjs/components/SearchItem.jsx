@@ -7,6 +7,7 @@ export default class SearchItem extends React.Component {
         super(props);
 
         this.renderResult = this.renderResult.bind(this);
+        this.renderResults = this.renderResults.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -51,10 +52,23 @@ export default class SearchItem extends React.Component {
         )
     }
 
+    renderResults() {
+        if (this.props.results.length == 0) {
+            return (
+                <li>
+                    <div className="search-item-noresult">No result</div>
+                </li>
+            )
+        }
+        return this.props.results.map(this.renderResult);
+    }
+
+
+
     render() {
         return (
             <ul id="search-result" className="list-group">
-                {this.props.results.map(this.renderResult)}
+                {this.renderResults()}
             </ul>
         )
     }
