@@ -6,20 +6,19 @@ export default class Header extends React.Component {
             <nav className="navbar navbar-expand-sm navbar-light bg-light">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                            <a href="http://127.0.0.1:8000/" className="nav-link">
+                            <a href="/" className="nav-link">
                                 <i className="fas fa-home" color="black" style={{marginRight:'20px'}}></i>
-                                Home
                             </a>
                         </li>
 
                         <li className="nav-item">
-                            <a href="http://127.0.0.1:8000/data" className="nav-link">
+                            <a href="/data/" className="nav-link">
                                 Data
                             </a>
                         </li>
 
                         <li className="nav-item">
-                            <a href="http://127.0.0.1:8000/lab/" className="nav-link">
+                            <a href="/lab/" className="nav-link">
                                 Contact Lab
                             </a>
                         </li>
