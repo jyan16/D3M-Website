@@ -123,7 +123,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'backendApp/static'),
 ]
 
-
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # webpack loader
 
