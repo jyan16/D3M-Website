@@ -719,7 +719,7 @@ export default class MainContent extends React.Component {
                         gt: 60, lte: 120,
                         color: 'rgb(110,50,155)'
                     } , {
-                        gt: 120, lte: 180,
+                        gt: 120,
                         color: 'rgb(201,127,233)'
                     }
                 ],
