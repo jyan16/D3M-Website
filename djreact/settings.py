@@ -74,18 +74,18 @@ WSGI_APPLICATION = 'djreact.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ebdb',
-        'USER': 'abcd',
-        'PASSWORD': 'abcd1234',
-        'HOST': 'aan8rvfdeqb3k5.czdv9lzxxhqp.us-east-2.rds.amazonaws.com',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'ebdb',
+    #     'USER': 'abcd',
+    #     'PASSWORD': 'abcd1234',
+    #     'HOST': 'aan8rvfdeqb3k5.czdv9lzxxhqp.us-east-2.rds.amazonaws.com',
+    #     'PORT': '3306',
+    # }
 }
 
 
