@@ -682,6 +682,7 @@ export default class MainContent extends React.Component {
                         emphasis: {
                             borderColor: 'gray',
                             borderWidth: 3,
+                            opacity: 1,
                         }
                     },
                     symbolSize: function (val, params) {
