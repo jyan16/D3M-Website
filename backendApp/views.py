@@ -117,6 +117,8 @@ def get_all(request):
 
     response['statistic'] = dict()
     for class_name, class_entry in tmp_dict.items():
+        print(class_name, class_entry)
+
         response['statistic'][class_name] = list()
         for time, data in class_entry.items():
             data['time'] = time
