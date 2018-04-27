@@ -121,5 +121,5 @@ def get_all(request):
         for time, data in class_entry.items():
             data['time'] = time
             response['statistic'][class_name].append(data)
-
+    pp.pprint(response)
     return JsonResponse(response)
