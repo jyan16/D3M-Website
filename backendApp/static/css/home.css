@@ -1,61 +1,64 @@
 @import url('https://fonts.googleapis.com/css?family=Cairo');
 @import url('https://fonts.googleapis.com/css?family=Rokkitt');
-html{
-    width: auto;
-    height: auto;
-    margin: 0;
-    padding: 0;
-    background-image: url("http://harrisburgu.edu/wp-content/uploads/2015/08/large_hero_image2.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+    img{
+        left: 50%;
+        margin-left: -512px;   /* 50% */
+    }
 }
+img {
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+#demo{
+    font-family: "Cairo";
+    color: white;
+    opacity: 0.8;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 30px;
+    position: relative;
+    margin-left: 28%;
+    margin-top:11%;
+}
+
 h1{
     font-family:"Rokkitt";
     color: white;
-    font-size: 75px;
+    font-size: 72px;
     opacity: 0.8;
     letter-spacing: 3px;
-    position:relative;
-    left:2%;
-    top:10%;
+    margin-left: 1%;
 
-}
-
-#demo{
-    color: white;
-    opacity: 0.7;
-    font-weight: bold;
-    letter-spacing: 1px;
-    font-family: "Cairo";
-    font-size: 30px;
-    position: absolute;
-    left:27%;
-    bottom:52%;
 }
 
 #features{
-    margin-left:29% ;
-    margin-top:16% ;
+    margin-left:30% ;
+    margin-top:2% ;
 }
-
 #explore,#uploaddata{
     display: inline-block;
     vertical-align:top;
-    width: 25%;
+    width: 27%;
 }
 
 .heading{
-    color:lightseagreen;
-    font-size:20px;
+    color:floralwhite;
+    font-family: Cairo;
+    font-size:18px;
     font-family: Cairo;
     font-weight: bold;
     text-align: center;
-    width: 82%;
+    width: 80%;
     border-radius: 5px;
     background: #1b6597;
-
 }
-
 .feature_column a{
     text-decoration: none;
 }
@@ -65,26 +68,58 @@ form{
     margin-left: 15%;
 }
 
-label{
-    color:transparent;
-}
+/*label{*/
+/*color:transparent;*/
+/*}*/
 
-input[type=file]{
-    font-family: "Cairo";
-    color:white;
-    font-size:11px;
-    margin-left: 12%;
-    margin-top: 7%;
+input[type="file"]{
+    /*font-family: "Cairo";*/
+    /*color:white;*/
+    /*font-size:11px;*/
+    /*margin-left: 12%;*/
+    /*margin-top: 7%;*/
+    /*border-color: transparent;*/
+    display: none;
 }
 
 input[type=submit] {
-    color: lightseagreen;
-    font-size: 19px;
+    color: floralwhite;
+    padding-top:0;
+    font-size: 18px;
     font-family: Cairo;
     font-weight: bold;
     text-align: center;
     border-radius: 5px;
     border-color: transparent;
     background: #1b6597;
-    margin-top: 4%;
+    margin-top: 5%;
+    height:36px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+/*label[for="file"]{*/
+/*width:90px;*/
+/*background-color: #1b6597;*/
+/*border-radius: 5px;*/
+/*color:floralwhite;*/
+/*font-size:12px;*/
+/*font-family: Cairo;*/
+/*cursor: pointer;*/
+/*margin-top:-20%;*/
+/*margin-left:10%;*/
+/*}*/
+
+.custom-file-upload {
+    border-radius: 5px;
+    display: inline-block;
+    background-color:#3D81FA;
+    padding: 6px 12px;
+    cursor: pointer;
+    color:floralwhite;
+    margin-left: 19%;
+    font-family: Cairo;
+    height: 25px;
+    padding-top: 0px;
+
 }
