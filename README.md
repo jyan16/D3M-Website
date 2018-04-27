@@ -101,9 +101,9 @@ response = {
 
 #### Superuser for Django
 
-1. name: D3M-Website
-1. email: d3m@brown.edu
-1. password: D3M-Website
+1. name: abcd
+1. email: abcd@brown.edu
+1. password: abcd12345678
 
 
 
