@@ -115,9 +115,10 @@ def get_all(request):
         class_entry_time = class_entry[tmp_key]
         class_entry_time[statistic.method] = statistic.score_avg
 
+    print("statistic data: \n")
+    pp.pprint(tmp_dict)
     response['statistic'] = dict()
     for class_name, class_entry in tmp_dict.items():
-        print(class_name, class_entry)
 
         response['statistic'][class_name] = list()
         for time, data in class_entry.items():
