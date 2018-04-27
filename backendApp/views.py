@@ -101,7 +101,7 @@ def get_all(request):
 
     threshold = make_aware(datetime.now() - timedelta(days=30))
     print('get statistic after %s' % threshold)
-    statistics = Statistic.objects.filter(time__gte=threshold).order_by('time')
+    statistics = Statistic.objects.all().order_by('time')
 
     pp.pprint(statistics)
 
