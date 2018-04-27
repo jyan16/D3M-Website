@@ -22,9 +22,9 @@ class App1 extends React.Component {
     render() {
         return (
             <div id="app-container">
-                <div id="header-container">
-                    <Header/>
-                </div>
+                {/*<div id="header-container">*/}
+                    {/*<Header/>*/}
+                {/*</div>*/}
                 <div id="page-wrapper">
                     <div id="left-toolbar-container">
                         <Filter rootThis={this}/>

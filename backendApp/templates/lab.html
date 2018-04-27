@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "base.html" %}
+{% block head %}
     <link rel="stylesheet" href="../static/css/about.css">
+    <link rel="stylesheet" href="../static/css/navigation.css">
     <title>About</title>
-    {% load static %}
-</head>
+{% endblock %}
 
-<body>
+{% block main %}
 
 <h1 id="meet"> Meet The Team </h1>
 <p id ="des"> Our team includes two leading research group in the data science field, one is MIT CSAIL group, and the other is Brown university data management group. We have professor Tim Kraska, PhD student Emanuel Zgraggen and Zeyuan Shang join the team. Together, the team explores and pioneers the breakthrough of the most recent technology in data science.  </p>
@@ -106,5 +105,4 @@
 </div>
 </div>
 
-</body>
-</html>
+{% endblock %}
