@@ -7,7 +7,4 @@ dataset/
 test.py
 media/
 
-webpack-stats-local.json
-backendApp/static/bundles/local/
-
 .ipynb_checkpoints
