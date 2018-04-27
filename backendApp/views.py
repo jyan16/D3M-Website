@@ -103,6 +103,8 @@ def get_all(request):
     print('get statistic after %s' % threshold)
     statistics = Statistic.objects.filter(time__gte=threshold).order_by('time')
 
+    pp.pprint(statistics)
+
     tmp_dict = dict()
     for statistic in statistics:
         if statistic.type not in tmp_dict:
