@@ -26,7 +26,10 @@ SECRET_KEY = '=wxis1%nzyaz)1y(0&$!)dqm!y&=s2n4ff1%-!3_-w12t1518a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fix
 # Application definition
 
 INSTALLED_APPS = [
@@ -124,7 +127,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'backendApp/static'),
 ]
 
-STATIC_ROOT = "static"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # webpack loader
 
 WEBPACK_LOADER = {
