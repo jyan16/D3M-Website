@@ -5,6 +5,7 @@ var config = require('./webpack.base.config.js')
 
 config.devtool = "#eval-source-map"
 
+
 config.output.publicPath = '/static/bundles/local/'
 
 
