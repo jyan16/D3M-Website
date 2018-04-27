@@ -139,5 +139,5 @@ WEBPACK_LOADER = {
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-ALLOWED_HOSTS = ['peaceful-inlet-74129.herokuapp.com']
+ALLOWED_HOSTS = ['peaceful-inlet-74129.herokuapp.com', 'localhost']
 
