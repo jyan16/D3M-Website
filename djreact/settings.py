@@ -125,7 +125,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'backendApp/static'),
 ]
 
-STATIC_ROOT = "staticfiles"
+STATIC_ROOT = "static"
 # webpack loader
 
 WEBPACK_LOADER = {
