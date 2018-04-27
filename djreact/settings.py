@@ -139,4 +139,4 @@ MEDIA_URL = '/media/'
 
 ALLOWED_HOSTS = ['*']
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
