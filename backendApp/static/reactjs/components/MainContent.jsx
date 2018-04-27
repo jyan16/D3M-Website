@@ -114,6 +114,7 @@ export default class MainContent extends React.Component {
                 }
             },
             grid: {
+                right: 150,
                 bottom: 60
             },
             // label: {
