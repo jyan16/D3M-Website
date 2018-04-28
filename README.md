@@ -106,7 +106,9 @@ response = {
 1. password: abcd12345678
 
 
-### delete DATABASE_URL in your heroku config variable!!!!!!!!!
+### NOTE
+1. delete DATABASE_URL in your heroku config variable!!!!!!!!!
+2. Compressor will not run is DEBUG is TRUE
 
 
 

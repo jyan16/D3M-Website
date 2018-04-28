@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=wxis1%nzyaz)1y(0&$!)dqm!y&=s2n4ff1%-!3_-w12t1518a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# note: Django Compressor will not run if Debug is True
+DEBUG = False
 
 # Application definition
 
@@ -113,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Pacific'
 
 USE_I18N = True
 
