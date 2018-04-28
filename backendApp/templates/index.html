@@ -4,19 +4,32 @@
 <head>
     <title>DMHub</title>
     <link rel="stylesheet" href="../static/css/home.css">
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+    </script>
+    <script>
+
+        let i = 0;
+        let txt = 'DMhub changes the way you look at data ...';
+        let speed = 80;
+
+        $(document).ready(function a(){
+            if (i < txt.length) {
+                document.getElementById("demo").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(a,speed);
+            }
+        })
+    </script>
 </head>
 <body>
-
-<div id="main">
-    <img src="http://harrisburgu.edu/wp-content/uploads/2015/08/large_hero_image2.png">
-    <h1>DMhub</h1>
-    <div id = "demo">
-        <!--<p id = "demo"></p>-->
-    </div>
-
-    <div id="features">
-        <div class="feature_column" id="explore">
-            <a href="{% url "data" %}"><h2 class="heading">See How DMhub Works</h2></a>
+    <div id="main">
+        <img src="http://harrisburgu.edu/wp-content/uploads/2015/08/large_hero_image2.png" alt="background">
+        <h1>DMhub</h1>
+        <div id = "demo">
+            <!--<p id = "demo"></p>-->
         </div>
 
         <div class="feature_column" id="uploaddata">
@@ -28,35 +41,8 @@
                 {{ form.docfile }}
                 <div id = "filechoosen">No File Selected...</div>
             </form>
+
         </div>
     </div>
-</div>
 </body>
-<script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous">
-</script>
-<script>
-
-    var i = 0;
-    var txt = 'DMhub changes the way you look at data ...';
-    var speed = 80;
-
-    $(document).ready(function a(){
-        if (i < txt.length) {
-            document.getElementById("demo").innerHTML += txt.charAt(i);
-            i++;
-            setTimeout(a,speed);
-        }
-    })
-
-    $('#id_docfile').change(function() {
-        var file = $('#id_docfile')[0].files[0].name;
-        document.getElementById("filechoosen").innerHTML = file
-    });
-
-
-</script>
 </html>
-
