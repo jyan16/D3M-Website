@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Cairo');
 @import url('https://fonts.googleapis.com/css?family=Rokkitt');
+<<<<<<< Updated upstream
 @media screen and (max-width: 1024px) {
+=======
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+    img{
+        /*left: 50%;*/
+        margin-left: -512px;   /* 50% */
+    }
+>>>>>>> Stashed changes
 }
 img {
     min-height: 100%;
