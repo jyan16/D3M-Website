@@ -8,3 +8,5 @@ test.py
 media/
 
 .ipynb_checkpoints
+
+webpack-stats-local.json
