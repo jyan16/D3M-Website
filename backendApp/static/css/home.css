@@ -1,4 +1,6 @@
+
 @import url('font.css');
+
 @media screen and (max-width: 1024px) { /* Specific to this particular image */
     img{
         left: 50%;
