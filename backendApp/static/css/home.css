@@ -45,7 +45,7 @@ h1{
 #explore,#uploaddata{
     display: inline-block;
     vertical-align:top;
-    width: 27%;
+    width: 24%;
 }
 
 .heading{
@@ -68,58 +68,46 @@ form{
     margin-left: 15%;
 }
 
-/*label{*/
-/*color:transparent;*/
-/*}*/
 
 input[type="file"]{
-    /*font-family: "Cairo";*/
-    /*color:white;*/
-    /*font-size:11px;*/
-    /*margin-left: 12%;*/
-    /*margin-top: 7%;*/
-    /*border-color: transparent;*/
     display: none;
 }
 
 input[type=submit] {
     color: floralwhite;
-    padding-top:0;
     font-size: 18px;
     font-family: Cairo;
     font-weight: bold;
     text-align: center;
-    border-radius: 5px;
+    border-radius:5px;
+
     border-color: transparent;
-    background: #1b6597;
+    background: #377EB4;
     margin-top: 5%;
-    height:36px;
+    height:33px;
     cursor: pointer;
     margin-bottom: 20px;
+    padding: 0 15px;
 }
-
-/*label[for="file"]{*/
-/*width:90px;*/
-/*background-color: #1b6597;*/
-/*border-radius: 5px;*/
-/*color:floralwhite;*/
-/*font-size:12px;*/
-/*font-family: Cairo;*/
-/*cursor: pointer;*/
-/*margin-top:-20%;*/
-/*margin-left:10%;*/
-/*}*/
 
 .custom-file-upload {
     border-radius: 5px;
-    display: inline-block;
-    background-color:#3D81FA;
-    padding: 6px 12px;
+    background-color:ghostwhite;
+    opacity: 0.8;
+    padding: 0 10px;
     cursor: pointer;
-    color:floralwhite;
-    margin-left: 19%;
+    font-size: 13px;
+    color:black;
+    margin-left: 8%;
     font-family: Cairo;
-    height: 25px;
-    padding-top: 0px;
+    font-weight: bold;
+}
 
+#filechoosen{
+    font-family: Cairo;
+    color:floralwhite;
+    float:right;
+    font-weight: bold;
+    font-size: 12px;
+    margin-right:10%
 }
