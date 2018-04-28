@@ -6,6 +6,7 @@ __pycache__/
 dataset/
 test.py
 media/
+staticfiles/
 
 .ipynb_checkpoints
 

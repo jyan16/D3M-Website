@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,8 +25,9 @@ SECRET_KEY = '=wxis1%nzyaz)1y(0&$!)dqm!y&=s2n4ff1%-!3_-w12t1518a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # note: Django Compressor will not run if Debug is True
-DEBUG = False
+DEBUG = True
 
+COMPRESS_ENABLED = True
 # Application definition
 
 INSTALLED_APPS = [
