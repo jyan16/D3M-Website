@@ -131,6 +131,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 # webpack loader
 
 WEBPACK_LOADER = {
