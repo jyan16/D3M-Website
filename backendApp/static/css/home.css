@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Cairo');
 @import url('https://fonts.googleapis.com/css?family=Rokkitt');
-@media screen and (max-width: 1024px) { /* Specific to this particular image */
-    img{
-        left: 50%;
-        margin-left: -512px;   /* 50% */
-    }
+@media screen and (max-width: 1024px) {
 }
 img {
     min-height: 100%;
@@ -15,6 +11,7 @@ img {
     left: 0;
     z-index: -1;
 }
+
 #demo{
     font-family: "Cairo";
     color: white;
@@ -49,14 +46,13 @@ h1{
 
 .heading{
     color:white;
-    font-family:  "Cairo";
+    font-family:  Cairo;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
     width: 80%;
     border-radius: 5px;
     background: #1b6597;
-
 }
 
 
@@ -75,9 +71,9 @@ input[type="file"]{
 }
 
 input[type=submit] {
-    color: floralwhite;
+    color: white;
     font-size: 18px;
-    font-family: "Cairo";
+    font-family: Cairo;
     font-weight: bold;
     text-align: center;
     border-radius:5px;
