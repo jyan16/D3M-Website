@@ -1,12 +1,12 @@
 import React from "react"
 import { render } from "react-dom"
-
 import Header from "./components/Header"
 import Filter from "./components/Filter"
 import Search from "./components/Search"
 import MainContent from "./components/MainContent"
 
-import "../css/main.css"
+
+// import "../css/main.css"
 
 class App1 extends React.Component {
     constructor(props) {
