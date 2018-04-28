@@ -32,15 +32,21 @@
             <!--<p id = "demo"></p>-->
         </div>
 
-        <div class="feature_column" id="uploaddata">
-            <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="submit" value="Upload My Own Dataset"/>
+        <div id="features">
+            <div class="feature_column" id="explore">
+                <a href="{% url "data" %}"><h2 class="heading">See How DMhub Works</h2></a>
+            </div>
 
-                <label for="id_docfile" class="custom-file-upload" id="uploadfile" >Browse...</label>
-                {{ form.docfile }}
-                <div id = "filechoosen">No File Selected...</div>
-            </form>
+            <div class="feature_column" id="uploaddata">
+                <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="submit" value="Upload My Own Dataset"/>
+                    <label class="custom-file-upload" id = "aa" onclick="filename">
+                        {{ form.docfile }}
+                        Choose a File ...
+                    </label>
+                </form>
+            </div>
 
         </div>
     </div>
