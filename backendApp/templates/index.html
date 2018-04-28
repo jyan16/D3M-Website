@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>DMdHub</title>
+    <title>DMHub</title>
     <link rel="stylesheet" href="../static/css/home.css">
 </head>
 <body>
@@ -23,13 +23,10 @@
             <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="submit" value="Upload My Own Dataset"/>
-                <label class="custom-file-upload" id = "aa" onclick="filename">
-                    {{ form.docfile }}
-                    Choose a File ...
-                </label>
 
-                <!--<label for = "file"> Browse..</label>-->
-                <!--<input type="file" name="file" id = "file">-->
+                <label for="id_docfile" class="custom-file-upload" id="uploadfile" >Browse...</label>
+                {{ form.docfile }}
+                <div id = "filechoosen">No File Selected...</div>
             </form>
         </div>
     </div>
@@ -54,6 +51,12 @@
         }
     })
 
+    $('#id_docfile').change(function() {
+        var file = $('#id_docfile')[0].files[0].name;
+        document.getElementById("filechoosen").innerHTML = file
+    });
+
 
 </script>
 </html>
+
