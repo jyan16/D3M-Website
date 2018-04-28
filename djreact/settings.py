@@ -24,10 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=wxis1%nzyaz)1y(0&$!)dqm!y&=s2n4ff1%-!3_-w12t1518a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# note: Django Compressor will not run if Debug is True
+
 DEBUG = True
 
-COMPRESS_ENABLED = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webpack_loader',
-    'compressor',
 ]
 
 MIDDLEWARE = [
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -134,12 +133,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'backendApp/static'),
 ]
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # other finders..
-    'compressor.finders.CompressorFinder',
-)
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 

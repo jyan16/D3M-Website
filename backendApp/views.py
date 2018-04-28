@@ -97,13 +97,9 @@ def get_all(request):
             data['most_recent_result'][record.method] = record.score
         response['data'][dataset.type].append(data)
 
-    # pp.pprint(response)
-
     threshold = make_aware(datetime.now() - timedelta(days=30))
     print('get statistic after %s' % threshold)
     statistics = Statistic.objects.filter(time__gte=threshold).order_by('time')
-
-    pp.pprint(statistics)
 
     tmp_dict = dict()
     for statistic in statistics:
@@ -117,8 +113,6 @@ def get_all(request):
         class_entry_time = class_entry[tmp_key]
         class_entry_time[statistic.method] = statistic.score_avg
 
-    print("statistic data: \n")
-    pp.pprint(tmp_dict)
     response['statistic'] = dict()
     for class_name, class_entry in tmp_dict.items():
 
