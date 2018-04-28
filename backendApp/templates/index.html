@@ -5,27 +5,12 @@
     <title>DMHub</title>
     <link rel="stylesheet" href="{% static "css/home.css" %}">
     <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-    <script>
-
-        let i = 0;
-        let txt = 'DMhub changes the way you look at data ...';
-        let speed = 80;
-
-        $(document).ready(function a(){
-            if (i < txt.length) {
-                document.getElementById("demo").innerHTML += txt.charAt(i);
-                i++;
-                setTimeout(a,speed);
-            }
-        })
-        $('#id_docfile').change(function() {
-                var file = $('#id_docfile')[0].files[0].name;
-                document.getElementById("filechoosen").innerHTML = file
-                   });
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
     </script>
+    <script src="{% static "js/index.js" %}"></script>
+
 </head>
 <body>
 
@@ -35,7 +20,6 @@
         <div id = "demo">
 
         </div>
-
         <div id="features">
             <div class="feature_column" id="explore">
                 <a href="{% url "data" %}"><h2 class="heading">See How DMhub Works</h2></a>

@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact us</title>
-  <link rel = "stylesheet" href="../static/css/contact_us.css">
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact us</title>
+    <link rel = "stylesheet" href="{% static "css/contact.css" %}">
+    <link rel = "stylesheet" href="{% static "css/navigation.css" %}">
+{% endblock %}
 
+{% block main %}
   <div class="top_container">
-      <img id = "img" src="../static/figure/back.jpg" alt="machine learning">
+      <img id = "img" src="{% static "figure/back.jpg" %}" alt="machine learning">
       <div class="centered">
         <h4 id="topline">Predict in an instant</h4>
         <form id = "top" action="{% url "index" %}">
@@ -59,5 +60,4 @@
 
     </div>
   </div>
-</body>
-</html>
+{% endblock %}

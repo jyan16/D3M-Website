@@ -11,6 +11,7 @@ urlpatterns = [
     path('upload/', views.upload, name='upload'),
     path('all/', views.get_all, name='get_all'),
     path('dataset/', views.get_data, name='get_data'),
+    path('contact/', views.contact, name='contact'),
 
     path('test/', views.test, name='test'),
 ]

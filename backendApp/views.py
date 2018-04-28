@@ -8,8 +8,10 @@ from datetime import datetime, timedelta
 from .forms import DocumentForm
 import os
 from django.conf import settings
+from django.middleware.gzip import GZipMiddleware
 
 pp = pprint.PrettyPrinter(indent=4)
+gzip_middleware = GZipMiddleware()
 
 
 # Create your views here.
@@ -122,3 +124,7 @@ def get_all(request):
             response['statistic'][class_name].append(data)
 
     return JsonResponse(response)
+
+
+def contact(request):
+    return render(request, 'contact.html')
