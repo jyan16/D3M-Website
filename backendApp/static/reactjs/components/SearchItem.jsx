@@ -21,7 +21,7 @@ export default class SearchItem extends React.Component {
         if (indicators.attr('activeIndex') != to) {
             indicators.carousel(to);
         } else {
-            if ($('#filter-filters').children().length > 0) {
+            if ($('#filter-filters').children().length > 0 || $("#xySelectorWrapper").css('display') == 'none') {
                 document.getElementById('filter-form-apply').click();
             }
         }
