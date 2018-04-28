@@ -17,7 +17,7 @@ img {
     z-index: -1;
 }
 #demo{
-    font-family: "Cairo";
+    font-family: "Rokkitt";
     color: white;
     opacity: 0.8;
     font-weight: bold;
@@ -49,10 +49,9 @@ h1{
 }
 
 .heading{
-    color:floralwhite;
-    font-family: Cairo;
+    color:red;
+    font-family:  "Rokkitt";
     font-size:18px;
-    font-family: Cairo;
     font-weight: bold;
     text-align: center;
     width: 80%;
@@ -76,7 +75,7 @@ input[type="file"]{
 input[type=submit] {
     color: floralwhite;
     font-size: 18px;
-    font-family: Cairo;
+    font-family: "Rokkitt";
     font-weight: bold;
     text-align: center;
     border-radius:5px;
@@ -104,7 +103,7 @@ input[type=submit] {
 }
 
 #filechoosen{
-    font-family: Cairo;
+    font-family: "Rokkitt";
     color:floralwhite;
     float:right;
     font-weight: bold;
