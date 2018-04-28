@@ -6,7 +6,6 @@ import Filter from "./components/Filter"
 import Search from "./components/Search"
 import MainContent from "./components/MainContent"
 
-
 import "../css/main.css"
 
 class App1 extends React.Component {
@@ -16,6 +15,7 @@ class App1 extends React.Component {
             filters: new Map(),
             data: [],
             categoryList: [],
+            currentCategory: null,
         }
     }
 
@@ -28,7 +28,7 @@ class App1 extends React.Component {
                 {/*</div>*/}
                 <div id="page-wrapper">
                     <div id="left-toolbar-container">
-                        <Filter rootThis={this}/>
+                        <Filter data={this.state.data} currentCategory={this.state.currentCategory} rootThis={this}/>
                     </div>
                     <div id="main-content-container">
                         <MainContent filters={this.state.filters} rootThis={this}/>

@@ -14,7 +14,7 @@ export default class Filter extends React.Component {
         this.updateFilter = this.updateFilter.bind(this);
         this.removeFilter = this.removeFilter.bind(this);
         this.removeAllFilters = this.removeAllFilters.bind(this);  
-        
+        // this.renderAttribute = this.renderAttribute.bind(this);
         this.state.removeFilter = this.removeFilter;
 
     }
@@ -29,7 +29,7 @@ export default class Filter extends React.Component {
 
         this.state.filters.set(key, {name: name.val(), relation: relation.val(), value: parseFloat(value.val())});
 
-        name.val('');
+        // name.val('');
         // relation.val('lt');
         value.val('');
 
@@ -58,6 +58,18 @@ export default class Filter extends React.Component {
         this.setState({filters: this.state.filters});
     }
 
+    // renderAttribute() {
+    //     let results = this.props.data[this.props.currentCategory];
+    //     if (!results || results.length == 0) {
+    //         return ''
+    //     }
+    //     let options = Object.keys(results[0].most_recent_result);
+
+    //     return options.map(function(op, index){
+    //         return <option value={op} key={'attr-'+op}>{op}</option>
+    //     });
+    // }
+
   render() {
     return (
       <div id="filter-wrapper">
@@ -67,7 +79,10 @@ export default class Filter extends React.Component {
         
         <div id="filter-form">
             <form onSubmit={this.addfilter}>
-                <input type="text" className="form-control" id="filter-form-attribute" placeholder="attribute name" required/>
+                {/* <input type="text" className="form-control" id="filter-form-attribute" placeholder="attribute name" required/> */}
+                <select id="filter-form-attribute" className="form-control" required>
+                    {/* {this.renderAttribute()} */}
+                </select>
                 <div>
                     <select id="filter-form-relation" className="form-control" required>
                         <option value="lt">&lt;</option>

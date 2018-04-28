@@ -17,15 +17,23 @@ export default class XYSelector extends React.Component {
             return ''
         }
 
-        let results = this.props.data[this.props.currentCategory]
+        let results = this.props.data[this.props.currentCategory];
         if (results.length == 0) {
             return ''
         }
         let options = Object.keys(results[0].most_recent_result);
         this.state.options = options;
+
+        let fa = $('#filter-form-attribute');
+        fa.children().remove();
         return options.map(function(op, index){
+            fa.append($('<option>', {
+                value: op,
+                text: op,
+            }));
             return <option value={op} key={'xyselector-'+op}>{op}</option>
         });
+
     }
 
     handleChange(event) {

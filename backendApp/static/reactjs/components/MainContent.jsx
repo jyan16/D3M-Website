@@ -64,7 +64,7 @@ export default class MainContent extends React.Component {
                         summary_chart: summarychart,
                         statistics: data.statistic,
                     });
-                    mythis.props.rootThis.setState({data: data.data, categoryList: cl});
+                    mythis.props.rootThis.setState({data: data.data, categoryList: cl, currentCategory: cl[0]});
                     mychart.on('click', function (params) {
                         if (mychart.getOption().title[0].text == 'overview') {
                             // mychart.showLoading();
@@ -801,8 +801,7 @@ export default class MainContent extends React.Component {
             <div id="MainContent-wrapper">
                 <Category categoryList={this.state.categoryList} rootThis={this}/>
                 <div ref="main_graph" id="main-graph"></div>
-                <div id="summary-info">
-                </div>
+                <div id="summary-info"></div>
                 <div ref="summary_graph" id="summary-graph"></div>
                 
                 <XYSelector data={this.state.data} currentCategory={this.state.currentCategory} rootThis={this}/>

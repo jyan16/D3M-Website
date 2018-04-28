@@ -93,8 +93,10 @@ html, body {
     color: white;
     background-color: #1F5F84;
 }
-
-
+#filter-form-attribute {
+    background-color: #1F5F84;
+    color: white;
+}
 #filter-form-relation {
     width: auto;
     padding: 2px 8px; padding: 0.125rem 0.5rem;
