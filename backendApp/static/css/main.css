@@ -6,12 +6,11 @@ html, body {
 #header-container {
     grid-area: header;
 }
-hr {
-    height: 4px;
-    background-color: chocolate;
-    position: relative;
-    top:-43%;
-}
+
+/*hr {*/
+    /*height: 4px;*/
+    /*background-color: chocolate;*/
+/*}*/
 
 .nav-item {
     margin-left: 10px;
@@ -31,6 +30,7 @@ hr {
     grid-template-areas: "left-toolbar main-content right-toolbar"
                          "summary summary summary";
 }
+
 
 #left-toolbar-container {
     grid-area: left-toolbar;

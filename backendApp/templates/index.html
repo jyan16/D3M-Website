@@ -22,14 +22,19 @@
                 setTimeout(a,speed);
             }
         })
+        $('#id_docfile').change(function() {
+                var file = $('#id_docfile')[0].files[0].name;
+                document.getElementById("filechoosen").innerHTML = file
+                   });
     </script>
 </head>
 <body>
+
     <div id="main">
         <img src="http://harrisburgu.edu/wp-content/uploads/2015/08/large_hero_image2.png" alt="background">
         <h1>DMhub</h1>
         <div id = "demo">
-            <!--<p id = "demo"></p>-->
+
         </div>
 
         <div id="features">
@@ -41,10 +46,11 @@
                 <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="submit" value="Upload My Own Dataset"/>
-                    <label class="custom-file-upload" id = "aa" onclick="filename">
+
+                    <label for="id_docfile" class="custom-file-upload" id="uploadfile" >Browse...</label>
                         {{ form.docfile }}
-                        Choose a File ...
-                    </label>
+                    <div id = "filechoosen">No File Selected...</div>
+
                 </form>
             </div>
 

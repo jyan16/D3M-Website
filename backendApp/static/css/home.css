@@ -17,15 +17,15 @@ img {
     z-index: -1;
 }
 #demo{
-    font-family: "Rokkitt";
+    font-family: "Cairo";
     color: white;
     opacity: 0.8;
     font-weight: bold;
     letter-spacing: 1px;
-    font-size: 30px;
+    font-size: 33px;
     position: relative;
-    margin-left: 28%;
-    margin-top:11%;
+    margin-left: 27%;
+    margin-top:12%;
 }
 
 h1{
@@ -35,29 +35,32 @@ h1{
     opacity: 0.8;
     letter-spacing: 3px;
     margin-left: 1%;
-
 }
 
 #features{
     margin-left:30% ;
     margin-top:2% ;
 }
+
 #explore,#uploaddata{
     display: inline-block;
     vertical-align:top;
-    width: 24%;
+    width: 26%;
 }
 
 .heading{
-    color:red;
-    font-family:  "Rokkitt";
-    font-size:18px;
+    color:white;
+    font-family:  "Cairo";
+    font-size: 18px;
     font-weight: bold;
     text-align: center;
     width: 80%;
     border-radius: 5px;
     background: #1b6597;
+
 }
+
+
 .feature_column a{
     text-decoration: none;
 }
@@ -75,7 +78,7 @@ input[type="file"]{
 input[type=submit] {
     color: floralwhite;
     font-size: 18px;
-    font-family: "Rokkitt";
+    font-family: "Cairo";
     font-weight: bold;
     text-align: center;
     border-radius:5px;
@@ -86,7 +89,7 @@ input[type=submit] {
     height:33px;
     cursor: pointer;
     margin-bottom: 20px;
-    padding: 0 15px;
+    padding: 0 18px;
 }
 
 .custom-file-upload {
@@ -103,10 +106,12 @@ input[type=submit] {
 }
 
 #filechoosen{
-    font-family: "Rokkitt";
+    font-family: "Cairo";
     color:floralwhite;
     float:right;
     font-weight: bold;
-    font-size: 12px;
-    margin-right:10%
+    font-size: 13px;
+    margin-right:10%;
+    position: relative;
+    bottom:1%;
 }
