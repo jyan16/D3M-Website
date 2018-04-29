@@ -147,5 +147,5 @@ def submit(request):
         text=request.POST['subject'],
     )
     contact_info.save()
-    context['reply_message'] = 'Thanks for submitting. We will contact you soon!'
+    context['reply_message'] = 'Thanks! We will contact you soon.'
     return render(request, 'submit.html', context)
