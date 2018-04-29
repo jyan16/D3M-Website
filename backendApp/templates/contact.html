@@ -29,8 +29,9 @@
           <p id ='coffee'>Swing by for a cup of coffee, or leave us a message:</p>
         </div>
 
-        <form action="">
+        <form action="{% url "submit" %}" method="post">
           <label for="q_type">Question type</label>
+            {% csrf_token %}
           <select id="question" name="q">
             <option value="model">Questions about models?</option>
             <option value="dataset">Questions about datasets?</option>

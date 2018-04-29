@@ -39,5 +39,12 @@ class Statistic(models.Model):
         return self.method
 
 
+class Contact(models.Model):
+    type = models.CharField(max_length=15)
+    time = models.DateTimeField()
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    text = models.CharField(max_length=500)
+
 class Document(models.Model):
     docfile = models.FileField(upload_to='documents/')

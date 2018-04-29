@@ -15,7 +15,7 @@
     <div class="container">
         <img src="{% static "figure/home.png" %}" alt="background">
         <div class="centered">
-            <h3 class="info1"> Your form has been successfully submitted!</h3>
+            <h3 class="info1"> {{ reply_message }}</h3>
             <h3 class="info2"> Time:<span id="time_count"> 30</span></h3>
 
             <form action="{% url "index" %}" name="form_redirect" id="form_redirect" >

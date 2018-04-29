@@ -2,33 +2,34 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import pprint
 from .utils import *
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.core.serializers import serialize
 from datetime import datetime, timedelta
 from .forms import DocumentForm
 import os
 from django.conf import settings
-from django.middleware.gzip import GZipMiddleware
-
-pp = pprint.PrettyPrinter(indent=4)
-gzip_middleware = GZipMiddleware()
+from django.core.validators import EmailValidator
 
 
 # Create your views here.
 def index(request):
     if request.method == 'POST':
+        context = dict()
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid() and check_file(request.FILES['docfile']):
             newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
             ok = upload(os.path.join(settings.MEDIA_ROOT, newdoc.docfile.name))
             if ok:
-                return HttpResponse('successfully upload file')
+                context['reply_message'] = 'successfully upload file!'
+                return render(request, 'submit.html', context)
             else:
-                return HttpResponse('load into database fail')
+                context['reply_message'] = 'load into database fail'
+                return render(request, 'submit.html', context)
 
         else:
-            return HttpResponse('upload file format fail')
+            context['reply_message'] = 'upload file format incorrect'
+            return render(request, 'submit.html', context)
     else:
         form = DocumentForm()
         return render(request, 'index.html', {'form': form})
@@ -128,3 +129,23 @@ def get_all(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+def submit(request):
+    context = dict()
+    validator = EmailValidator()
+    try:
+        validator(request.POST['email'])
+    except ValidationError:
+        context['reply_message'] = 'email format incorrect'
+        return render(request, 'submit.html', context)
+
+    contact_info = Contact.objects.create(
+        type=request.POST['q'],
+        name=request.POST['firstname'],
+        time=make_aware(datetime.now()),
+        email=request.POST['email'],
+        text=request.POST['subject'],
+    )
+    contact_info.save()
+    context['reply_message'] = 'Thanks for submitting. We will contact you soon!'
+    return render(request, 'submit.html', context)

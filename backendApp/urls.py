@@ -12,6 +12,7 @@ urlpatterns = [
     path('all/', views.get_all, name='get_all'),
     path('dataset/', views.get_data, name='get_data'),
     path('contact/', views.contact, name='contact'),
+    path('submit/', views.submit, name='submit'),
 
     path('test/', views.test, name='test'),
 ]
