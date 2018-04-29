@@ -7,15 +7,18 @@ h2{
   margin-bottom: 2%;
   font-weight: normal;
   font-family:"Rokkitt";
+  font-size:1.7em;
 }
 
 #coffee{
   margin-top: 2%;
   font-family:"Rokkitt";
+  font-size:1.5em;
 }
 
 label{
   font-family:"Rokkitt";
+  font-size:1.5em;
 }
 #question{
   font-size: 1em;
@@ -44,7 +47,7 @@ input[type=text], select, textarea {
     border: none;
     cursor: pointer;
     font-family:"Rokkitt";
-    font-size:1em;
+    font-size:1em; 
 }
 
 #submit:hover {
@@ -53,7 +56,7 @@ input[type=text], select, textarea {
 
 /* Style the container/contact section */
 .container {
-    width: 80%;
+  width:80%;
   margin-left: 10%;
   margin-right: 10%;
   border-radius: 5px;
@@ -70,14 +73,15 @@ input[type=text], select, textarea {
 /* Create two columns that float next to eachother */
 .column {
     float: left;
-    width: 48%;
-    margin-left: 2%;
+    width: 60%;
+    margin-left: 0%;
 }
 
 .column2 {
-    float: right;
-    width: 35%;
+    float: left;
+    width: 25%;
     margin-left: 15%;
+    margin-right: 0%;
 }
 
 /* Clear floats after the columns */
@@ -143,17 +147,21 @@ input[type=text], select, textarea {
 #connect{
   font-weight:normal;
   font-family:"Rokkitt";
+  font-size:1.5em;
 
 }
-
+ 
 #info > p{
   margin-top: 2%;
   margin-bottom: 10%;
-  font-size: 1em;
+  font-size: 1.5em;
   font-family:"Rokkitt";
 
 }
 .address{
+  font-size:1.5em;
   margin-bottom: 0%;
   font-family:"Rokkitt";
 }
+
+
