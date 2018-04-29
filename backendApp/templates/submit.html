@@ -16,8 +16,9 @@
         <img src="{% static "figure/home.png" %}" alt="background">
         <div class="centered">
             <h3 class="info1"> {{ reply_message }}</h3>
-            <h3 class="info2"> Time:<span id="time_count"> 30</span></h3>
-
+            <div id="info">
+                <h3 class="info2"> Time:<span id="time_count"> 30</span></h3>
+            </div>
             <form action="{% url "index" %}" name="form_redirect" id="form_redirect" >
             </form>
                 

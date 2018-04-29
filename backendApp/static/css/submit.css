@@ -3,6 +3,7 @@
         container: 60%;
     }
 }
+
 img {
     width: 100%;
     height: auto;
@@ -20,15 +21,15 @@ img {
 /* Centered text */
 .centered {
     position: absolute;
-    width:35%;
+    width:36%;
     top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 /***Text***/
-.info, #time_count, #inline, #word{
-    font-family:"Rokkitt";
+.info1,.info2, #time_count, #inline, #word{
+    font-family:"cairo";
     color: white;
 }
 
@@ -36,35 +37,41 @@ img {
     font-size: 2em;
     text-align: left;
     margin-bottom: 0%;
+    opacity:0.8;
 
 }
+
 .info2 {
     font-size: 2em;
-    text-align: center; 
+    text-align: center;
+    vertical-align: center;
+    margin-left: 0%;
     margin-bottom: 0%;
     margin-top: 0%;
+    opacity:0.8;
 }
 
 #time_count{
     font-size:1.5em;
-    text-align: center;
+
 }
 
 #cover, #word{
     font-size: 1.2em;
     text-align: left;
+    opacity:0.8;
 }
 
 /* unvisited link */
 a:link {
-    color: red;
+    color: darkred;
     text-decoration: none;
 }
 
 
 /* mouse over link & selected link */
 a:hover, a:active {
-    color: darkred;
+    color: red;
     text-decoration: underline;
 }
 
