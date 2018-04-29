@@ -1,10 +1,10 @@
 
 @import url('font.css');
 
-@media screen and (max-width: 1024px) { /* Specific to this particular image */
+@media screen and (max-width: 1024px) {
     img{
         /*left: 50%;*/
-        margin-left: -512px;   /* 50% */
+        margin-left: -512px;
     }
 
 }
@@ -19,6 +19,16 @@ img {
     width: 100%;
 }
 
+
+h1{
+    font-family:"Rokkitt";
+    color: white;
+    font-size: 70px;
+    opacity: 0.9;
+    letter-spacing: 4px;
+    margin-left: 2%;
+}
+
 #demo{
     font-family: "Cairo";
     color: white;
@@ -31,18 +41,9 @@ img {
     margin-top:12%;
 }
 
-h1{
-    font-family:"Rokkitt";
-    color: white;
-    font-size: 72px;
-    opacity: 0.8;
-    letter-spacing: 3px;
-    margin-left: 1%;
-}
-
 #features{
     margin-left:30% ;
-    margin-top:2% ;
+    margin-top:1% ;
 }
 
 #explore,#uploaddata{
@@ -57,9 +58,12 @@ h1{
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    width: 80%;
+    width: 90%;
+    letter-spacing: 2px;
+    padding: 6px 6px;
     border-radius: 5px;
-    background: #1b6597;
+    opacity:0.8;
+    background-color: rgba(0, 0, 0, .3);
 }
 
 
@@ -84,36 +88,38 @@ input[type=submit] {
     font-weight: bold;
     text-align: center;
     border-radius:5px;
-
     border-color: transparent;
-    background: #377EB4;
+    opacity: 0.8;
+    background-color: rgba(0, 0, 0, .4);
+    letter-spacing: 1px;
     margin-top: 5%;
-    height:33px;
+    height:44px;
     cursor: pointer;
-    margin-bottom: 20px;
     padding: 0 18px;
+    margin-bottom: 30%;
 }
 
 .custom-file-upload {
     border-radius: 5px;
-    background-color:ghostwhite;
+    background-color:whitesmoke;
     opacity: 0.8;
     padding: 0 10px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 15px;
     color:black;
-    margin-left: 8%;
+    margin-left: 12%;
     font-family: Cairo;
     font-weight: bold;
+
 }
 
 #filechoosen{
-    font-family: "Cairo";
-    color:floralwhite;
+    font-family: Cairo;
+    color:white;
     float:right;
     font-weight: bold;
     font-size: 13px;
-    margin-right:10%;
+    margin-right:4%;
     position: relative;
-    bottom:1%;
+    bottom:2%;
 }

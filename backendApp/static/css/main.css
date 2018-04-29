@@ -173,14 +173,17 @@ html, body {
     font-size: 18px;
     position: relative;
     top: 10px;
-    left: 33px;
+    left: 16%;
+
     color: navajowhite;
     font-weight: bolder;
 }
 
 #search-input{
-    font-size: 12px;
-    opacity: 0.9;
+    font-size: 15px;
+    opacity: 0.8;
+    font-weight: bolder;
+
 }
 
 #Search-type{
@@ -207,6 +210,7 @@ html, body {
 
 .search-item-noresult {
     text-align: center;
+    font-size:15px;
 }
 /* end search */
 
