@@ -69,7 +69,6 @@ hr {
 
 #filter-form * {
     margin: 2px; margin: 0.125rem;
-    background-color: #1F5F84;
     opacity: 0.8;
     height: auto;
     width: 100%;
@@ -80,7 +79,7 @@ hr {
 }
 
 #filter-form > form > input {
-    font-size: 2px;
+    font-size: 12px;
     background-color: #1F5F84;
 }
 
@@ -93,6 +92,7 @@ hr {
     color: white;
     background-color: #1F5F84;
 }
+
 #filter-form-attribute {
     background-color: #1F5F84;
     color: white;
