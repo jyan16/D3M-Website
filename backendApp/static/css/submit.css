@@ -35,8 +35,8 @@ img {
 
 .info1{
     font-size: 2em;
-    text-align: left;
-    margin-bottom: 0%;
+    text-align: center;
+    margin-bottom: 5%;
     opacity:0.8;
 
 }
@@ -58,7 +58,7 @@ img {
 
 #cover, #word{
     font-size: 1.2em;
-    text-align: left;
+    text-align: center;
     opacity:0.8;
 }
 
