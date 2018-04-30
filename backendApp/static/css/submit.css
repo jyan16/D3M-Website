@@ -7,13 +7,14 @@ img {
     top: 0;
     left: 0;
     z-index: -1;
+    position: fixed;
 }
-/***Container***/
-.container{
-    position: relative;
-    text-align: center;
-    color: white;
-}
+/*!***Container***!*/
+/*.container{*/
+    /*position: relative;*/
+    /*text-align: center;*/
+    /*color: white;*/
+/*}*/
 
 /* Centered text */
 .centered {
