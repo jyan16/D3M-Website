@@ -167,16 +167,15 @@ hr {
     font-size: 18px;
     position: relative;
     top: 10px;
-    left: 16%;
+    left: 20%;
     color: navajowhite;
 }
 
 #search-input{
     font-size: 15px;
     opacity: 0.8;
+    color:white;
 }
-
-
 
 #search-result {
     margin: 20px 10px;
@@ -191,27 +190,26 @@ hr {
     word-wrap: break-word;
 }
 
-
 .search-item-noresult {
     font-size: 15px;
     text-align: center;
     opacity: 0.7;
+    font-family: Cairo;
     color:white;
 }
 
-.search-item-name, .search-item-category{
-    color: white ;
+.search-item-name, .search-item-category {
+    color: navajowhite;
+    opacity:0.8;
     font-family: Cairo;
+    font-size: 15px;
+}
+
+.added_name{
+    color:white;
     font-size: 13px;
+    font-family: Cairo;
 }
-
-.search-item-name{
-    font-weight: bold;
-}
-.search-item-category{
-    opacity: 0.7;
-}
-
 
 /* end search */
 
