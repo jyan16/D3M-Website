@@ -83,7 +83,7 @@ input[type=submit] {
 
 
 #custom-file{
-    margin-left: 2%;
+    /*margin-left: 2%;*/
 }
 
 #custom-file-upload,#filechoosen{
@@ -100,7 +100,7 @@ input[type=submit] {
     cursor: pointer;
     font-size: 15px;
     color:black;
-    margin-left: %;
+    margin-left:2%;
     font-family: Cairo;
     font-weight: bold;
 

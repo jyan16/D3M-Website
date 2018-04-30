@@ -6,10 +6,12 @@ html, body {
 #header-container {
     grid-area: header;
 }
-/*hr {*/
-    /*height: 4px;*/
-    /*background-color: chocolate;*/
-/*}*/
+hr {
+    height: 5px;
+    background-color: #d27b0e;
+    position: relative;
+    bottom:21px;
+}
 
 .nav-item {
     margin-left: 10px;
@@ -57,7 +59,7 @@ html, body {
 
 /* filter section */
 #filter-form * {
-    font-size: 13px;
+    font-size: 12px;
     margin: 2px; margin: 0.125rem;
     height: auto;
     width: 100%;
@@ -105,8 +107,8 @@ html, body {
  }
 
 #filter-form-apply, #filter-form-add, #filter-form-removeall {
-    font-size: 12px;
-    opacity: 0.7;
+    font-size: 13px;
+    opacity: 0.8;
     background-color: steelblue;
     border-color:steelblue;
     border-radius: 3px;
@@ -124,16 +126,13 @@ html, body {
 .close {
     color: white;
 }
-#filter-filters {
-    margin-top: 20%;
-}
 
 #filter-filters * {
-    font-size: 0.875rem;
+    color:white;
 }
 
 .filter-item button {
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 /* end of filter section */
@@ -148,12 +147,10 @@ html, body {
 }
 
 #search-wrapper * {
-    font-size: 0.625rem;
     height: auto;
     background-color: #1F5F84;
     border-color:#1F5F84;
     border-radius: 4px; border-radius: 0.25rem;
-    color: white;
 }
 
 
@@ -171,22 +168,15 @@ html, body {
     position: relative;
     top: 10px;
     left: 16%;
-
     color: navajowhite;
-    font-weight: bolder;
 }
 
 #search-input{
     font-size: 15px;
     opacity: 0.8;
-    font-weight: bolder;
-
 }
 
-#Search-type{
-    font-size: 12px;
-    opacity: 0.7;
-}
+
 
 #search-result {
     margin: 20px 10px;
@@ -201,14 +191,28 @@ html, body {
     word-wrap: break-word;
 }
 
-.search-item-category {
-    padding-left: 5px;
-}
 
 .search-item-noresult {
+    font-size: 15px;
     text-align: center;
-    font-size:15px;
+    opacity: 0.7;
+    color:white;
 }
+
+.search-item-name, .search-item-category{
+    color: white ;
+    font-family: Cairo;
+    font-size: 13px;
+}
+
+.search-item-name{
+    font-weight: bold;
+}
+.search-item-category{
+    opacity: 0.7;
+}
+
+
 /* end search */
 
 /* main content */
