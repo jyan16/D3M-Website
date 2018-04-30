@@ -6,7 +6,6 @@ html, body {
 #header-container {
     grid-area: header;
 }
-
 /*hr {*/
     /*height: 4px;*/
     /*background-color: chocolate;*/
@@ -49,18 +48,16 @@ html, body {
 
 #filter-wrapper {
     background-color: #1F5F84;
-    background-color: #1F5F84;
     padding: 16px; padding: 1rem;
     border-radius: 4px; border-radius: 0.25rem;
     margin-top: 10%;
-    margin-right:40%;
+    margin-right:35%;
     height: 505px;
-    color: white;
 }
 
 /* filter section */
 #filter-form * {
-    font-size: 10px; font-size: 0.625rem;
+    font-size: 13px;
     margin: 2px; margin: 0.125rem;
     height: auto;
     width: 100%;

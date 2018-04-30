@@ -15,25 +15,28 @@
         <div id="main">
             <img src="{% static "figure/home.png" %}" alt="background">
             <h1>DMhub</h1>
-            <div id = "demo"></div>
 
-            <div id="features">
-                <form class="feature_column" id="explore" action = "{% url "data" %}">
-                    <input type="submit" value="See How DMhub Works" />
-                </form>
-
-                <div class="feature_column" id="uploaddata">
-                    <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <input type="submit" value="Upload My Own Dataset"/>
-                        <div id = "custom-file">
-                            <label for="id_docfile" id="custom-file-upload">Browse...</label>
-                            {{ form.docfile }}
-                            <div id = "filechoosen">No File Selected...</div>
-                        </div>
+            <div id = 'container'>
+                <div id = "demo"></div>
+                <div id="features">
+                    <form class="feature_column" id="explore" action = "{% url "data" %}">
+                        <input type="submit" value="See How DMhub Works" />
                     </form>
+
+                    <div class="feature_column" id="uploaddata">
+                        <form action="{% url "index" %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="submit" value="Upload My Own Dataset"/>
+                            <div id = "custom-file">
+                                <label for="id_docfile" id="custom-file-upload">Browse...</label>
+                                {{ form.docfile }}
+                                <div id = "filechoosen">No File Selected...</div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+
         </div>
 
     </body>

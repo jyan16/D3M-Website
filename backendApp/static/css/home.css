@@ -3,14 +3,12 @@
 
 @media screen and (max-width: 1024px) {
     img{
-        /*left: 50%;*/
         margin-left: -512px;
     }
 
 }
 
 img {
-
     min-height: 100%;
     min-width: 1024px;
     width:100%;
@@ -32,9 +30,11 @@ h1{
     margin-left: 2%;
 }
 
+#container{
+
+}
 
 #demo{
-
     font-family: "Cairo";
     color: white;
     opacity: 0.8;
