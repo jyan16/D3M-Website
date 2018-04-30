@@ -30,7 +30,8 @@ h1{
 }
 
 #container{
-
+    text-align: center;
+    position: relative;
 }
 
 #demo{
@@ -41,19 +42,17 @@ h1{
     letter-spacing: 1px;
     font-size: 33px;
     position: relative;
-    margin-left: 27%;
-    margin-top:12%;
+    margin-top:13%;
 }
 
 #features{
-    margin-left:30% ;
     margin-top:2% ;
 }
 
 #explore,#uploaddata{
     display: inline-block;
     vertical-align:top;
-    width: 28%;
+    width: 22%;
 }
 
 .feature_column a{
@@ -84,7 +83,7 @@ input[type=submit] {
 
 
 #custom-file{
-    margin-left: 5%;
+    margin-left: 2%;
 }
 
 #custom-file-upload,#filechoosen{
@@ -101,7 +100,7 @@ input[type=submit] {
     cursor: pointer;
     font-size: 15px;
     color:black;
-    margin-left: 2%;
+    margin-left: %;
     font-family: Cairo;
     font-weight: bold;
 

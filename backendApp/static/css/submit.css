@@ -1,7 +1,4 @@
-@media screen and (max-width: 600px) {  Specific to this particular image 
-    img{
-        container: 60%;
-    }
+@media screen and (max-width: 600px) {  Specific to this particular image
 }
 
 img {
