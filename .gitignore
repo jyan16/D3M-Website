@@ -10,5 +10,3 @@ staticfiles/
 
 .ipynb_checkpoints
 
-webpack-stats-local.json
-backendApp/static/bundles/local/
