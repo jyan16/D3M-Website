@@ -107,7 +107,6 @@ export default class Filter extends React.Component {
                     Apply Filter
                 </button>
         </div>
-        
 
         <FilterItem data={this.state.filters} removeFilter={this.state.removeFilter}/>
       </div>
