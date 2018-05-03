@@ -6,12 +6,12 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
+ /*********** Column adjustment **********/
 .column {
   float: left;
   width: 30%;
   margin-bottom: 16px;
-  margin-right: 1.6%;
+  margin-right: 1.5%;
   padding: 0 8px;
 }
 
@@ -19,23 +19,41 @@ html {
   float: left;
   width: 46%;
   margin-bottom: 16px;
-  margin-right:1.6%;
+  margin-right:1.5%;
   padding: 0 8px;
 }
 
+.column3 {
+  float: left;
+  width: 22.2%;
+  margin-bottom: 16px;
+  margin-right:1.4%;
+  padding: 0 8px;
+}
+
+/*********** overall **********/
 #overall{
   background-color: #f2f2f2;
   margin-top: 0%;
   padding: 0.5%;
 }
 
+#whole{
+  width: 80%;
+  align:center;
+  vertical-align: center;
+  margin-left: 12.5%;
+}
+
+
 @media screen and (max-width: 700px) {
-  .column {
+  .column, .column2 {
     width: 100%;
     display: block;
   }
 }
 
+/*********** card **********/
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
@@ -50,7 +68,7 @@ html {
   display: table;
 }
 
-
+/*********** inner text & button **********/
 .title {
   color: grey;
 }
@@ -73,16 +91,16 @@ html {
   background-color: #555;
 }
 
-#whole{
-  width: 70%;
-  align:center;
-  vertical-align: center;
-  margin-left: 17%;
-}
 
 .img{
   background-color: lightgray;
 }
+.phd{width:80%;
+    display: block;
+    margin-left: auto;
+    margin-top:10%;
+    margin-bottom:auto;
+    margin-right: auto;}
 
 #meet{
   text-align: center;
@@ -90,8 +108,8 @@ html {
 }
 
 #des{
-  margin-left:18%;
-  margin-right: 18%;
+  margin-left:12.5%;
+  margin-right: 12.5%;
   font-size: 1.2em;
   text-align:justify;
 }

@@ -16,13 +16,13 @@
         <img src="{% static "figure/home.png" %}" alt="background">
         <div class="centered">
             <h3 class="info1"> {{ reply_message }}</h3>
-            <div id="info">
-                <h3 class="info2"> Time:<span id="time_count"> 30</span></h3>
-            </div>
+{#            <div id="info">#}
+{#                <h3 class="info2"> Time:<span id="time_count"> 30</span></h3>#}
+{#            </div>#}
             <form action="{% url "index" %}" name="form_redirect" id="form_redirect" >
             </form>
                 
-            <div id="word" class="wait">Please wait while we we redirect you to our home page</div>
+{#            <div id="word" class="wait">Please wait while we we redirect you to our home page</div>#}
             <div id="cover">
             <span id="inline">If current page did not redirect in 5 seconds, please</span>
             <a class="redirect" href="javascript:void(0)" title="Proceed to DMhub" onClick="document.getElementById('form_redirect').submit();"><span>click here</span></a>

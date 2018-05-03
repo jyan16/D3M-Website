@@ -1,7 +1,4 @@
-@media screen and (max-width: 600px) {  Specific to this particular image 
-    img{
-        container: 60%;
-    }
+@media screen and (max-width: 600px) {  Specific to this particular image
 }
 
 img {
@@ -10,13 +7,14 @@ img {
     top: 0;
     left: 0;
     z-index: -1;
+    position: fixed;
 }
-/***Container***/
-.container{
-    position: relative;
-    text-align: center;
-    color: white;
-}
+/*!***Container***!*/
+/*.container{*/
+    /*position: relative;*/
+    /*text-align: center;*/
+    /*color: white;*/
+/*}*/
 
 /* Centered text */
 .centered {
@@ -35,8 +33,8 @@ img {
 
 .info1{
     font-size: 2em;
-    text-align: left;
-    margin-bottom: 0%;
+    text-align: center;
+    margin-bottom: 5%;
     opacity:0.8;
 
 }
@@ -58,7 +56,7 @@ img {
 
 #cover, #word{
     font-size: 1.2em;
-    text-align: left;
+    text-align: center;
     opacity:0.8;
 }
 

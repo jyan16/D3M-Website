@@ -46,8 +46,8 @@ export default class SearchItem extends React.Component {
     renderResult(entry) {
         return (
             <li className="search-item" onClick={this.handleClick} key={entry.name+'-'+entry.category} name={entry.name} category={entry.category} index={entry.index}>
-                <div className="search-item-name">{entry.name}</div>
-                <div className="search-item-category">{entry.category}</div>
+                <div className="search-item-category"><span className="added_name">Category:</span> {entry.category}</div>
+                <div className="search-item-name"><span className="added_name">Dataset: </span>{entry.name}</div>
             </li>
         )
     }
