@@ -1,5 +1,5 @@
 window.onload = function(){
-            var counter = 30;
+            var counter = 5;
             var interval = setInterval(function(){
                 counter --;
                 $("#time_count").text(counter);
