@@ -5,6 +5,7 @@ from .models import *
 import pandas as pd
 import numpy as np
 from django.core.exceptions import ObjectDoesNotExist
+from .config import *
 
 def get_time(time_str):
     tmp = time_str.split()
@@ -140,6 +141,6 @@ def check_file(file):
 
 def get_login_reply(request):
     if request.user.is_authenticated:
-        return {'status': 'Signout', 'method': 'post'}
+        return {'status': SIGNOUT, 'method': 'post'}
     else:
-        return {'status': 'Signin', 'method': 'get'}
+        return {'status': SIGNIN, 'method': 'get'}

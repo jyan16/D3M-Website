@@ -19,8 +19,8 @@
                     <form class="feature_column" id="login" action = "{% url "login" %}" method={{ method }}>
                     {% csrf_token %}
                     <input type="hidden" value="index.html" name="redirect_path" />
-                    <input type="hidden" value={{ status }} name="status" />
-                    <input type="submit" value={{ status }} /></form>
+                    <input type="hidden" value="{{ status }}" name="status" />
+                    <input type="submit" value="{{ status }}" /></form>
                 </div>
 
             <div id = 'container'>

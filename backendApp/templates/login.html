@@ -4,18 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
+    <link rel="stylesheet" href="{% static "css/login.css" %}">
 </head>
 <body>
-    {{ message }}
-    <form action="{% url "login" %}" method="post">
-    {% csrf_token %}
-        <input type="hidden" value={{ redirect_path }} name="redirect_path" />
-        <input type="hidden" value="Signin" name="status" />
-        <label for="username">username:</label>
-        <input type="text" name="username" value="tong" style="width: 200px;"/>
-        <label for="password">password:</label>
-        <input type="text" name="password" value="abcd12345678" style="width: 200px;"/>
-        <input type="submit" value="login" />
-    </form>
+    <div id="main">
+        <img src="{% static "figure/home.png" %}" alt="background">
+
+        <div class="container">
+            <h2 id="title">Sign In</h2>
+            {{ message }}
+            <form id="login_form" action="{% url "login" %}" method="post">
+            {% csrf_token %}
+                <input type="hidden" value={{ redirect_path }} name="redirect_path" />
+                <input type="hidden" value="{{ status }}" name="status" />
+
+                <label for="username">Username:</label>
+                <input type="text" name="username" value="tong"/>
+
+                <label for="password">Password:</label>
+                <input type="text" name="password" value="abcd12345678"/>
+
+                <input type="submit" value="login" />
+            </form>
+        </div>
+
+
+
+    </div>
 </body>
 </html>

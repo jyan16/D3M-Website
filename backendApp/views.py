@@ -10,7 +10,7 @@ import os
 from django.conf import settings
 from django.core.validators import EmailValidator
 from django.contrib.auth import authenticate, login, logout
-
+from .config import *
 
 # Create your views here.
 def index(request):
@@ -18,10 +18,10 @@ def index(request):
     context = dict()
     user = request.user
     if user.is_authenticated:
-        context['status'] = 'Signout'
+        context['status'] = SIGNOUT
         context['method'] = 'post'
     else:
-        context['status'] = 'Signin'
+        context['status'] = SIGNIN
         context['method'] = 'get'
 
     if request.method == 'POST':
@@ -51,16 +51,16 @@ def index(request):
 
 def my_login(request):
     form = DocumentForm()
-    if request.method == 'POST' and request.POST['status'] == 'Signout':
+    if request.method == 'POST' and request.POST['status'] == SIGNOUT:
         logout(request)
         context = {
             'form': form,
-            'status': 'Signin',
+            'status': SIGNIN,
             'method': 'get',
         }
         return render(request, request.POST['redirect_path'], context)
 
-    if request.method == 'POST' and request.POST['status'] == 'Signin':
+    if request.method == 'POST' and request.POST['status'] == SIGNIN:
         username = request.POST["username"]
         password = request.POST["password"]
 
@@ -68,7 +68,7 @@ def my_login(request):
         if user is not None:
             login(request, user)
             context = {
-                'status': 'Signout',
+                'status': SIGNOUT,
                 'method': 'post',
                 'form': form,
             }
@@ -84,6 +84,7 @@ def my_login(request):
     if request.method == 'GET':
         context = {
             'redirect_path': request.GET['redirect_path'],
+            'status': SIGNIN,
         }
         return render(request, 'login.html', context)
 
