@@ -7,6 +7,14 @@
     <title>About</title>
 {% endblock %}
 
+{% block login %}
+    <form class="nav-item" id="login" action = "{% url "login" %}" method={{ method }}>
+        {% csrf_token %}
+        <input type="hidden" value={{ status }} name="status" />
+        <input type="submit" value={{ status }} />
+    </form>
+{% endblock %}
+
 {% block main %}
 <div id="overall">
 <h1 id="meet"> Meet The Team </h1>

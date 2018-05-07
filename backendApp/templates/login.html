@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+    {{ message }}
+    <form action="{% url "login" %}" method="post">
+    {% csrf_token %}
+        <input type="hidden" value={{ redirect_path }} name="redirect_path" />
+        <input type="hidden" value="Signin" name="status" />
+        <label for="username">username:</label>
+        <input type="text" name="username" value="tong" style="width: 200px;"/>
+        <label for="password">password:</label>
+        <input type="text" name="password" value="abcd12345678" style="width: 200px;"/>
+        <input type="submit" value="login" />
+    </form>
+</body>
+</html>

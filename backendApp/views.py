@@ -9,13 +9,27 @@ from .forms import DocumentForm
 import os
 from django.conf import settings
 from django.core.validators import EmailValidator
+from django.contrib.auth import authenticate, login, logout
 
 
 # Create your views here.
 def index(request):
+    request.session.set_expiry(0)
+    context = dict()
+    user = request.user
+    if user.is_authenticated:
+        context['status'] = 'Signout'
+        context['method'] = 'post'
+    else:
+        context['status'] = 'Signin'
+        context['method'] = 'get'
+
     if request.method == 'POST':
-        context = dict()
         form = DocumentForm(request.POST, request.FILES)
+
+        if not user.is_authenticated:
+            return render(request, 'login.html', {'message': 'Please login and then upload!'})
+
         if form.is_valid() and check_file(request.FILES['docfile']):
             newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
@@ -32,19 +46,51 @@ def index(request):
             return render(request, 'submit.html', context)
     else:
         form = DocumentForm()
-        return render(request, 'index.html', {'form': form})
+        context['form'] = form
+        return render(request, 'index.html', context)
 
+def my_login(request):
+    form = DocumentForm()
+    if request.method == 'POST' and request.POST['status'] == 'Signout':
+        logout(request)
+        context = {
+            'form': form,
+            'status': 'Signin',
+            'method': 'get',
+        }
+        return render(request, 'index.html', context)
+
+    if request.method == 'POST' and request.POST['status'] == 'Signin':
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            context = {
+                'status': 'Signout',
+                'method': 'post',
+                'form': form,
+            }
+            return render(request, 'index.html', context)
+        else:
+            return render(request, 'login.html', {'message': 'information incorrect, try again!'})
+
+    if request.method == 'GET':
+        return render(request, 'login.html')
 
 def test(request):
     return render(request, 'test.html')
 
 
 def lab(request):
-    return render(request, 'lab.html')
+    context = get_login_reply(request)
+    return render(request, 'lab.html', context)
 
 
 def data(request):
-    return render(request, 'data.html')
+    context = get_login_reply(request)
+    return render(request, 'data.html', context = get_login_reply(request))
 
 
 def get_data(request):
@@ -128,7 +174,8 @@ def get_all(request):
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    context = get_login_reply(request)
+    return render(request, 'contact.html', context)
 
 def submit(request):
     context = dict()

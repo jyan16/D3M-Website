@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 from django.core.exceptions import ObjectDoesNotExist
 
-
 def get_time(time_str):
     tmp = time_str.split()
     date = tmp[0].split('/')
@@ -138,3 +137,9 @@ def check_file(file):
     if tmp[-1] != 'csv':
         return False
     return True
+
+def get_login_reply(request):
+    if request.user.is_authenticated:
+        return {'status': 'Signout', 'method': 'post'}
+    else:
+        return {'status': 'Signin', 'method': 'get'}

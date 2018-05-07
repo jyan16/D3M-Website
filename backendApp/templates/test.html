@@ -5,6 +5,7 @@
     <title>Example</title>
 </head>
 <body>
+    {{ status }}
     <form action="upload/" method="post">
     {% csrf_token %}
         <label for="file_dir">file directory</label>
@@ -16,6 +17,14 @@
         <label for="data_name">dataset name:</label>
         <input type="text" name="data_name" value="1491_one_hundred_plants_margin" style="width: 200px;"/>
         <input type="submit" value="get data" />
+    </form>
+    <form action="/login/" method="post">
+    {% csrf_token %}
+        <label for="username">username:</label>
+        <input type="text" name="username" value="tong" style="width: 200px;"/>
+        <label for="password">password:</label>
+        <input type="text" name="password" value="abcd12345678" style="width: 200px;"/>
+        <input type="submit" value="login" />
     </form>
 </body>
 </html>

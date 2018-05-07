@@ -6,6 +6,13 @@
     <link rel = "stylesheet" href="{% static "css/contact.css" %}">
     <link rel = "stylesheet" href="{% static "css/navigation.css" %}">
 {% endblock %}
+{% block login %}
+    <form class="nav-item" id="login" action = "{% url "login" %}" method={{ method }}>
+        {% csrf_token %}
+        <input type="hidden" value={{ status }} name="status" />
+        <input type="submit" value={{ status }} />
+    </form>
+{% endblock %}
 
 {% block main %}
   <div class="top_container">
