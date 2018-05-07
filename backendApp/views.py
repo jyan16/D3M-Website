@@ -28,7 +28,7 @@ def index(request):
         form = DocumentForm(request.POST, request.FILES)
 
         if not user.is_authenticated:
-            return render(request, 'login.html', {'message': 'Please login and then upload!'})
+            return render(request, 'login.html', {'message': 'Please login and then upload!', 'redirect_path': 'index.html'})
 
         if form.is_valid() and check_file(request.FILES['docfile']):
             newdoc = Document(docfile=request.FILES['docfile'])
@@ -58,7 +58,7 @@ def my_login(request):
             'status': 'Signin',
             'method': 'get',
         }
-        return render(request, 'index.html', context)
+        return render(request, request.POST['redirect_path'], context)
 
     if request.method == 'POST' and request.POST['status'] == 'Signin':
         username = request.POST["username"]
@@ -72,12 +72,20 @@ def my_login(request):
                 'method': 'post',
                 'form': form,
             }
-            return render(request, 'index.html', context)
+
+            return render(request, request.POST['redirect_path'], context)
         else:
-            return render(request, 'login.html', {'message': 'information incorrect, try again!'})
+            context = {
+                'message': 'information incorrect, try again!',
+                'redirect_path': request.POST['redirect_path'],
+            }
+            return render(request, 'login.html', context)
 
     if request.method == 'GET':
-        return render(request, 'login.html')
+        context = {
+            'redirect_path': request.GET['redirect_path'],
+        }
+        return render(request, 'login.html', context)
 
 def test(request):
     return render(request, 'test.html')

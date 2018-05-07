@@ -108,7 +108,9 @@ response = {
 1. email: jin_yan@brown.edu
 1. password: abcd12345678
 
-
+#### normal user
+1. name: tong
+1. password: abcd12345678
 ### NOTE
 1. delete DATABASE_URL in your heroku config variable!!!!!!!!!
 2. Compressor will not run is DEBUG is TRUE
