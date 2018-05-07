@@ -4,7 +4,6 @@
     img{
         margin-left: -512px;
     }
-
 }
 
 img {
@@ -28,6 +27,16 @@ h1{
     letter-spacing: 4px;
     margin-left: 2%;
 }
+
+#signin{
+    float: right;
+    opacity: 0.9;
+    margin-right:5%;
+    position: relative;
+    bottom:120px;
+}
+
+
 
 #container{
     text-align: center;
@@ -81,11 +90,6 @@ input[type=submit] {
     padding: 0 18px;
 }
 
-
-#custom-file{
-    /*margin-left: 2%;*/
-}
-
 #custom-file-upload,#filechoosen{
     margin-top: 10%;
     display: inline-block;
@@ -112,5 +116,5 @@ input[type=submit] {
     font-weight: bold;
     font-size: 16px;
     margin-left:5%;
-
 }
+
