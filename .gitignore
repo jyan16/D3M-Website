@@ -9,4 +9,5 @@ media/
 staticfiles/
 
 .ipynb_checkpoints
+db.sqlite3
 
