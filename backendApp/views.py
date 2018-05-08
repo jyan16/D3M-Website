@@ -12,6 +12,7 @@ from django.core.validators import EmailValidator
 from django.contrib.auth import authenticate, login, logout
 from .config import *
 
+
 # Create your views here.
 def index(request):
     request.session.set_expiry(0)
@@ -78,6 +79,7 @@ def my_login(request):
             context = {
                 'message': 'information incorrect, try again!',
                 'redirect_path': request.POST['redirect_path'],
+                'status': SIGNIN,
             }
             return render(request, 'login.html', context)
 
