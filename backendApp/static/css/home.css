@@ -68,7 +68,6 @@ h1{
     text-decoration: none;
 }
 
-
 input[type="file"]{
     display: none;
 }
@@ -90,7 +89,7 @@ input[type=submit] {
     padding: 0 18px;
 }
 
-#custom-file-upload,#filechoosen{
+#custom-file-upload{
     margin-top: 10%;
     display: inline-block;
     vertical-align:top;
@@ -104,7 +103,6 @@ input[type=submit] {
     cursor: pointer;
     font-size: 15px;
     color:black;
-    margin-left:2%;
     font-family: Cairo;
     font-weight: bold;
 }
