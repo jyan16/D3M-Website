@@ -1,6 +1,6 @@
 @import url('font.css');
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 600px) {
     img{
         margin-left: -512px;
     }
