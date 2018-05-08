@@ -29,7 +29,12 @@ def index(request):
         form = DocumentForm(request.POST, request.FILES)
 
         if not user.is_authenticated:
-            return render(request, 'login.html', {'message': 'Please login and then upload!', 'redirect_path': 'index.html'})
+            context = {
+                'message': 'Please login and then upload!',
+                'redirect_path': 'index.html',
+                'status': SIGNIN,
+            }
+            return render(request, 'login.html', context)
 
         if form.is_valid() and check_file(request.FILES['docfile']):
             newdoc = Document(docfile=request.FILES['docfile'])
