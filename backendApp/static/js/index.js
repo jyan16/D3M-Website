@@ -9,7 +9,17 @@ $(document).ready(function a(){
     }
 });
 
-$('#id_docfile').change(function() {
-    let file = $('#id_docfile')[0].files[0].name;
-    document.getElementById("filechoosen").innerHTML = file
-});
+// $('#id_docfile').change(function() {
+//     let file = $('#id_docfile')[0].files[0].name;
+//     document.getElementById("filechoosen").innerHTML = file
+// });
+
+var input = document.getElementById( 'id_docfile' );
+var infoArea = document.getElementById( 'filechoosen' );
+input.addEventListener( 'change', showFileName );
+function showFileName( event ) {
+
+  var input = event.srcElement;
+  var fileName = input.files[0].name;
+  infoArea.textContent = 'File name: ' + fileName;
+}

@@ -14,19 +14,17 @@ html, body {
     font-weight: bolder;
 }
 .nav-item input[type=submit] {
-    color: rgba(0,0,0,.8);
+    color: rgba(0,0,0,.6);
     font-size: 18px;
     font-family: Cairo;
     font-weight: bold;
     text-align: center;
     letter-spacing: 1px;
 
-    border-radius: 5px;
-
-    opacity: 0.8;
-    height: 40px;
+    border-color:transparent;
+    background-color:#f8f9fa;
     cursor: pointer;
-    padding: 0 18px;
+
 }
 
 
